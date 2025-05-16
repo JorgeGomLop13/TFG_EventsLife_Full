@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="header.component.scss" />
+    </head>
+    <body>
+        <header class="header">
+            <div class="title">
+                <h1 [routerLink]="['/home']">BooksShelter</h1>
+            </div>
+            <div class="flex justify-end p-4">
+                <select
+                    class="bg-white text-black border-white rounded-lg px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-colors"
+                    [value]="currentLang"
+                    (change)="switchLang($event)"
+                >
+                    <option disabled>{{ "HEADER.LANGUAGE" | translate }}</option>
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+
+            <div class="header-buttons-search">
+                <button class="header-button" [routerLink]="['/search']">{{ "HEADER.SEARCH" | translate }}</button>
+                <button *ngIf="userRole === 'writer'" [routerLink]="['/createBook']">{{ "HEADER.PUBLISH" | translate }}</button>
+            </div>
+            <div *ngIf="token === null" class="header-buttons-login">
+                <button class="header-button" [routerLink]="['/register']">
+                    {{ "HEADER.REGISTER" | translate }}
+                </button>
+                <button class="header-button" [routerLink]="['/login']">
+                    {{ "HEADER.LOGIN" | translate }}
+                </button>
+            </div>
+
+            <div *ngIf="token && token.length > 0" class="user">
+                <div class="relative mx-2 flex items-center">
+                    <button [routerLink]="['/cart']" class="relative p-2 rounded-full bg-gray-200" aria-label="Carrito">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M8.5 19C9.32843 19 10 19.6716 10 20.5C10 21.3284 9.32843 22 8.5 22C7.67157 22 7 21.3284 7 20.5C7 19.6716 7.67157 19 8.5 19ZM17.5 19C18.3284 19 19 19.6716 19 20.5C19 21.3284 18.3284 22 17.5 22C16.6716 22 16 21.3284 16 20.5C16 19.6716 16.6716 19 17.5 19ZM3 2H5C5.4556 2 5.84831 2.30684 5.96506 2.73774L5.98837 2.84794L6.4733 6H21C21.5998 6 22.0549 6.52068 21.9951 7.10035L21.9762 7.21693L20.3242 14.6508C20.0325 15.9637 18.9059 16.9143 17.5779 16.9945L17.3957 17H8.71584C7.29435 17 6.07697 16.0044 5.78265 14.6299L5.75072 14.4562L4.14208 4H3C2.44772 4 2 3.55228 2 3C2 2.48716 2.38604 2.06449 2.88338 2.00673L3 2H5H3ZM19.7534 8H6.781L7.72747 14.1521C7.79674 14.6024 8.15973 14.9438 8.60337 14.9937L8.71584 15H17.3957C17.8253 15 18.2021 14.7265 18.3402 14.3285L18.3718 14.2169L19.7534 8Z"
+                                fill="black"
+                            />
+                        </svg>
+
+                        <span
+                            *ngIf="booksList.length > 0"
+                            class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-semibold rounded-full px-1.5 py-0.5 leading-none shadow-md"
+                        >
+                            {{ booksList.length }}
+                        </span>
+                    </button>
+                </div>
+                <div [routerLink]="['/profile']" class="user">
+                    <svg
+                        width="26"
+                        height="26"
+                        viewBox="0 0 26 26"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                        <rect width="26" height="26" fill="url(#pattern0_141_369)" />
+                        <defs>
+                            <pattern id="pattern0_141_369" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_141_369" transform="scale(0.0208333)" />
+                            </pattern>
+                            <image
+                                id="image0_141_369"
+                                width="48"
+                                height="48"
+                                preserveAspectRatio="none"
+                                xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAATaSURBVHgB7VrrUdwwEF7M8RqYyaUCnApCBzEVcKmASwWQCqADkgq4VJCkglMq4FIBpoKQGRjekG8vkm9PSDrJNgM/+GY8lmxptVqtVrtrE73ieTFHLeLh4aF7c3OTo7iB683c3FxXPz/FdZJl2Wmn0xnh+Sm1hMYTuL6+3gBzPTD3Afcipg8moHBTt7e331ZWVkpqgNoTgKQL3PZimfYygMmAxmBxcfEb1UDyBM7OzjaWlpYOAoyXuJRWE6Mq3fv7+xzPcvqvXi6M7u7uPjZdkSAuLy93oTIPjmsIddjiPTCLBrfhtuhz6KJ1dXW1T21Db86hY7C9GKZ9uLi4yF0TAd3vsXRnqhAPMj8/P0QxF48VlvuTb7l1nwIqs851qM9vlEvo+SjQ/hDFwjzDBEr022ykUiwFSOTYlrqvPd73XSsl+jKtbV9/pm23b7LCTPC7xYRzcJZgiHHXnuE+LlqOfTakOuDNJAmB8I6PeXuVcP3hyWNSe3xpQfyxpeubBJ73rbF3KQWaqSi1cUj+wLXsTNNWkZB07bZsvikWYOooZhDW+RgVsyYS3YfHTlYlmynfMuu2xzGrZAMCOohhzNYE1IsY4nLWh7527ANJnQ9N1Ia2btWeANYD/OxFr4JjxrmvLU7Tnjx4KBFgrLJwoOVVIz1Z717IZAWuriQ0CB0iIPy+IpJlI0rHSNDKfY20T6VMHX7YlnyfWe0LmjD1g14IwMtXU7adyEy86MqXONp/UQAcoJgyjvx4EzdB1QdSDq4geFGiWkgzXU0AeiiZmBk1wRdSgoEi5cjnvSWFhYPqJNRe81Ka+vn5eW7KmWhUMcCOFM2A3h9KV9lbjTajUIk+9zFjra2txewhZQrLy8uT/WcKUIN1MUBJcZBR1G7sQQZhVZNFeZ8iIDUCvD5WIbkCNImkgoB7PCAhGWDAPpTL/Gpz+EW7zQYqIZQ8dfHaoYbguEDGCyxd1HegUoompnJDx9BTagpJfqKG6AiCUurRG5L3AiS+aQUkbNF6uPc83RQznxisdF28ynPgr2iQFEQwI1CFTRRZomWgqcLV57Y1Iq3cFOQelSokLUFBNaD3xICPe1iKdQhibJo5nGRbjvsJ1UduCpa2VA+nfI5GoVzLCPEmrdCUz4HN+YFeCMBLIapKmtQpK6SzZOPG2GQcxv2kAOzsQypmZStEuy3Jo3w3lVZhHx+3I1NfWFh463IpOOjB8+2maUUDNql8oLnOBC2kY1PHaryTBmDKG9WSUKYO/2jHJsYBD4qHbTHP0CnHgStbAeali6Js6/UoscVhmz6YxjAz9iS4OG2uasYDYy+WHUF6fMBtijGPRZd+1MntCqZjsw+pCGUrrDGPoomyHZcEHcxvU8uwsxX2mCkx9xi+THRK9iEVVrai+ZiWKiVnH1JhZytiEgZZ6CXM6Eea9m26Ohh5EoBhPnumNjQ2bTOP1ZP7HLa5Eq7kcCh3mgxeWkemepz4ajKIprvvoDt8El/MYe6qieBdL/YTE7f1peN9WXAfkj/yub6mWOCMRkn/9071kU9Pjvvknn4KE/gcGeBXqP2Zlf0h3LapZuwgwN7lPgzGrzqdG3/o5hXhlKT2jYrIbuz1ckA/aBjktP+rARzA95w10N+Fq18N+DcD6Pfv1dXVss1fDV7x3PgHAVhpMFnPkgEAAAAASUVORK5CYII="
+                            />
+                        </defs>
+                    </svg>
+                    <button>{{ userName }}</button>
+                </div>
+            </div>
+        </header>
+    </body>
+</html>

@@ -1,0 +1,134 @@
+<app-header></app-header>
+<div class="flex justify-center items-start mb-[120px] mt-20 pt-8">
+    <div class="block max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700">
+        <div class="flex items-center space-x-4 mb-6">
+            <svg
+                class="w-16 h-16 md:w-20 md:h-20"
+                viewBox="0 0 26 26"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                style="background-color: #444648; border-radius: 50%"
+            >
+                <rect width="26" height="26" fill="url(#pattern0_141_369)" />
+
+                <defs>
+                    <pattern id="pattern0_141_369" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_141_369" transform="scale(0.0208333)" />
+                    </pattern>
+                    <image
+                        id="image0_141_369"
+                        width="480"
+                        height="48"
+                        preserveAspectRatio="none"
+                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAATaSURBVHgB7VrrUdwwEF7M8RqYyaUCnApCBzEVcKmASwWQCqADkgq4VJCkglMq4FIBpoKQGRjekG8vkm9PSDrJNgM/+GY8lmxptVqtVrtrE73ieTFHLeLh4aF7c3OTo7iB683c3FxXPz/FdZJl2Wmn0xnh+Sm1hMYTuL6+3gBzPTD3Afcipg8moHBTt7e331ZWVkpqgNoTgKQL3PZimfYygMmAxmBxcfEb1UDyBM7OzjaWlpYOAoyXuJRWE6Mq3fv7+xzPcvqvXi6M7u7uPjZdkSAuLy93oTIPjmsIddjiPTCLBrfhtuhz6KJ1dXW1T21Db86hY7C9GKZ9uLi4yF0TAd3vsXRnqhAPMj8/P0QxF48VlvuTb7l1nwIqs851qM9vlEvo+SjQ/hDFwjzDBEr022ykUiwFSOTYlrqvPd73XSsl+jKtbV9/pm23b7LCTPC7xYRzcJZgiHHXnuE+LlqOfTakOuDNJAmB8I6PeXuVcP3hyWNSe3xpQfyxpeubBJ73rbF3KQWaqSi1cUj+wLXsTNNWkZB07bZsvikWYOooZhDW+RgVsyYS3YfHTlYlmynfMuu2xzGrZAMCOohhzNYE1IsY4nLWh7527ANJnQ9N1Ia2btWeANYD/OxFr4JjxrmvLU7Tnjx4KBFgrLJwoOVVIz1Z717IZAWuriQ0CB0iIPy+IpJlI0rHSNDKfY20T6VMHX7YlnyfWe0LmjD1g14IwMtXU7adyEy86MqXONp/UQAcoJgyjvx4EzdB1QdSDq4geFGiWkgzXU0AeiiZmBk1wRdSgoEi5cjnvSWFhYPqJNRe81Ka+vn5eW7KmWhUMcCOFM2A3h9KV9lbjTajUIk+9zFjra2txewhZQrLy8uT/WcKUIN1MUBJcZBR1G7sQQZhVZNFeZ8iIDUCvD5WIbkCNImkgoB7PCAhGWDAPpTL/Gpz+EW7zQYqIZQ8dfHaoYbguEDGCyxd1HegUoompnJDx9BTagpJfqKG6AiCUurRG5L3AiS+aQUkbNF6uPc83RQznxisdF28ynPgr2iQFEQwI1CFTRRZomWgqcLV57Y1Iq3cFOQelSokLUFBNaD3xICPe1iKdQhibJo5nGRbjvsJ1UduCpa2VA+nfI5GoVzLCPEmrdCUz4HN+YFeCMBLIapKmtQpK6SzZOPG2GQcxv2kAOzsQypmZStEuy3Jo3w3lVZhHx+3I1NfWFh463IpOOjB8+2maUUDNql8oLnOBC2kY1PHaryTBmDKG9WSUKYO/2jHJsYBD4qHbTHP0CnHgStbAeali6Js6/UoscVhmz6YxjAz9iS4OG2uasYDYy+WHUF6fMBtijGPRZd+1MntCqZjsw+pCGUrrDGPoomyHZcEHcxvU8uwsxX2mCkx9xi+THRK9iEVVrai+ZiWKiVnH1JhZytiEgZZ6CXM6Eea9m26Ohh5EoBhPnumNjQ2bTOP1ZP7HLa5Eq7kcCh3mgxeWkemepz4ajKIprvvoDt8El/MYe6qieBdL/YTE7f1peN9WXAfkj/yub6mWOCMRkn/9071kU9Pjvvknn4KE/gcGeBXqP2Zlf0h3LapZuwgwN7lPgzGrzqdG3/o5hXhlKT2jYrIbuz1ckA/aBjktP+rARzA95w10N+Fq18N+DcD6Pfv1dXVss1fDV7x3PgHAVhpMFnPkgEAAAAASUVORK5CYII="
+                    />
+                </defs>
+            </svg>
+
+            <div>
+                <h5 class="font-normal text-gray-700">{{ userName }}</h5>
+                <p class="text-sm text-gray-700">{{ userEmail }}</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 text-sm text-gray-700 dark:text-gray-400 mb-6">
+            <div>
+                <p class="font-semibold text-gray-900">{{ "PROFILE.ACCOUNT" | translate }}</p>
+                <p class="text-gray-700">{{ userRole?.toLocaleUpperCase() }}</p>
+            </div>
+            <div>
+                <p class="font-semibold text-gray-900">{{ "PROFILE.ID" | translate }}</p>
+                <p class="text-gray-700">{{ userId }}</p>
+            </div>
+        </div>
+
+        <button
+            class="mt-4 px-6 py-3 text-sm font-medium text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none"
+            *ngIf="userRole === 'writer'"
+            (click)="createStripeAccount()"
+        >
+            {{ "PROFILE.STRIPE" | translate }}
+        </button>
+        <button
+            class="mt-4 px-6 py-3 text-sm font-medium text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none"
+            (click)="logout()"
+            type="button"
+        >
+            {{ "PROFILE.SESSION" | translate }}
+        </button>
+    </div>
+</div>
+
+<div *ngFor="let book of userBooks" class="max-w-md mx-auto bg-gray-800 text-white rounded-xl shadow-md overflow-hidden mb-6">
+    <div class="px-4 py-2 border-b border-gray-700 flex justify-between text-sm">
+        <span class="font-semibold">{{ book.name }}</span>
+        <span class="text-green-400">{{ book.price | currency : "EUR" }}</span>
+    </div>
+
+    <div class="p-4 flex">
+        <img class="w-24 h-24 object-cover rounded-md" [src]="book.image" [alt]="book.name" />
+
+        <div class="ml-4 flex-1 flex flex-col justify-between">
+            <div>
+                <h3 class="text-lg font-semibold">{{ book.author }}</h3>
+                <p class="mt-1 text-gray-300 text-sm">{{ book.description }}</p>
+                <div class="mt-2 text-sm text-gray-400 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 4h12v12H4z" />
+                    </svg>
+                    {{ book.pages }} {{ "PROFILE.PAGES" | translate }}
+                </div>
+            </div>
+
+            <div class="mt-3 flex justify-end space-x-2">
+                <button class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-sm rounded-md" [routerLink]="['/editBook/', book.id]">
+                    {{ "PROFILE.EDIT" | translate }}
+                </button>
+                <button class="px-3 py-1 bg-red-600 hover:bg-red-500 text-sm rounded-md" (click)="deleteBook(book.id)">
+                    {{ "PROFILE.DELETE" | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Si el user es reader:-->
+<div *ngIf="booksInHistory.length > 0" class="flex justify-center items-center py-10">
+    <div class="bg-white rounded-2xl shadow-md p-6 w-full max-w-xl text-center">
+        <h2 class="text-2xl font-semibold text-gray-800">{{ "PROFILE.HISTORY" | translate }}</h2>
+    </div>
+</div>
+
+<div
+    *ngFor="let book of booksInHistory"
+    class="max-w-md mx-auto bg-gray-800 text-white rounded-xl shadow-md overflow-hidden mb-6"
+>
+    <!-- Header con título y precio -->
+    <div class="px-4 py-2 border-b border-gray-700 flex justify-between text-sm">
+        <span class="font-semibold">{{ book.name }}</span>
+        <span class="text-green-400">{{ book.price | currency : "EUR" }}</span>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="p-4 flex">
+        <!-- Imagen -->
+        <img class="w-24 h-24 object-cover rounded-md" [src]="book.image" [alt]="book.name" />
+
+        <!-- Info y botones -->
+        <div class="ml-4 flex-1 flex flex-col justify-between">
+            <!-- Texto info -->
+            <div>
+                <h3 class="text-lg font-semibold">{{ book.author }}</h3>
+                <p class="mt-1 text-gray-300 text-sm">{{ book.description }}</p>
+                <div class="mt-2 text-sm text-gray-400 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 4h12v12H4z" />
+                    </svg>
+                    {{ book.pages }} {{ "PROFILE.PAGES" | translate }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />

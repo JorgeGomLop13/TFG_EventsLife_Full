@@ -1,0 +1,99 @@
+<div class="container-form">
+    <form [formGroup]="form" class="form">
+        <div class="field">
+            <label for="bookName">{{ "FORM.BOOK_NAME" | translate }}</label>
+            <input
+                type="text"
+                id="bookName"
+                name="bookName"
+                formControlName="bookName"
+                required
+                [placeholder]="'FORM.BOOK_NAME' | translate"
+                class="fill-info"
+            />
+        </div>
+
+        <div class="field">
+            <label for="bookPages">{{ "FORM.BOOK_PAGES" | translate }}</label>
+            <input
+                type="number"
+                min="1"
+                step="1"
+                id="bookPages"
+                name="bookPages"
+                formControlName="bookPages"
+                required
+                class="fill-info"
+            />
+        </div>
+
+        <div class="field">
+            <label for="bookDescription">{{ "FORM.BOOK_DESCRIPTION" | translate }}</label>
+            <textarea
+                type="text"
+                id="bookDescription"
+                name="bookDescription"
+                formControlName="bookDescription"
+                required
+                class="fill-info-description"
+            ></textarea>
+        </div>
+
+        <div class="field">
+            <label for="bookPrice">{{ "FORM.BOOK_PRICE" | translate }}</label>
+            <input
+                type="number"
+                min="1"
+                step="1"
+                id="bookPrice"
+                name="bookPrice"
+                formControlName="bookPrice"
+                required
+                class="fill-info"
+            />
+        </div>
+
+        <div class="field">
+            <input type="file" (change)="onFileSelected($event)" accept="image/*" id="bookImage" name="bookImage" />
+            <img
+                *ngIf="bookImagePreview"
+                [src]="bookImagePreview"
+                alt="{{ 'FORM.IMAGE_PREVIEW' | translate }}"
+                width="200"
+                height="200"
+            />
+        </div>
+        <!--El formulario se desabilita hasta que esté correcto-->
+        <button type="submit" (click)="selectFunction()" [disabled]="form.invalid" class="btn_action">
+            {{ "FORM.SUBMIT" | translate }}
+        </button>
+    </form>
+</div>
+
+<footer class="footer">
+    <div class="goBack" [routerLink]="['/home']">
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+            <rect width="24" height="24" fill="url(#pattern0_44_8)" />
+            <defs>
+                <pattern id="pattern0_44_8" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_44_8" transform="scale(0.0208333)" />
+                </pattern>
+                <image
+                    id="image0_44_8"
+                    width="48"
+                    height="48"
+                    preserveAspectRatio="none"
+                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAL/SURBVHgB7ZjNbhoxEIDH3iTqJVJSRVHbS1cNRFH+RJ4gcMzPgb4BOfXYRwg8Qp6geQQqRUlvkFtvpQqqUECqc2sjNdqqUqWy4OkYAgQK2LtdxErZ78La2N4Zjz0/CxARERER8ZixwAeJeDqxtPTqzYv5jZtvTsWBKTIDHlHCS9YoMGALzVk3SV0pmCLcy+CO8Ai4oNrI2r/TxFiBQeFJfNGoy9cwZYwU2FrZSw8K79ZlqiI+CJgyTDdg2M6HRXjFWAUSa2lbysansAqvGOuFpHRp5yG0witGWmBz7TDJJBa6HYinyEBAAHDGHcngc7lyVoT/ZLQFpNzt04+xjPbCGIKIwMi026sHgh6LljubK4m8AB94igNBQzrYtEeZ5pz7dXv1MAs+GH2EYnSE+MMjBHSEUEAg8AQDmaDX2/39mLfqv49Komicnow9FVvxgwKNSN4PFLw+m/Jr6qHrx/Z26UKc9iuC+avrc+MAOTaZe7q8cmmhlaHHJ6C8kSXTz+c33geVwN3e1W5uf1RPlhfjdMVYst3L1p4txn5+v6t9NFlDey/XKZBZFMjgPhZMwhKKzdj+MeMs22ogOHSxd0zeob3EX6r5Ev0ckehOe22w5ZxbSNhpGwKkXDvP0eLFVoMBZbp/3prMM/JCV9dn+SbOpCatBCLL9Vo8YzLH2I0qSwwqQfXAOwiQco0CW8fTkRWUJ9TN8RQH/lFiEvUAsmL3keNL3XDPgUwp4fLGDiV42UnUA7Su6DwzQFs33nNJqahUWgldDkLAVFOJYTCK0t0GojbehFAB7CpACV9JNz5UCqgUvpXgtUBxVbu41M0JlQJcYs8td4Kabg6EBJVO93YfwHWlkZMIhQJt4fG400aJWdPSNagiyxetshVJcGyn7G28pdOe4sBWfD9DdbE2Ouqgz5I2Y5iknbb7/8H8LypowAPGFlDCU9IeaO7zAAdRZsvVixPwiLEFmuDzU/Z4HDrwp66LJ34/13i6A+tkBR7AEeIgBUpm5OcjIiIiIiLG8ReIVF4tY0vSGgAAAABJRU5ErkJggg=="
+                />
+            </defs>
+        </svg>
+        <button>{{ "FORM.GO_BACK" | translate }}</button>
+    </div>
+</footer>

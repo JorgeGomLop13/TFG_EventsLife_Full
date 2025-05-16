@@ -1,0 +1,129 @@
+{
+    "HOME": {
+        "AUTHOR": "Author",
+        "PAGES": "Pages",
+        "CART": "Add to the cart",
+        "PREVIUS": "Previus",
+        "FORWARD": "Next",
+        "IMAGETEXT": "Welcome to BooksShelter ",
+        "IMAGESUBTEXT": "Discover, explore, and dive into thousands of books 📚",
+        "DESCRIPTION": "Description: "
+    },
+    "SEARCH": {
+        "AUTHOR": "Author:",
+        "PAGES": "Pages:",
+        "CART": "Add to the cart",
+        "PREVIUS": "Previus",
+        "FORWARD": "Next",
+        "SEARCHPLACEHOLDER": "Search books...",
+        "SEARCHBUTTON": "Search",
+        "RESETBUTTON": "Reset",
+        "PAGE": "Page",
+        "OF": "of",
+        "DESCRIPTION": "Description: "
+    },
+    "HEADER": {
+        "SEARCH": "Search",
+        "LANGUAGE": "Select language",
+        "PUBLISH": "Publish your book",
+        "REGISTER": "Register",
+        "LOGIN": "Login"
+    },
+    "PROFILE": {
+        "STRIPE": "Link Stripe",
+        "SESSION": "Log out",
+        "PAGES": "Pages",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "ACCOUNT": "Account type",
+        "ID": "User ID",
+        "HISTORY": "My recent purchases:"
+    },
+    "CREATEBOOK": {
+        "TITLE": "Enter your book details!"
+    },
+    "EDITBOOK": {
+        "TITLE": "Edit your book details!"
+    },
+
+    "FORM": {
+        "BOOK_NAME": "Book name",
+        "BOOK_PAGES": "Number of pages",
+        "BOOK_DESCRIPTION": "Book description",
+        "BOOK_PRICE": "Book price",
+        "IMAGE_PREVIEW": "Preview",
+        "SUBMIT": "Submit data",
+        "GO_BACK": "Go back"
+    },
+    "REGISTER": {
+        "TITLE": "Create Account",
+        "SUBTITLE": "Complete the form to register in BooksShelter",
+        "USERNAME": "Username",
+        "USERNAME_PLACEHOLDER": "Your username",
+        "EMAIL": "Email",
+        "EMAIL_PLACEHOLDER": "Email",
+        "PASSWORD": "Password",
+        "CONFIRM_PASSWORD": "Confirm password",
+        "COUNTRY": "Country",
+        "SELECT_COUNTRY": "Select your country",
+        "COMMUNITY": "Community",
+        "SELECT_COMMUNITY": "Select your community",
+        "PROVINCE": "Province",
+        "SELECT_PROVINCE": "Select your province",
+        "USER_TYPE": "User type",
+        "READER_LABEL": "Reader (to read published books)",
+        "WRITER_LABEL": "Writer (to be able to publish books)",
+        "ACCEPT": "I accept the",
+        "TERMS": "Terms and conditions",
+        "BUTTON": "Register",
+        "BACK": "Go back",
+        "HAVE_ACCOUNT": "Already have an account?",
+        "LOGIN_LINK": "Log in"
+    },
+    "ERROR-CODES": {
+        "USEREXIST": "The email is already asigned to another account",
+        "PASSWORD": "Passwords do not match",
+        "LOGIN": "Email or password incorrect",
+        "DEFAULT": "Failed to create your user"
+    },
+    "LOGIN": {
+        "WELCOME": "Welcome to BooksShelter",
+        "SUBTITLE": "Log in to access your account",
+        "EMAIL": "Email",
+        "EMAIL_PLACEHOLDER": "Email",
+        "PASSWORD": "Password",
+        "PASSWORD_PLACEHOLDER": "Password",
+        "BUTTON": "Log in",
+        "BACK": "Go back",
+        "NO_ACCOUNT": "Don't have an account?",
+        "REGISTER_LINK": "Register here"
+    },
+    "CART": {
+        "TITLE": "My cart:",
+        "EMPTY": "Your cart is empty for now.",
+        "ADD_HINT": "Add books to see them here 📚",
+        "PAGES": "pages",
+        "DELETE": "Delete",
+        "PAY": "Pay"
+    },
+    "SUCCESS": {
+        "BACK_TO_SHOP": "Back to the shop",
+        "TITLE": "Purchase completed successfully!",
+        "MESSAGE_1": "Thank you for your purchase.",
+        "MESSAGE_2": "The book has been added to your library.",
+        "SUBSCRIPTION_TITLE": "Stripe account linked!",
+        "SUBSCRIPTION_MSG_1": "Thank you for linking your account."
+    },
+    "common": {
+        "accessDenied": "Acces denied",
+        "close": "Close"
+    },
+    "confirmdialog": {
+        "no": "No",
+        "yes": "Yes"
+    },
+    "errors": {
+        "unknown": "Unknown error"
+    },
+    "hello": "Wellcome to Jenga 🙌"
+}

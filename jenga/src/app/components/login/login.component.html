@@ -1,0 +1,73 @@
+<div class="text-start">
+    <h1>{{ "LOGIN.WELCOME" | translate }}</h1>
+    <h2>{{ "LOGIN.SUBTITLE" | translate }}</h2>
+</div>
+
+<div class="container-form">
+    <form #loginForm="ngForm" class="form">
+        <div class="field">
+            <label for="email">{{ "LOGIN.EMAIL" | translate }}</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                [(ngModel)]="email"
+                required
+                placeholder="{{ 'LOGIN.EMAIL_PLACEHOLDER' | translate }}"
+                class="fill-info"
+            />
+        </div>
+        <div class="field">
+            <label for="password">{{ "LOGIN.PASSWORD" | translate }}</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                [(ngModel)]="password"
+                required
+                placeholder="{{ 'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
+                class="fill-info"
+            />
+        </div>
+        <!--Hasta que el formulario no sea valido, no deja enviar-->
+        <button type="submit" (click)="login()" [disabled]="!loginForm.valid" class="btn_action">
+            {{ "LOGIN.BUTTON" | translate }}
+        </button>
+
+        <div *ngIf="errorMessage" class="mt-2 p-2 bg-red-100 text-red-700 border border-red-400 rounded">
+            {{ `ERROR-CODES.${errorMessage}` | translate }}
+        </div>
+    </form>
+</div>
+
+<footer class="footer">
+    <div class="goBack" [routerLink]="['/home']">
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+            <rect width="24" height="24" fill="url(#pattern0_44_8)" />
+            <defs>
+                <pattern id="pattern0_44_8" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_44_8" transform="scale(0.0208333)" />
+                </pattern>
+                <image
+                    id="image0_44_8"
+                    width="48"
+                    height="48"
+                    preserveAspectRatio="none"
+                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAL/SURBVHgB7ZjNbhoxEIDH3iTqJVJSRVHbS1cNRFH+RJ4gcMzPgb4BOfXYRwg8Qp6geQQqRUlvkFtvpQqqUECqc2sjNdqqUqWy4OkYAgQK2LtdxErZ78La2N4Zjz0/CxARERER8ZixwAeJeDqxtPTqzYv5jZtvTsWBKTIDHlHCS9YoMGALzVk3SV0pmCLcy+CO8Ai4oNrI2r/TxFiBQeFJfNGoy9cwZYwU2FrZSw8K79ZlqiI+CJgyTDdg2M6HRXjFWAUSa2lbysansAqvGOuFpHRp5yG0witGWmBz7TDJJBa6HYinyEBAAHDGHcngc7lyVoT/ZLQFpNzt04+xjPbCGIKIwMi026sHgh6LljubK4m8AB94igNBQzrYtEeZ5pz7dXv1MAs+GH2EYnSE+MMjBHSEUEAg8AQDmaDX2/39mLfqv49Komicnow9FVvxgwKNSN4PFLw+m/Jr6qHrx/Z26UKc9iuC+avrc+MAOTaZe7q8cmmhlaHHJ6C8kSXTz+c33geVwN3e1W5uf1RPlhfjdMVYst3L1p4txn5+v6t9NFlDey/XKZBZFMjgPhZMwhKKzdj+MeMs22ogOHSxd0zeob3EX6r5Ev0ckehOe22w5ZxbSNhpGwKkXDvP0eLFVoMBZbp/3prMM/JCV9dn+SbOpCatBCLL9Vo8YzLH2I0qSwwqQfXAOwiQco0CW8fTkRWUJ9TN8RQH/lFiEvUAsmL3keNL3XDPgUwp4fLGDiV42UnUA7Su6DwzQFs33nNJqahUWgldDkLAVFOJYTCK0t0GojbehFAB7CpACV9JNz5UCqgUvpXgtUBxVbu41M0JlQJcYs8td4Kabg6EBJVO93YfwHWlkZMIhQJt4fG400aJWdPSNagiyxetshVJcGyn7G28pdOe4sBWfD9DdbE2Ouqgz5I2Y5iknbb7/8H8LypowAPGFlDCU9IeaO7zAAdRZsvVixPwiLEFmuDzU/Z4HDrwp66LJ34/13i6A+tkBR7AEeIgBUpm5OcjIiIiIiLG8ReIVF4tY0vSGgAAAABJRU5ErkJggg=="
+                />
+            </defs>
+        </svg>
+        <button>{{ "LOGIN.BACK" | translate }}</button>
+    </div>
+    <div class="login_text">
+        <h2>{{ "LOGIN.NO_ACCOUNT" | translate }}</h2>
+        <a [routerLink]="['/register']" class="login">{{ "LOGIN.REGISTER_LINK" | translate }}</a>
+    </div>
+</footer>

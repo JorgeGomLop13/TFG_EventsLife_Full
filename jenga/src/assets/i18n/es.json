@@ -1,0 +1,128 @@
+{
+    "HOME": {
+        "AUTHOR": "Autor",
+        "PAGES": "Páginas",
+        "CART": "Añadir al carro",
+        "PREVIUS": "Anterior",
+        "FORWARD": "Siguiente",
+        "IMAGETEXT": "Bienvenido a BooksShelter ",
+        "IMAGESUBTEXT": "Descubre, explora y sumérgete en miles de libros 📚",
+        "DESCRIPTION": "Descripción: "
+    },
+    "SEARCH": {
+        "AUTHOR": "Autor:",
+        "PAGES": "Páginas:",
+        "CART": "Añadir al carro",
+        "PREVIUS": "Anterior",
+        "FORWARD": "Siguiente",
+        "SEARCHPLACEHOLDER": "Busca libros...",
+        "SEARCHBUTTON": "Buscar",
+        "RESETBUTTON": "Restablecer",
+        "PAGE": "Página",
+        "OF": "de",
+        "DESCRIPTION": "Descripción: "
+    },
+    "HEADER": {
+        "SEARCH": "Búsqueda",
+        "LANGUAGE": "Seleccionar idioma",
+        "PUBLISH": "Publica tu libro",
+        "REGISTER": "Registrarse",
+        "LOGIN": "Iniciar sesión"
+    },
+    "PROFILE": {
+        "STRIPE": "Vincular Stripe",
+        "SESSION": "Cerrar sesión",
+        "PAGES": "Páginas",
+        "EDIT": "Editar",
+        "DELETE": "Borrar ",
+        "ACCOUNT": "Tipo de cuenta",
+        "ID": "ID de usuario",
+        "HISTORY": "Mis compras recientes:"
+    },
+    "CREATEBOOK": {
+        "TITLE": "¡Introduce los datos de tu libro!"
+    },
+    "EDITBOOK": {
+        "TITLE": "¡Edita los datos de tu libro!"
+    },
+    "FORM": {
+        "BOOK_NAME": "Nombre del libro",
+        "BOOK_PAGES": "Número de páginas",
+        "BOOK_DESCRIPTION": "Descripción del libro",
+        "BOOK_PRICE": "Precio del libro",
+        "IMAGE_PREVIEW": "Vista previa",
+        "SUBMIT": "Mandar los datos",
+        "GO_BACK": "Volver atrás"
+    },
+    "REGISTER": {
+        "TITLE": "Crear Cuenta",
+        "SUBTITLE": "Completa el formulario para registrarte en BooksShelter",
+        "USERNAME": "Usuario",
+        "USERNAME_PLACEHOLDER": "Tu usuario",
+        "EMAIL": "Email",
+        "EMAIL_PLACEHOLDER": "Email",
+        "PASSWORD": "Contraseña",
+        "CONFIRM_PASSWORD": "Confirmación contraseña",
+        "COUNTRY": "País",
+        "SELECT_COUNTRY": "Selecciona tu país",
+        "COMMUNITY": "Comunidad",
+        "SELECT_COMMUNITY": "Selecciona tu comunidad",
+        "PROVINCE": "Provincia",
+        "SELECT_PROVINCE": "Selecciona tu provincia",
+        "USER_TYPE": "Tipo de usuario",
+        "READER_LABEL": "Lector (para leer los libros publicados)",
+        "WRITER_LABEL": "Escritor (para poder publicar libros)",
+        "ACCEPT": "Acepto los",
+        "TERMS": "Términos y condiciones",
+        "BUTTON": "Registrarse",
+        "BACK": "Volver atrás",
+        "HAVE_ACCOUNT": "¿Ya tienes una cuenta?",
+        "LOGIN_LINK": "Inicia sesión"
+    },
+    "ERROR-CODES": {
+        "USEREXIST": "El correo ya está asignado a otra cuenta",
+        "PASSWORD": "Las contraseñas no coinciden",
+        "LOGIN": "Email o contraseña incorrectos",
+        "DEFAULT": "Fallo al crear tu usuario"
+    },
+    "LOGIN": {
+        "WELCOME": "Bienvenido a BooksShelter",
+        "SUBTITLE": "Inicia sesión para acceder a tu cuenta",
+        "EMAIL": "Email",
+        "EMAIL_PLACEHOLDER": "Email",
+        "PASSWORD": "Contraseña",
+        "PASSWORD_PLACEHOLDER": "Contraseña",
+        "BUTTON": "Iniciar sesión",
+        "BACK": "Volver atrás",
+        "NO_ACCOUNT": "¿No tienes una cuenta?",
+        "REGISTER_LINK": "Regístrate aquí"
+    },
+    "CART": {
+        "TITLE": "Mi carrito:",
+        "EMPTY": "Tu carrito está vacío por ahora.",
+        "ADD_HINT": "Añade libros para poder verlos aquí 📚",
+        "PAGES": "páginas",
+        "DELETE": "Borrar",
+        "PAY": "Pagar"
+    },
+    "SUCCESS": {
+        "BACK_TO_SHOP": "Volver a la tienda",
+        "TITLE": "¡Compra realizada con éxito!",
+        "MESSAGE_1": "Gracias por tu compra.",
+        "MESSAGE_2": "El libro ha sido añadido a tu biblioteca.",
+        "SUBSCRIPTION_TITLE": "¡Cuenta de Stripe vinculada!",
+        "SUBSCRIPTION_MSG_1": "Gracias por vincular tu cuenta."
+    },
+    "common": {
+        "accessDenied": "Acceso denegado",
+        "close": "Cerrar"
+    },
+    "confirmdialog": {
+        "no": "No",
+        "yes": "Sí"
+    },
+    "errors": {
+        "unknown": "Error desconocido"
+    },
+    "hello": "Bienvenido a Jenga 🙌"
+}

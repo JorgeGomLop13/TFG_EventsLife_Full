@@ -1,0 +1,77 @@
+@import '../../styles/variables';
+$text-color: #ffffff;
+
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: center;
+  justify-items: center;
+  align-items: center;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: $text-color;
+  background-color: $header-color;
+  gap: 10px;
+  .title {
+    font-family: 'Reggae One';
+    font-size: 1.5625rem;
+    cursor: pointer;
+  }
+  .header-buttons-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 3.5rem;
+    font-family: 'Aclonica';
+  }
+  .header-buttons-login {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 1rem;
+
+    .header-button {
+      font-family: 'Aclonica';
+      width: 11rem;
+      padding: 1rem;
+      background-color: $buttons-color;
+      border: 3px solid #000000;
+      border-radius: 0.3125rem;
+      color: $text-color;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+      color: #000000;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &:hover {
+        background-color: $text-color;
+      }
+    }
+  }
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Aclonica';
+  cursor: pointer;
+}
+
+@media (max-width: 400px) {
+  .header {
+    .header-buttons-login {
+      .header-button {
+        font-size: 1rem;
+      }
+    }
+  }
+}

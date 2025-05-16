@@ -1,0 +1,70 @@
+<app-header [booksList]="booksList"></app-header>
+
+<div class="carousel-container">
+    <div
+        class="carousel-slide"
+        *ngFor="let image of images; let i = index"
+        [style.backgroundImage]="'url(' + image + ')'"
+        [class.active]="i === currentIndex"
+    >
+        <div class="carousel-text">
+            <h1>{{ "HOME.IMAGETEXT" | translate }}</h1>
+            <p>{{ "HOME.IMAGESUBTEXT" | translate }}</p>
+        </div>
+    </div>
+
+    <button class="prev" (click)="prev()">‹</button>
+    <button class="next" (click)="next()">›</button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <div
+        *ngFor="let book of books | paginate : { itemsPerPage: 3, currentPage: page }"
+        class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col justify-between"
+    >
+        <div class="aspect-[3/2] overflow-hidden">
+            <img [src]="book.image" alt="Portada del libro" class="w-full h-full object-contain" />
+        </div>
+
+        <div class="p-4 space-y-2 text-sm text-gray-800 flex-grow">
+            <div class="flex justify-between items-center font-semibold text-base">
+                <h3>{{ book.name }}</h3>
+                <span>{{ book.price }}€</span>
+            </div>
+
+            <div class="text-sm text-gray-600">
+                <p class="text-gray-700 text-sm mt-2 line-clamp-3">
+                    <span class="font-medium">{{ "SEARCH.DESCRIPTION" | translate }}</span
+                    >{{ book.description }}
+                </p>
+                <p>
+                    <span class="font-medium">{{ "HOME.AUTHOR" | translate }}</span> {{ book.author }}
+                </p>
+                <p>
+                    <span class="font-medium">{{ "HOME.PAGES" | translate }}</span> {{ book.pages }}
+                </p>
+            </div>
+
+            <p class="text-gray-700 text-sm mt-2 line-clamp-3">
+                {{ book.descripcion }}
+            </p>
+        </div>
+
+        <div class="p-4 pt-0">
+            <button
+                (click)="addToCart(book.id)"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-xl transition duration-200"
+                *ngIf="role === 'reader' || !role"
+            >
+                {{ "HOME.CART" | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<pagination-controls
+    (pageChange)="page = $event"
+    [previousLabel]="'HOME.PREVIUS' | translate"
+    [nextLabel]="'HOME.FORWARD' | translate"
+    class="pageChange"
+></pagination-controls>
