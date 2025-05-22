@@ -1,74 +1,52 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@app/core/types/user';
-import { jwtDecode } from 'jwt-decode';
+import { catchError, map, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl = 'http://127.0.0.1:8000/api';
 
-  public role: string = '';
-  public userName: string = '';
   constructor(private http: HttpClient, private router: Router) {}
 
-  register(user: User) {
-    return this.http.post(`${this.apiUrl}/signup`, user);
+  register(user: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/register`, user, {
+      headers: {
+        Accept: 'application/json'
+      }
+    });
   }
-  login(email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/signin`, { email, password });
+  login(email: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, { email, password });
   }
-  setRole(role: string) {
-    localStorage.setItem('role', role);
-  }
-  setUserName(name: string) {
-    localStorage.setItem('userName', name);
-  }
-  getRole() {
-    this.role = localStorage.getItem('role') || '';
-    return this.role;
-  }
-  getUserName() {
-    this.userName = localStorage.getItem('userName') || '';
-    return this.userName;
+  getUser(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user`);
   }
 
   logout() {
     this.deleteLocalStorage();
-    this.role = '';
-    this.userName = '';
     this.router.navigate(['/home']);
   }
   //Para comprobar si el usuario está logueado
-  isAuthenticated() {
+  isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    //Primero comprobamos que el token existe y no es nulo, si no existe redirigimos a la pagina de login
-    if (token) {
-      try {
-        //Decodificamos el token para obtener su payload y sacar su fecha de expiracion
-        const tokenDecoded = jwtDecode(token);
-        const now = Math.floor(Date.now() / 1000);
-        //Luego verificamos que el token no haya expirado, si ha expirado redirigimos devuelve false
-        if (tokenDecoded.exp && tokenDecoded.exp < now) {
-          return false;
-        }
-        //Si el token es valido y no ha expirado, se devuelve true
-        return true;
-      } catch (e) {
-        //Si detecta algun error al decodificar el token devuelve false
-        console.error('Error decoding token:', e);
-        return false;
-      }
-    }
-    return false;
+    return token !== null && token !== undefined;
   }
+
   deleteLocalStorage() {
     localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('role');
-    localStorage.removeItem('userEmail');
+  }
+
+  isOrganizer(): Observable<boolean> {
+    return this.getUser().pipe(
+      map((user) => user.role === 'organizer'),
+      catchError((err) => {
+        console.error('Error al obtener usuario', err);
+        return of(false);
+      })
+    );
   }
 }

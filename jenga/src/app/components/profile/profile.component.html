@@ -35,17 +35,21 @@
         <div class="grid grid-cols-2 gap-6 text-sm text-gray-700 dark:text-gray-400 mb-6">
             <div>
                 <p class="font-semibold text-gray-900">{{ "PROFILE.ACCOUNT" | translate }}</p>
-                <p class="text-gray-700">{{ userRole?.toLocaleUpperCase() }}</p>
+                <p class="text-gray-700">{{ userRole.toLocaleUpperCase() }}</p>
             </div>
             <div>
                 <p class="font-semibold text-gray-900">{{ "PROFILE.ID" | translate }}</p>
                 <p class="text-gray-700">{{ userId }}</p>
             </div>
+            <div *ngIf="userRole === 'organizer' && userStripeId">
+                <p class="font-semibold text-gray-900">{{ "PROFILE.STRIPEID" | translate }}</p>
+                <p class="text-gray-700">{{ userStripeId }}</p>
+            </div>
         </div>
 
         <button
             class="mt-4 px-6 py-3 text-sm font-medium text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none"
-            *ngIf="userRole === 'writer'"
+            *ngIf="userRole === 'organizer'"
             (click)="createStripeAccount()"
         >
             {{ "PROFILE.STRIPE" | translate }}
@@ -59,76 +63,107 @@
         </button>
     </div>
 </div>
+<!--Para el organizer-->
+<div *ngIf="userRole === 'organizer' && userEvents.length > 0" class="flex justify-center items-center py-10">
+    <div class="bg-white rounded-2xl shadow-md p-6 w-full max-w-xl text-center">
+        <h2 class="text-2xl font-semibold text-gray-800">{{ "PROFILE.CREATED_EVENTS" | translate }}</h2>
+    </div>
+</div>
 
-<div *ngFor="let book of userBooks" class="max-w-md mx-auto bg-gray-800 text-white rounded-xl shadow-md overflow-hidden mb-6">
+<div *ngFor="let event of userEvents" class="max-w-md mx-auto bg-gray-800 text-white rounded-xl shadow-md overflow-hidden mb-6">
     <div class="px-4 py-2 border-b border-gray-700 flex justify-between text-sm">
-        <span class="font-semibold">{{ book.name }}</span>
-        <span class="text-green-400">{{ book.price | currency : "EUR" }}</span>
+        <span class="font-semibold">{{ event.name }}</span>
+        <span class="text-gray-400"> {{ event.date | date : "dd/MM/yyyy" }}</span>
+        <span class="text-gray-400"> {{ event.start_date.slice(0, 5) }}h</span>
+        -
+        <span class="text-gray-400"> {{ event.end_date.slice(0, 5) }}h</span>
+        <span class="text-green-400">{{ event.price | currency : "EUR" }}</span>
     </div>
 
     <div class="p-4 flex">
-        <img class="w-24 h-24 object-cover rounded-md" [src]="book.image" [alt]="book.name" />
+        <img class="w-24 h-24 object-cover rounded-md" [src]="event.image" [alt]="event.name" />
 
         <div class="ml-4 flex-1 flex flex-col justify-between">
             <div>
-                <h3 class="text-lg font-semibold">{{ book.author }}</h3>
-                <p class="mt-1 text-gray-300 text-sm">{{ book.description }}</p>
+                <h3 class="text-lg font-semibold">{{ event.name }}</h3>
                 <div class="mt-2 text-sm text-gray-400 flex items-center">
                     <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M4 4h12v12H4z" />
                     </svg>
-                    {{ book.pages }} {{ "PROFILE.PAGES" | translate }}
+                    {{ userName }}
+                </div>
+                <div class="mt-2 text-sm text-gray-400 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 4h12v12H4z" />
+                    </svg>
+                    {{ event.location }}
                 </div>
             </div>
 
             <div class="mt-3 flex justify-end space-x-2">
-                <button class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-sm rounded-md" [routerLink]="['/editBook/', book.id]">
+                <button
+                    class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-sm rounded-md"
+                    [routerLink]="['/editEvent/', event.id]"
+                >
                     {{ "PROFILE.EDIT" | translate }}
                 </button>
-                <button class="px-3 py-1 bg-red-600 hover:bg-red-500 text-sm rounded-md" (click)="deleteBook(book.id)">
+                <button
+                    class="px-3 py-1 bg-red-600 hover:bg-red-500 text-sm rounded-md"
+                    (click)="deleteEvent(event.id, event.codes)"
+                >
                     {{ "PROFILE.DELETE" | translate }}
                 </button>
+                @if (event.codes.length >0) {
+                <button class="px-3 py-1 bg-green-600 hover:bg-green-500 text-sm rounded-md" (click)="getCodes(event.id)">
+                    {{ "PROFILE.CODES" | translate }}
+                </button>
+                }
             </div>
         </div>
     </div>
 </div>
 
 <!--Si el user es reader:-->
-<div *ngIf="booksInHistory.length > 0" class="flex justify-center items-center py-10">
+<div *ngIf="eventsInHistory.length > 0" class="flex justify-center items-center py-10">
     <div class="bg-white rounded-2xl shadow-md p-6 w-full max-w-xl text-center">
         <h2 class="text-2xl font-semibold text-gray-800">{{ "PROFILE.HISTORY" | translate }}</h2>
     </div>
 </div>
 
 <div
-    *ngFor="let book of booksInHistory"
+    *ngFor="let event of eventsInHistory"
     class="max-w-md mx-auto bg-gray-800 text-white rounded-xl shadow-md overflow-hidden mb-6"
 >
     <!-- Header con título y precio -->
     <div class="px-4 py-2 border-b border-gray-700 flex justify-between text-sm">
-        <span class="font-semibold">{{ book.name }}</span>
-        <span class="text-green-400">{{ book.price | currency : "EUR" }}</span>
+        <span class="font-semibold">{{ event.name }}</span>
+        <span class="text-gray-400"> {{ event.date | date : "dd/MM/yyyy" }}</span>
+        <span class="text-gray-400"> {{ event.start_date.slice(0, 5) }}h</span>
+        -
+        <span class="text-gray-400"> {{ event.end_date.slice(0, 5) }}h</span>
+        <span class="text-green-400">{{ event.price | currency : "EUR" }}</span>
     </div>
 
-    <!-- Contenido principal -->
     <div class="p-4 flex">
-        <!-- Imagen -->
-        <img class="w-24 h-24 object-cover rounded-md" [src]="book.image" [alt]="book.name" />
-
-        <!-- Info y botones -->
+        <img class="w-24 h-24 object-cover rounded-md" [src]="event.image" [alt]="event.name" />
         <div class="ml-4 flex-1 flex flex-col justify-between">
-            <!-- Texto info -->
             <div>
-                <h3 class="text-lg font-semibold">{{ book.author }}</h3>
-                <p class="mt-1 text-gray-300 text-sm">{{ book.description }}</p>
+                <h3 class="text-lg font-semibold">{{ event.name }}</h3>
                 <div class="mt-2 text-sm text-gray-400 flex items-center">
                     <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M4 4h12v12H4z" />
                     </svg>
-                    {{ book.pages }} {{ "PROFILE.PAGES" | translate }}
+                    {{ userName }}
+                </div>
+                <div class="mt-2 text-sm text-gray-400 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 4h12v12H4z" />
+                    </svg>
+                    {{ event.location }}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <br /><br />

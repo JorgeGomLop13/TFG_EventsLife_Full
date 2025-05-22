@@ -1,40 +1,40 @@
 <div class="text-start">
-    <h1>{{ "REGISTER.TITLE" | translate }}</h1>
-    <h2>{{ "REGISTER.SUBTITLE" | translate }}</h2>
+    <h1>Crear Cuenta</h1>
+    <h2>Completa el formulario para registrarte en EventsLife</h2>
 </div>
 <div class="container-form">
     <form #registerForm="ngForm" class="form" (ngSubmit)="register()">
         <div class="field">
-            <label for="name">{{ "REGISTER.USERNAME" | translate }}</label>
+            <label for="name">Usuario</label>
+            <input type="text" id="name" name="name" [(ngModel)]="name" required placeholder="Tu usuario" class="fill-info" />
+        </div>
+        <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" [(ngModel)]="email" required placeholder="Email" class="fill-info" />
+        </div>
+        <div class="field" *ngIf="role_selected === 'organizer'">
+            <label for="address">Dirección</label>
             <input
                 type="text"
-                id="name"
-                name="name"
-                [(ngModel)]="name"
+                id="address"
+                name="address"
+                [(ngModel)]="address"
                 required
-                [placeholder]="'REGISTER.USERNAME_PLACEHOLDER' | translate"
+                placeholder="Dirección"
                 class="fill-info"
             />
         </div>
-        <div class="field">
-            <label for="email">{{ "REGISTER.EMAIL" | translate }}</label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                [(ngModel)]="email"
-                required
-                [placeholder]="'REGISTER.EMAIL_PLACEHOLDER' | translate"
-                class="fill-info"
-            />
+        <div class="field" *ngIf="role_selected === 'organizer'">
+            <label for="phone">Teléfono</label>
+            <input type="text" id="phone" name="phone" [(ngModel)]="phone" required placeholder="Teléfono" class="fill-info" />
         </div>
 
         <div class="field">
-            <label for="password">{{ "REGISTER.PASSWORD" | translate }}</label>
+            <label for="password">Contraseña</label>
             <input type="password" id="password" name="password" [(ngModel)]="password" required class="fill-info" />
         </div>
         <div class="field">
-            <label for="password">{{ "REGISTER.CONFIRM_PASSWORD" | translate }}</label>
+            <label for="password">Confirmación contraseña</label>
             <input
                 type="password"
                 id="confirmation_password"
@@ -44,52 +44,10 @@
                 class="fill-info"
             />
         </div>
-        <div class="field">
-            <label for="country">
-                {{ "REGISTER.COUNTRY" | translate }}
-            </label>
-            <select
-                id="country"
-                name="country"
-                [(ngModel)]="select_country"
-                required
-                class="fill-info"
-                (change)="resetCommunitiesProvinces($event)"
-            >
-                <option value="" disabled selected>{{ "REGISTER.SELECT_COUNTRY" | translate }}</option>
-                <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
-            </select>
-        </div>
-
-        <div class="field" *ngIf="select_country === 'ES'">
-            <label for="comunities"> {{ "REGISTER.COMMUNITY" | translate }} </label>
-            <select
-                id="comunities"
-                name="comunities"
-                [(ngModel)]="select_comunity"
-                required
-                class="fill-info"
-                (change)="setProvince($event)"
-            >
-                <option value="" disabled selected>{{ "REGISTER.SELECT_COMMUNITY" | translate }}</option>
-                <option *ngFor="let comunity of comunities" [value]="comunity.id">{{ comunity.name }}</option>
-            </select>
-        </div>
-
-        <div class="field" *ngIf="select_comunity && select_country === 'ES'">
-            <label for="provinces">
-                {{ "REGISTER.PROVINCE" | translate }}
-            </label>
-            <select id="provinces" name="provinces" [(ngModel)]="select_province" required class="fill-info">
-                <option value="" disabled selected>{{ "REGISTER.SELECT_PROVINCE" | translate }}</option>
-                <option *ngFor="let province of provinces" [value]="province.id">{{ province.name }}</option>
-            </select>
-        </div>
-
         <div class="select_user">
-            <label for="role_selected">{{ "REGISTER.USER_TYPE" | translate }}</label>
+            <label for="role_selected">Tipo de usuario</label>
             <div class="user_type">
-                <input type="radio" name="role_selected" (click)="changeRoleSelected('reader')" checked />
+                <input type="radio" name="role_selected" (click)="changeRoleSelected('standart')" checked />
                 <svg
                     width="36"
                     height="35"
@@ -112,10 +70,10 @@
                         />
                     </defs>
                 </svg>
-                <label for="reader">{{ "REGISTER.READER_LABEL" | translate }}</label>
+                <label for="standart">Asistente (para asistir a eventos)</label>
             </div>
             <div class="user_type">
-                <input type="radio" name="role_selected" (click)="changeRoleSelected('writer')" />
+                <input type="radio" name="role_selected" (click)="changeRoleSelected('organizer')" />
                 <svg
                     width="36"
                     height="36"
@@ -139,26 +97,20 @@
                     </defs>
                 </svg>
 
-                <label for="writer">{{ "REGISTER.WRITER_LABEL" | translate }}</label>
+                <label for="organizer">Organizador (para crear y gestionar eventos)</label>
             </div>
         </div>
 
         <div class="terms_conditions">
             <input type="checkbox" id="terms_conditions" name="terms_conditions" [(ngModel)]="terms_conditions" required />
-            <label for="terms_conditions"
-                >{{ "REGISTER.ACCEPT" | translate }}
-                <a href="#" class="conditions_Terms">{{ "REGISTER.TERMS" | translate }}</a></label
-            >
+            <label for="terms_conditions">Acepto los <a href="#" class="conditions_Terms">Términos y condiciones</a></label>
         </div>
 
-        <button type="submit" class="btn_action" [disabled]="!registerForm.valid">{{ "REGISTER.BUTTON" | translate }}</button>
-        <div *ngIf="errorMessage" class="mt-2 p-2 bg-red-100 text-red-700 border border-red-400 rounded">
-            {{ `ERROR-CODES.${errorMessage}` | translate }}
-        </div>
+        <button type="submit" class="btn_action" [disabled]="!registerForm.valid">Registrarse</button>
     </form>
 </div>
 <footer class="footer">
-    <div class="goBack" (click)="goHome()">
+    <div class="goBack" [routerLink]="['/home']">
         <svg
             width="24"
             height="24"
@@ -181,10 +133,10 @@
                 />
             </defs>
         </svg>
-        <button>{{ "REGISTER.BACK" | translate }}</button>
+        <button>Volver atrás</button>
     </div>
     <div class="login_text">
-        <h2>{{ "REGISTER.HAVE_ACCOUNT" | translate }}</h2>
-        <a (click)="toLogin()" class="login">{{ "REGISTER.LOGIN_LINK" | translate }}</a>
+        <h2>¿Ya tienes una cuenta?</h2>
+        <a [routerLink]="['/login']" class="login">Inicia sesión</a>
     </div>
 </footer>

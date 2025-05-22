@@ -1,72 +1,112 @@
 <div class="container-form">
     <form [formGroup]="form" class="form">
         <div class="field">
-            <label for="bookName">{{ "FORM.BOOK_NAME" | translate }}</label>
+            <label for="eventName">Nombre del evento</label>
             <input
                 type="text"
-                id="bookName"
-                name="bookName"
-                formControlName="bookName"
+                id="eventName"
+                name="eventName"
+                formControlName="eventName"
                 required
-                [placeholder]="'FORM.BOOK_NAME' | translate"
+                placeholder="Titulo del evento..."
                 class="fill-info"
             />
         </div>
-
         <div class="field">
-            <label for="bookPages">{{ "FORM.BOOK_PAGES" | translate }}</label>
+            <label>¿Cuándo lo quieres realizar?</label>
+            <div class="fecha">
+                <div class="time_global">
+                    <label for="eventDate">Fecha</label>
+                    <input type="date" id="eventDate" name="eventDate" formControlName="eventDate" required class="fill-info" />
+                </div>
+                <div class="time_start">
+                    <label for="eventTimeStart">Hora inicio</label>
+                    <input
+                        type="time"
+                        id="eventTimeStart"
+                        name="eventTimeStart"
+                        formControlName="eventTimeStart"
+                        required
+                        class="fill-info"
+                    />
+                </div>
+                <div class="time_end">
+                    <label for="eventTimeEnd">Hora fin</label>
+                    <input
+                        type="time"
+                        id="eventTimeEnd"
+                        name="eventTimeEnd"
+                        formControlName="eventTimeEnd"
+                        required
+                        class="fill-info"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label for="eventLocation">¿Dónde se encuentra?</label>
             <input
-                type="number"
-                min="1"
-                step="1"
-                id="bookPages"
-                name="bookPages"
-                formControlName="bookPages"
+                type="text"
+                id="eventLocation"
+                name="eventLocation"
+                formControlName="eventLocation"
                 required
+                placeholder="Ubicación del evento..."
                 class="fill-info"
             />
         </div>
-
         <div class="field">
-            <label for="bookDescription">{{ "FORM.BOOK_DESCRIPTION" | translate }}</label>
+            <label for="eventDescription">Descripción del evento</label>
             <textarea
                 type="text"
-                id="bookDescription"
-                name="bookDescription"
-                formControlName="bookDescription"
+                id="eventDescription"
+                name="eventDescription"
+                formControlName="eventDescription"
                 required
                 class="fill-info-description"
             ></textarea>
         </div>
-
         <div class="field">
-            <label for="bookPrice">{{ "FORM.BOOK_PRICE" | translate }}</label>
+            <label for="eventPrice">¿Cuánto quieres cobrar por la entrada?</label>
             <input
                 type="number"
-                min="1"
-                step="1"
-                id="bookPrice"
-                name="bookPrice"
-                formControlName="bookPrice"
+                id="eventPrice"
+                name="eventPrice"
+                formControlName="eventPrice"
+                required
+                class="fill-info"
+                [readonly]="freeEvent"
+            />
+            <div class="free-entry">
+                <input type="checkbox" id="eventPriceFree" name="eventPriceFree" (change)="onCheckboxChange()" />
+                <label for="eventPriceFree">La entrada es gratis</label>
+            </div>
+        </div>
+        <div class="field">
+            <label for="eventCapacity">¿Cuál es la capacidad máxima del evento?</label>
+            <input
+                type="number"
+                id="eventCapacity"
+                name="eventCapacity"
+                formControlName="eventCapacity"
                 required
                 class="fill-info"
             />
         </div>
-
         <div class="field">
-            <input type="file" (change)="onFileSelected($event)" accept="image/*" id="bookImage" name="bookImage" />
-            <img
-                *ngIf="bookImagePreview"
-                [src]="bookImagePreview"
-                alt="{{ 'FORM.IMAGE_PREVIEW' | translate }}"
-                width="200"
-                height="200"
-            />
+            <label for="eventCategoryId">Selecciona una categoría</label>
+            <select id="eventCategoryId" name="eventCategoryId" formControlName="eventCategoryId" required class="fill-info">
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+            </select>
         </div>
-        <!--El formulario se desabilita hasta que esté correcto-->
-        <button type="submit" (click)="selectFunction()" [disabled]="form.invalid" class="btn_action">
-            {{ "FORM.SUBMIT" | translate }}
-        </button>
+        <div class="field">
+            <label for="portrait">¡Sube una foto para la portada de tu evento!</label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*" id="eventImage" name="eventImage" />
+            <img *ngIf="eventImagePreview" [src]="eventImagePreview" alt="Vista previa" width="200" height="200" />
+        </div>
+        <!--Hasta que el formulario no sea valido el boton estara disabled-->
+        <button type="submit" (click)="selectFunction()" [disabled]="form.invalid" class="btn_action">Manda tus datos!</button>
     </form>
 </div>
 

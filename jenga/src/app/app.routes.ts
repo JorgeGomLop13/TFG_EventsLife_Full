@@ -19,13 +19,13 @@ export const routes: Routes = [
     data: { animation: 'ProfilePage' }
   },
   {
-    path: 'createBook',
-    loadComponent: () => import('./components/create-book/create-book.component').then((m) => m.CreateBookComponent),
+    path: 'createEvent',
+    loadComponent: () => import('./components/create-event/create-event.component').then((m) => m.CreateEventComponent),
     canActivate: [authGuard]
   },
   {
-    path: 'editBook/:id',
-    loadComponent: () => import('./components/edit-book/edit-book.component').then((m) => m.EditBookComponent),
+    path: 'editEvent/:id',
+    loadComponent: () => import('./components/edit-event/edit-event.component').then((m) => m.EditEventComponent),
     canActivate: [authGuard]
   },
   { path: 'search', loadComponent: () => import('./components/search/search.component').then((m) => m.SearchComponent) },
@@ -38,6 +38,7 @@ export const routes: Routes = [
     loadComponent: () => import('./components/success/success.component').then((m) => m.SuccessComponent)
   },
   { path: 'cart', loadComponent: () => import('./components/cart/cart.component').then((m) => m.CartComponent) },
+  { path: 'event/:id', loadComponent: () => import('./components/event/event.component').then((m) => m.EventComponent) },
 
   { path: '**', loadComponent: () => import('./components/not-found/not-found.component').then((m) => m.NotFoundComponent) }
 ];

@@ -9,7 +9,7 @@
     <body>
         <header class="header">
             <div class="title">
-                <h1 [routerLink]="['/home']">BooksShelter</h1>
+                <h1 [routerLink]="['/home']">EventsLife</h1>
             </div>
             <div class="flex justify-end p-4">
                 <select
@@ -25,7 +25,9 @@
 
             <div class="header-buttons-search">
                 <button class="header-button" [routerLink]="['/search']">{{ "HEADER.SEARCH" | translate }}</button>
-                <button *ngIf="userRole === 'writer'" [routerLink]="['/createBook']">{{ "HEADER.PUBLISH" | translate }}</button>
+                <button *ngIf="userRole === 'organizer'" [routerLink]="['/createEvent']">
+                    {{ "HEADER.PUBLISH" | translate }}
+                </button>
             </div>
             <div *ngIf="token === null" class="header-buttons-login">
                 <button class="header-button" [routerLink]="['/register']">
@@ -37,7 +39,7 @@
             </div>
 
             <div *ngIf="token && token.length > 0" class="user">
-                <div class="relative mx-2 flex items-center">
+                <div class="relative mx-2 flex items-center" *ngIf="userRole === 'standart'">
                     <button [routerLink]="['/cart']" class="relative p-2 rounded-full bg-gray-200" aria-label="Carrito">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -49,10 +51,10 @@
                         </svg>
 
                         <span
-                            *ngIf="booksList.length > 0"
+                            *ngIf="eventsList.length > 0"
                             class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-semibold rounded-full px-1.5 py-0.5 leading-none shadow-md"
                         >
-                            {{ booksList.length }}
+                            {{ eventsList.length }}
                         </span>
                     </button>
                 </div>

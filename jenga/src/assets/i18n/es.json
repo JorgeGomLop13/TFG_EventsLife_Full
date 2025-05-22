@@ -5,9 +5,11 @@
         "CART": "Añadir al carro",
         "PREVIUS": "Anterior",
         "FORWARD": "Siguiente",
-        "IMAGETEXT": "Bienvenido a BooksShelter ",
+        "IMAGETEXT": "Bienvenido a EventsLife ",
         "IMAGESUBTEXT": "Descubre, explora y sumérgete en miles de libros 📚",
-        "DESCRIPTION": "Descripción: "
+        "DESCRIPTION": "Descripción: ",
+        "DELETE": "Borrar evento",
+        "DELETEUSER": "Borrar evento y usuario"
     },
     "SEARCH": {
         "AUTHOR": "Autor:",
@@ -25,7 +27,7 @@
     "HEADER": {
         "SEARCH": "Búsqueda",
         "LANGUAGE": "Seleccionar idioma",
-        "PUBLISH": "Publica tu libro",
+        "PUBLISH": "Publica tu evento",
         "REGISTER": "Registrarse",
         "LOGIN": "Iniciar sesión"
     },
@@ -37,41 +39,40 @@
         "DELETE": "Borrar ",
         "ACCOUNT": "Tipo de cuenta",
         "ID": "ID de usuario",
-        "HISTORY": "Mis compras recientes:"
+        "HISTORY": "Mis compras recientes:",
+        "STRIPEID": "ID de Stripe:",
+        "CREATED_EVENTS": "Mis eventos:",
+        "NODELETE": "No puedes eliminar este evento porque ya ha sido comprado por al menos un usuario",
+        "CODES": "Descargar códigos de asistentes",
+        "pdf_title": "codigos_evento_"
     },
     "CREATEBOOK": {
-        "TITLE": "¡Introduce los datos de tu libro!"
+        "TITLE": "¡Introduce los datos de tu evento!"
     },
     "EDITBOOK": {
-        "TITLE": "¡Edita los datos de tu libro!"
+        "TITLE": "¡Edita los datos de tu evento!"
     },
     "FORM": {
-        "BOOK_NAME": "Nombre del libro",
+        "BOOK_NAME": "Nombre del evento",
         "BOOK_PAGES": "Número de páginas",
-        "BOOK_DESCRIPTION": "Descripción del libro",
-        "BOOK_PRICE": "Precio del libro",
+        "BOOK_DESCRIPTION": "Descripción del evento",
+        "BOOK_PRICE": "Precio del evento",
         "IMAGE_PREVIEW": "Vista previa",
         "SUBMIT": "Mandar los datos",
         "GO_BACK": "Volver atrás"
     },
     "REGISTER": {
         "TITLE": "Crear Cuenta",
-        "SUBTITLE": "Completa el formulario para registrarte en BooksShelter",
+        "SUBTITLE": "Completa el formulario para registrarte en EventsLife",
         "USERNAME": "Usuario",
         "USERNAME_PLACEHOLDER": "Tu usuario",
         "EMAIL": "Email",
         "EMAIL_PLACEHOLDER": "Email",
         "PASSWORD": "Contraseña",
         "CONFIRM_PASSWORD": "Confirmación contraseña",
-        "COUNTRY": "País",
-        "SELECT_COUNTRY": "Selecciona tu país",
-        "COMMUNITY": "Comunidad",
-        "SELECT_COMMUNITY": "Selecciona tu comunidad",
-        "PROVINCE": "Provincia",
-        "SELECT_PROVINCE": "Selecciona tu provincia",
         "USER_TYPE": "Tipo de usuario",
-        "READER_LABEL": "Lector (para leer los libros publicados)",
-        "WRITER_LABEL": "Escritor (para poder publicar libros)",
+        "READER_LABEL": "Asistente (para asistir a eventos)",
+        "WRITER_LABEL": "Organizador (para crear y gestionar eventos)",
         "ACCEPT": "Acepto los",
         "TERMS": "Términos y condiciones",
         "BUTTON": "Registrarse",
@@ -86,7 +87,7 @@
         "DEFAULT": "Fallo al crear tu usuario"
     },
     "LOGIN": {
-        "WELCOME": "Bienvenido a BooksShelter",
+        "WELCOME": "Bienvenido a EventsLife",
         "SUBTITLE": "Inicia sesión para acceder a tu cuenta",
         "EMAIL": "Email",
         "EMAIL_PLACEHOLDER": "Email",
@@ -111,7 +112,27 @@
         "MESSAGE_1": "Gracias por tu compra.",
         "MESSAGE_2": "El libro ha sido añadido a tu biblioteca.",
         "SUBSCRIPTION_TITLE": "¡Cuenta de Stripe vinculada!",
-        "SUBSCRIPTION_MSG_1": "Gracias por vincular tu cuenta."
+        "SUBSCRIPTION_MSG_1": "Gracias por vincular tu cuenta.",
+        "SUBJECT": "Pedido realizado correctamente",
+        "HTML": "Gracias por realizar tu pedido con nosotros, el código de seguimiento de tu libro es: "
+    },
+    "FOOTER": {
+        "RESOURCES": {
+            "TITLE": "Recursos",
+            "CATALOG": "Catálogo",
+            "BLOG": "Blog"
+        },
+        "COMMUNITY": {
+            "TITLE": "Comunidad",
+            "FORUM": "Foro",
+            "CONTACT": "Contacto"
+        },
+        "LEGAL": {
+            "TITLE": "Legal",
+            "PRIVACY": "Política de Privacidad",
+            "TERMS": "Términos y Condiciones"
+        },
+        "RIGHTS": "Todos los derechos reservados."
     },
     "common": {
         "accessDenied": "Acceso denegado",

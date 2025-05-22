@@ -5,9 +5,11 @@
         "CART": "Add to the cart",
         "PREVIUS": "Previus",
         "FORWARD": "Next",
-        "IMAGETEXT": "Welcome to BooksShelter ",
-        "IMAGESUBTEXT": "Discover, explore, and dive into thousands of books 📚",
-        "DESCRIPTION": "Description: "
+        "IMAGETEXT": "Welcome to EventsLife ",
+        "IMAGESUBTEXT": "Discover, explore, and dive into thousands of events 📚",
+        "DESCRIPTION": "Description: ",
+        "DELETE": "Delete event",
+        "DELETEUSER": "Delete event and user"
     },
     "SEARCH": {
         "AUTHOR": "Author:",
@@ -15,7 +17,7 @@
         "CART": "Add to the cart",
         "PREVIUS": "Previus",
         "FORWARD": "Next",
-        "SEARCHPLACEHOLDER": "Search books...",
+        "SEARCHPLACEHOLDER": "Search events...",
         "SEARCHBUTTON": "Search",
         "RESETBUTTON": "Reset",
         "PAGE": "Page",
@@ -25,7 +27,7 @@
     "HEADER": {
         "SEARCH": "Search",
         "LANGUAGE": "Select language",
-        "PUBLISH": "Publish your book",
+        "PUBLISH": "Publish your event",
         "REGISTER": "Register",
         "LOGIN": "Login"
     },
@@ -37,27 +39,32 @@
         "DELETE": "Delete",
         "ACCOUNT": "Account type",
         "ID": "User ID",
-        "HISTORY": "My recent purchases:"
+        "HISTORY": "My recent purchases:",
+        "STRIPEID": "Stripe ID",
+        "CREATED_EVENTS": "My events:",
+        "NODELETE": "You can not delete this event, because it has been booked by at least one user",
+        "CODES": "Download asistants codes",
+        "pdf_title": "event_codes_"
     },
     "CREATEBOOK": {
-        "TITLE": "Enter your book details!"
+        "TITLE": "Enter your event details!"
     },
     "EDITBOOK": {
-        "TITLE": "Edit your book details!"
+        "TITLE": "Edit your event details!"
     },
 
     "FORM": {
-        "BOOK_NAME": "Book name",
+        "BOOK_NAME": "Event name",
         "BOOK_PAGES": "Number of pages",
-        "BOOK_DESCRIPTION": "Book description",
-        "BOOK_PRICE": "Book price",
+        "BOOK_DESCRIPTION": "Event description",
+        "BOOK_PRICE": "Event price",
         "IMAGE_PREVIEW": "Preview",
         "SUBMIT": "Submit data",
         "GO_BACK": "Go back"
     },
     "REGISTER": {
         "TITLE": "Create Account",
-        "SUBTITLE": "Complete the form to register in BooksShelter",
+        "SUBTITLE": "Complete the form to register in EventsLife",
         "USERNAME": "Username",
         "USERNAME_PLACEHOLDER": "Your username",
         "EMAIL": "Email",
@@ -71,8 +78,8 @@
         "PROVINCE": "Province",
         "SELECT_PROVINCE": "Select your province",
         "USER_TYPE": "User type",
-        "READER_LABEL": "Reader (to read published books)",
-        "WRITER_LABEL": "Writer (to be able to publish books)",
+        "READER_LABEL": "Reader (to read published events)",
+        "WRITER_LABEL": "Writer (to be able to publish events)",
         "ACCEPT": "I accept the",
         "TERMS": "Terms and conditions",
         "BUTTON": "Register",
@@ -87,7 +94,7 @@
         "DEFAULT": "Failed to create your user"
     },
     "LOGIN": {
-        "WELCOME": "Welcome to BooksShelter",
+        "WELCOME": "Welcome to EventsLife",
         "SUBTITLE": "Log in to access your account",
         "EMAIL": "Email",
         "EMAIL_PLACEHOLDER": "Email",
@@ -101,7 +108,7 @@
     "CART": {
         "TITLE": "My cart:",
         "EMPTY": "Your cart is empty for now.",
-        "ADD_HINT": "Add books to see them here 📚",
+        "ADD_HINT": "Add events to see them here 📚",
         "PAGES": "pages",
         "DELETE": "Delete",
         "PAY": "Pay"
@@ -110,9 +117,29 @@
         "BACK_TO_SHOP": "Back to the shop",
         "TITLE": "Purchase completed successfully!",
         "MESSAGE_1": "Thank you for your purchase.",
-        "MESSAGE_2": "The book has been added to your library.",
+        "MESSAGE_2": "The event has been added to your library.",
         "SUBSCRIPTION_TITLE": "Stripe account linked!",
-        "SUBSCRIPTION_MSG_1": "Thank you for linking your account."
+        "SUBSCRIPTION_MSG_1": "Thank you for linking your account.",
+        "SUBJECT": "Order successfully placed",
+        "HTML": "Thank you for placing your order with us. The tracking code for your book is: "
+    },
+    "FOOTER": {
+        "RESOURCES": {
+            "TITLE": "Resources",
+            "CATALOG": "Catalog",
+            "BLOG": "Blog"
+        },
+        "COMMUNITY": {
+            "TITLE": "Community",
+            "FORUM": "Forum",
+            "CONTACT": "Contact"
+        },
+        "LEGAL": {
+            "TITLE": "Legal",
+            "PRIVACY": "Privacy Policy",
+            "TERMS": "Terms and Conditions"
+        },
+        "RIGHTS": "All rights reserved."
     },
     "common": {
         "accessDenied": "Acces denied",

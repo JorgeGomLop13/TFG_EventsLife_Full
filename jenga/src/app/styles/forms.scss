@@ -2,12 +2,8 @@
   text-align: center;
   margin-top: 50px;
   margin-bottom: 40px;
-  h1 {
-    font-size: 2.1875rem;
-  }
   h2 {
     margin-top: 40px;
-    font-size: 1.5625rem;
   }
   font-family: 'Marhey';
 }
@@ -15,14 +11,18 @@
 .form {
   margin: auto;
   width: 80%;
+
   .field {
     display: flex;
     flex-direction: column;
     text-align: left;
+    justify-content: space-between;
+    margin-bottom: 20px;
     label {
       margin-bottom: 20px;
       font-size: 1.5rem;
     }
+
     .fill-info {
       height: 2.5rem;
       margin-bottom: 20px;
@@ -49,91 +49,116 @@
         font-size: 1rem;
       }
     }
-    .error-message {
-      color: red;
-      font-size: 1.2rem;
-      margin-top: -15px;
-      margin-bottom: 20px;
+    .fecha {
+      display: flex;
+      text-align: left;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .time_global {
+        input {
+          width: 90%;
+        }
+      }
+      .time_start {
+        input {
+          width: 90%;
+        }
+      }
+      .time_end {
+        input {
+          width: 90%;
+        }
+      }
     }
-    .error-message-description {
-      color: red;
-      font-size: 1.2rem;
-      margin-top: -15px;
-      margin-bottom: 20px;
+    .free-entry {
+      input {
+        margin-right: 1.875rem;
+        width: 1.1rem;
+        height: 1.1rem;
+        background-color: #d9d9d9;
+        cursor: pointer;
+      }
+      label {
+        font-size: 1.5rem;
+      }
     }
-  }
-}
-.field:first-child {
-  margin-top: 40px;
-}
-.select_user {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  align-items: start;
-  margin-bottom: 40px;
-  label {
-    margin-bottom: 30px;
-    font-size: 1.5rem;
   }
 
-  .user_type {
+  .field:first-child {
+    margin-top: 40px;
+  }
+  .select_user {
+    margin-top: 20px;
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    svg {
-      display: block;
-      margin: 0 10px;
+    flex-direction: column;
+    text-align: left;
+    align-items: start;
+    margin-bottom: 40px;
+    label {
+      margin-bottom: 30px;
+      font-size: 1.5rem;
     }
-    input {
-      margin-right: 10px;
-      width: 1.25rem;
-      height: 1.25rem;
+
+    .user_type {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      svg {
+        display: block;
+        margin: 0 10px;
+      }
+      input {
+        margin-right: 10px;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+      label {
+        font-size: 1.4rem;
+        margin: 0;
+      }
     }
     label {
-      font-size: 1.4rem;
-      margin: 0;
+      font-size: 1.5rem;
     }
   }
-}
 
-.btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  button {
-    width: 100%;
-    height: 3rem;
-    font-size: 1.5rem;
-    border-radius: 10px;
-    background-color: $header-color;
-    color: white;
-    border: none;
-    cursor: pointer;
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    button {
+      width: 100%;
+      height: 3rem;
+      font-size: 1.5rem;
+      border-radius: 10px;
+      background-color: $header-color;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
   }
-}
 
-.btn_action {
-  margin-top: 30px;
-  margin-bottom: 50px;
-  font-size: 1.2rem;
-  border: 1px solid;
-  padding: 0.625rem 2.8rem 0.625rem 2.8rem;
-  background-color: #ffffff;
-  border-radius: 20px;
-  &:hover {
-    background-color: $header-color;
-    color: white;
+  .btn_action {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    font-size: 1.2rem;
+    border: 1px solid;
+    padding: 0.625rem 2.8rem 0.625rem 2.8rem;
+    background-color: #ffffff;
+    border-radius: 20px;
+    &:hover {
+      background-color: $header-color;
+      color: white;
+    }
+    font-family: 'Langar', system-ui;
   }
-  font-family: 'Langar', system-ui;
-}
-.btn_action:disabled {
-  background-color: #ffe7ac;
-  color: #464646;
-  cursor: not-allowed;
+  .btn_action:disabled {
+    background-color: #b3c8ea;
+    color: #464646;
+    cursor: not-allowed;
+  }
 }
 
 .footer {
@@ -169,7 +194,8 @@
     }
     .login {
       font-size: 1.2rem;
-      color: #fe9721;
+      color: #6eabc3;
+      text-decoration: underline;
     }
   }
   margin-bottom: 50px;

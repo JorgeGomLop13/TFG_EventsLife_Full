@@ -1,4 +1,4 @@
-<app-header [booksList]="booksList"></app-header>
+<app-header [eventsList]="eventsList"></app-header>
 
 <div class="carousel-container">
     <div
@@ -19,52 +19,74 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
     <div
-        *ngFor="let book of books | paginate : { itemsPerPage: 3, currentPage: page }"
-        class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col justify-between"
+        *ngFor="let event of events"
+        class="bg-white rounded-2xl shadow-md overflow-hidden max-w-md mx-auto cursor-pointer"
+        [routerLink]="['/event', event.id]"
     >
+        <!-- Imagen con aspecto fijo -->
         <div class="aspect-[3/2] overflow-hidden">
-            <img [src]="book.image" alt="Portada del libro" class="w-full h-full object-contain" />
+            <img [src]="event.image" alt="Imagen del evento" class="w-full h-full object-contain" />
         </div>
 
-        <div class="p-4 space-y-2 text-sm text-gray-800 flex-grow">
+        <div class="p-4 space-y-2 text-sm text-gray-800">
             <div class="flex justify-between items-center font-semibold text-base">
-                <h3>{{ book.name }}</h3>
-                <span>{{ book.price }}€</span>
+                <h3 class="text-lg">{{ event.name }}</h3>
+                <span class="text-blue-600 font-bold" *ngIf="event.price !== 0">{{ event.price }}€</span>
+                <span class="text-blue-600 font-bold" *ngIf="event.price === 0">Free</span>
             </div>
-
-            <div class="text-sm text-gray-600">
-                <p class="text-gray-700 text-sm mt-2 line-clamp-3">
-                    <span class="font-medium">{{ "SEARCH.DESCRIPTION" | translate }}</span
-                    >{{ book.description }}
-                </p>
-                <p>
-                    <span class="font-medium">{{ "HOME.AUTHOR" | translate }}</span> {{ book.author }}
-                </p>
-                <p>
-                    <span class="font-medium">{{ "HOME.PAGES" | translate }}</span> {{ book.pages }}
-                </p>
+            <br />
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
+                <p><span class="font-medium">Ubicación:</span> {{ event.location }}</p>
+                <p><span class="font-medium">Fecha:</span> {{ event.date }}</p>
+                <p><span class="font-medium">Inicio:</span> {{ event.start_date.slice(0, 5) }}h</p>
+                <p><span class="font-medium">Fin:</span> {{ event.end_date.slice(0, 5) }}h</p>
+                <p><span class="font-medium">Capacidad:</span> {{ event.capacity }}</p>
+                <p><span class="font-medium">Organizador:</span>{{ event.organizer }}</p>
             </div>
-
-            <p class="text-gray-700 text-sm mt-2 line-clamp-3">
-                {{ book.descripcion }}
-            </p>
         </div>
-
+        @if (this.role === "admin") {
         <div class="p-4 pt-0">
             <button
-                (click)="addToCart(book.id)"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-xl transition duration-200"
-                *ngIf="role === 'reader' || !role"
+                (click)="deleteEvent(event.id); $event.stopPropagation()"
+                class="w-full mt-2 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-xl transition duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
             >
-                {{ "HOME.CART" | translate }}
+                {{ "HOME.DELETE" | translate }}
+            </button>
+            <button
+                (click)="deleteEventAndUser(event.id, event.author_id); $event.stopPropagation()"
+                class="w-full mt-2 bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-xl transition duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
+            >
+                {{ "HOME.DELETEUSER" | translate }}
             </button>
         </div>
+        }
     </div>
 </div>
 
-<pagination-controls
-    (pageChange)="page = $event"
-    [previousLabel]="'HOME.PREVIUS' | translate"
-    [nextLabel]="'HOME.FORWARD' | translate"
-    class="pageChange"
-></pagination-controls>
+<div class="pagination flex items-center mt-4 justify-center">
+    <button
+        (click)="getEvents(currentPage - 1)"
+        class="flex items-center justify-center px-3 mr-5 h-8 text-sm font-medium border rounded-lg transition"
+        [ngClass]="{
+            'text-gray-500 bg-gray-300 cursor-not-allowed pointer-events-none opacity-50': !hasPrevPage,
+            'text-gray-700 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white':
+                hasPrevPage
+        }"
+    >
+        {{ "SEARCH.PREVIUS" | translate }}
+    </button>
+    <span>{{ "SEARCH.PAGE" | translate }} {{ currentPage }} {{ "SEARCH.OF" | translate }} {{ totalPages }}</span>
+    <button
+        (click)="getEvents(currentPage + 1)"
+        class="flex items-center justify-center px-3 ml-5 h-8 text-sm font-medium border rounded-lg transition"
+        [ngClass]="{
+            'text-gray-500 bg-gray-300 cursor-not-allowed pointer-events-none opacity-50': !hasNextPage,
+            'text-gray-700 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white':
+                hasNextPage
+        }"
+    >
+        {{ "SEARCH.FORWARD" | translate }}
+    </button>
+</div>
+<br />
+<app-footer></app-footer>

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@app/services/auth.service';
 import { CartService } from '@app/services/cart.service';
 import { StripeService } from '@app/services/stripe.service';
 import { UseBackService } from '@app/services/use-back.service';
@@ -16,45 +17,62 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent implements OnInit {
-  public booksInCart: any[] = [];
-  booksList: [] = [];
+  public eventsInCart: any[] = [];
+  eventsList: [] = [];
+  public userName: string | null = '';
+  public userRole: string | null = '';
+  public userId: number = 0;
 
-  constructor(private useData: UseBackService, private stripe: StripeService, private cartService: CartService) {}
+  constructor(
+    private useData: UseBackService,
+    private stripe: StripeService,
+    private cartService: CartService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.cartService
-      .getCartBooksByIds()
+    this.auth
+      .getUser()
       .pipe(take(1))
       .subscribe((res: any) => {
-        this.booksInCart = res.books;
-        console.log(this.booksInCart);
+        this.userName = res.name;
+        this.userRole = res.role;
+        this.userId = res.id;
+        this.cartService
+          .getCartEventsByIds(this.userId)
+          .pipe(take(1))
+          .subscribe((res: any) => {
+            this.eventsInCart = res.events;
+            console.log(this.eventsInCart);
+          });
       });
   }
-  deleteBookShoping(id: string) {
+  deleteEventShoping(id: number) {
     this.cartService
-      .deleteBookFromCart(id)
+      .deleteEventFromCart(this.userId, id)
       .pipe(take(1))
       .subscribe((res: any) => {
         console.log(res);
-        this.booksList = res.books;
+        this.eventsList = res.cart;
       });
 
-    this.booksInCart = this.booksInCart.filter((book) => book.id !== id);
+    this.eventsInCart = this.eventsInCart.filter((event) => event.id !== id);
   }
-  payForProduct(bookId: string, bookPrice: number, bookTitle: string, authorId: string) {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
+
+  payForProduct(eventId: number, eventPrice: number, eventTitle: string, authorId: number) {
+    if (this.userId) {
       this.useData
         .getUserById(authorId)
         .pipe(take(1))
         .subscribe((res: any) => {
           const authorStripeId = res.stripeAccountId;
-          this.stripe.payProduct(bookTitle, bookPrice, authorStripeId, bookId, userId).subscribe((res: any) => {
+          this.stripe.payProduct(eventTitle, eventPrice, authorStripeId, eventId).subscribe((res: any) => {
             window.location.href = res.url;
           });
         });
     }
   }
-  decreaseQuantity(book: any) {}
-  increaseQuantity(book: any) {}
+  /*
+  decreaseQuantity(event: any) {}
+  increaseQuantity(event: any) {}*/
 }

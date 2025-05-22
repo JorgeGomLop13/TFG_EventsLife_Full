@@ -6,7 +6,7 @@ import { AuthService } from '@app/services/auth.service';
 import { CartService } from '@app/services/cart.service';
 import { StripeService } from '@app/services/stripe.service';
 import { UseBackService } from '@app/services/use-back.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { take } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 
@@ -18,62 +18,99 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
-  public userId: string | null = localStorage.getItem('userId');
-  public userName: string | null = localStorage.getItem('userName');
-  public userEmail: string | null = localStorage.getItem('userEmail');
-  public userRole: string | null = localStorage.getItem('role');
+  public userId: number = 0;
+  public userName: string = '';
+  public userEmail: string = '';
+  public userRole: string = '';
   public userHistory: number[] = [];
+  public userStripeId: string = '';
 
-  public userBooks: any[] = [];
+  public userEvents: any[] = [];
 
-  public booksInCart: any[] = [];
-  public booksInHistory: any[] = [];
+  public eventsInCart: any[] = [];
+  public eventsInHistory: any[] = [];
 
   constructor(
     private useData: UseBackService,
     private auth: AuthService,
     private stripe: StripeService,
-    private cartService: CartService
+    private cartService: CartService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
-    if (this.userRole === 'writer') {
-      this.useData
-        .getBookById(this.userId!)
-        .pipe(take(1))
-        .subscribe((res: any) => {
-          this.userBooks = res;
-          console.log(res);
-        });
-    }
-    if (this.userId && this.userRole === 'reader') {
-      this.useData
-        .getUserById(this.userId)
-        .pipe(take(1))
-        .subscribe((res: any) => {
-          this.userHistory = res.history;
-          console.log(this.userHistory);
-          this.cartService
-            .getHistoryBooksByIds()
+    this.auth
+      .getUser()
+      .pipe(take(1))
+      .subscribe((res: any) => {
+        this.userName = res.name;
+        this.userRole = res.role;
+        this.userId = res.id;
+        this.userEmail = res.email;
+        this.userStripeId = res.stripeAccountId;
+        if (this.userRole === 'organizer') {
+          console.log(this.userId);
+          this.useData
+            .getEventByOrganizer(this.userId)
             .pipe(take(1))
             .subscribe((res: any) => {
-              this.booksInHistory = res.books;
+              this.userEvents = res;
+              console.log(res);
             });
-        });
-    }
+        }
+        if (this.userId && this.userRole === 'standart') {
+          this.useData
+            .getUserById(this.userId)
+            .pipe(take(1))
+            .subscribe((res: any) => {
+              this.userHistory = res.history;
+              console.log(this.userHistory);
+              this.cartService
+                .getHistoryEventsByIds(this.userId)
+                .pipe(take(1))
+                .subscribe((res: any) => {
+                  this.eventsInHistory = res.events;
+                });
+            });
+        }
+      });
   }
 
-  deleteBook(id: string) {
+  deleteEvent(id: number, codes: [string]) {
+    if (codes.length > 0) {
+      alert(this.translate.instant('PROFILE.NODELETE'));
+      return;
+    }
     this.useData
-      .deleteBook(id)
+      .deleteEvent(id)
       .pipe(take(1))
       .subscribe(() => {});
-    this.userBooks = this.userBooks.filter((book) => book.id !== id);
+    this.userEvents = this.userEvents.filter((event) => event.id !== id);
   }
 
   createStripeAccount() {
-    this.stripe.createStripeAccount().subscribe((res: any) => {
+    this.stripe.createStripeAccount(this.userId).subscribe((res: any) => {
       window.location.href = res.url;
+    });
+  }
+
+  getCodes(id: number) {
+    const language = localStorage.getItem('lang') || 'es';
+    this.useData.getEventCodes(id, language).subscribe({
+      next: (pdfBlob: Blob) => {
+        const url = window.URL.createObjectURL(pdfBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${this.translate.instant('PROFILE.pdf_title')}_${id}.pdf`;
+        a.click();
+      },
+      error: (err) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          console.error('Error (contenido):', reader.result); // Aquí verás el mensaje real
+        };
+        reader.readAsText(err.error); // Lee el contenido del blob
+      }
     });
   }
 

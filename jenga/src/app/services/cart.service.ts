@@ -9,29 +9,39 @@ import { Env } from '@app/core/types/env';
 export class CartService {
   constructor(private http: HttpClient, @Inject(ENV) private env: Env) {}
 
-  setBookToCart(bookId: string) {
-    const userId = localStorage.getItem('userId');
-    return this.http.get(`${this.env.apiBaseUrl}/users/${userId}/books/${bookId}`);
+  setEventToCart(eventId: number, userId: number) {
+    return this.http.get(`${this.env.apiBaseUrl}/event/${eventId}/user/${userId}`);
   }
 
-  getCartBooksByIds() {
-    const userId = localStorage.getItem('userId');
-    return this.http.get(`${this.env.apiBaseUrl}/booksFromIds/${userId}`);
+  getCartEventsByIds(userId: number) {
+    return this.http.get(`${this.env.apiBaseUrl}/eventsFromIds/${userId}`);
   }
-  getHistoryBooksByIds() {
-    const userId = localStorage.getItem('userId');
+
+  getHistoryEventsByIds(userId: number) {
     return this.http.get(`${this.env.apiBaseUrl}/history/${userId}`);
   }
 
-  deleteBookFromCart(bookId: string) {
-    const userId = localStorage.getItem('userId');
-    return this.http.get(`${this.env.apiBaseUrl}/profile/${userId}/books/${bookId}`);
+  deleteEventFromCart(userId: number, EventId: number) {
+    return this.http.delete(`${this.env.apiBaseUrl}/user/${userId}/events/${EventId}`);
   }
 
-  setBookToHistory(userId: string, bookId: string) {
-    return this.http.post(`${this.env.apiBaseUrl}/setBookToHistory`, {
+  setEventToHistory(userId: number, eventId: number) {
+    return this.http.post(`${this.env.apiBaseUrl}/setEventToHistory`, {
       userId: userId,
-      bookId: bookId
+      eventId: eventId
+    });
+  }
+  sendEmail(subject: string, html: string, email: string) {
+    return this.http.post(`${this.env.apiBaseUrl}/sendEmail`, {
+      subject: subject,
+      html: html,
+      email: email
+    });
+  }
+  setCodeToEvent(eventId: number, code: string) {
+    return this.http.post(`${this.env.apiBaseUrl}/setCodeToEvent`, {
+      eventId: eventId,
+      code: code
     });
   }
 }

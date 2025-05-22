@@ -1,4 +1,4 @@
-<app-header [booksList]="booksList"></app-header>
+<app-header [eventsList]="eventsList"></app-header>
 
 <div class="max-w-3xl mx-auto mt-10 px-4">
     <h1 class="text-2xl font-bold text-black mb-6 flex items-center gap-2">
@@ -13,45 +13,82 @@
         {{ "CART.TITLE" | translate }}
     </h1>
     <!--Si no hay libros se muestra este mensaje-->
-    <div *ngIf="booksInCart.length === 0" class="text-center text-gray-400 mt-10">
+    <div *ngIf="eventsInCart.length === 0" class="text-center text-gray-400 mt-10">
         <p class="text-lg">{{ "CART.EMPTY" | translate }}</p>
         <p class="text-sm mt-1">{{ "CART.ADD_HINT" | translate }}</p>
     </div>
 
     <div
-        *ngFor="let book of booksInCart"
+        *ngFor="let event of eventsInCart"
         class="bg-gray-900 text-white rounded-2xl shadow-lg overflow-hidden mb-6 border border-gray-700 transition hover:shadow-2xl"
     >
         <div class="px-6 py-3 border-b border-gray-700 flex justify-between items-center">
-            <h2 class="text-lg font-semibold truncate">{{ book.name }}</h2>
-            <span class="text-green-400 font-medium">{{ book.price | currency : "EUR" }}</span>
+            <h2 class="text-lg font-semibold truncate">{{ event.name }}</h2>
+            <span class="text-green-400 font-medium">{{ event.price | currency : "EUR" }}</span>
         </div>
 
         <div class="p-6 flex gap-4">
-            <img class="w-28 h-28 object-cover rounded-lg border border-gray-700 shadow" [src]="book.image" [alt]="book.name" />
+            <img class="w-28 h-28 object-cover rounded-lg border border-gray-700 shadow" [src]="event.image" [alt]="event.name" />
 
             <div class="flex-1 flex flex-col justify-between">
                 <div>
-                    <h3 class="text-md font-semibold">{{ book.author }}</h3>
-                    <p class="text-sm text-gray-400 mt-1 line-clamp-3">{{ book.description }}</p>
-                    <div class="mt-2 flex items-center text-xs text-gray-500">
-                        <svg class="w-4 h-4 mr-1 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M4 4h12v12H4z" />
-                        </svg>
-                        {{ book.pages }} {{ "CART.PAGES" | translate }}
+                    <h3 class="text-md font-semibold">{{ event.author }}</h3>
+                    <p class="text-sm text-gray-400 mt-1 line-clamp-3">{{ event.description }}</p>
+
+                    <div class="grid grid-cols-2 gap-3 text-xs text-gray-400 mt-4">
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                            </svg>
+                            {{ event.date }}
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 9V7a4 4 0 00-8 0v2M5 13h14l1 9H4l1-9z"
+                                />
+                            </svg>
+                            {{ event.location }}
+                        </div>
+
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 9h10M5 21h14a2 2 0 002-2V7H3v12a2 2 0 002 2z"
+                                />
+                            </svg>
+                            {{ event.capacity }} personas
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                            </svg>
+                            {{ event.start_date }} - {{ event.end_date }}
+                        </div>
                     </div>
                 </div>
 
                 <div class="mt-4 flex justify-end gap-2">
                     <button
                         class="px-4 py-1.5 bg-red-600 hover:bg-red-500 text-sm font-medium rounded-md transition"
-                        (click)="deleteBookShoping(book.id)"
+                        (click)="deleteEventShoping(event.id)"
                     >
                         {{ "CART.DELETE" | translate }}
                     </button>
                     <button
                         class="px-4 py-1.5 bg-green-600 hover:bg-green-500 text-sm font-medium rounded-md transition"
-                        (click)="payForProduct(book.id, book.price, book.name, book.author_id)"
+                        (click)="payForProduct(event.id, event.price, event.name, event.organizer_id)"
                     >
                         {{ "CART.PAY" | translate }}
                     </button>

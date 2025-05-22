@@ -32,10 +32,6 @@ export class LoginComponent {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         next: (res: any) => {
           localStorage.setItem('token', res.token);
-          localStorage.setItem('userId', res.user.id);
-          localStorage.setItem('userName', res.user.name);
-          localStorage.setItem('role', res.user.role);
-          localStorage.setItem('userEmail', res.user.email);
           this.router.navigate(['/home']);
         },
         error: (error) => {

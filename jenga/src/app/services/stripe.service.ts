@@ -1,30 +1,29 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { ENV } from '@app/core/constants/global.constants';
+import { Env } from '@app/core/types/env';
 
 @Injectable()
 export class StripeService {
-  private apiUrl = 'http://localhost:3000/api';
+  constructor(private http: HttpClient, @Inject(ENV) private env: Env) {}
 
-  constructor(private http: HttpClient) {}
-
-  createStripeAccount() {
-    return this.http.post(`${this.apiUrl}/createAccountStripe`, {
-      userId: localStorage.getItem('userId')
-    });
-  }
-
-  payProduct(productTitle: string, productPrice: number, sellerStripeId: string, productId: string, userId: string) {
-    return this.http.post(`${this.apiUrl}/payProduct`, {
-      productTitle: productTitle,
-      productPrice: productPrice,
-      sellerStripeId: sellerStripeId,
-      productId: productId,
+  createStripeAccount(userId: number) {
+    return this.http.post(`${this.env.apiBaseUrl}/createAccountStripe`, {
       userId: userId
     });
   }
 
-  setStripeId(userId: string, userStripeId: string) {
-    return this.http.post(`${this.apiUrl}/setStripeId`, {
+  payProduct(productTitle: string, productPrice: number, sellerStripeId: string, productId: number) {
+    return this.http.post(`${this.env.apiBaseUrl}/payProduct`, {
+      productTitle: productTitle,
+      productPrice: productPrice,
+      sellerStripeId: sellerStripeId,
+      productId: productId
+    });
+  }
+
+  setStripeId(userId: number, userStripeId: string) {
+    return this.http.post(`${this.env.apiBaseUrl}/setStripeId`, {
       userId: userId,
       stripeId: userStripeId
     });

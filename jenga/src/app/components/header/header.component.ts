@@ -19,28 +19,36 @@ export class HeaderComponent implements OnInit {
   public token: string | null = localStorage.getItem('token');
   public userName: string | null = '';
   public userRole: string | null = '';
-  public userBooksInCart: [] = [];
+  public userId: number = 0;
+
+  public userEventsInCart: [] = [];
 
   public currentLang: string = '';
 
-  @Input() booksList = [];
+  @Input() eventsList = [];
 
-  constructor(private authService: AuthService, private localeService: LocaleService, private cartService: CartService) {}
+  constructor(private auth: AuthService, private localeService: LocaleService, private cartService: CartService) {}
 
   ngOnInit(): void {
     const savedLang = localStorage.getItem('lang');
     this.currentLang = savedLang ? savedLang : 'es';
 
     if (this.token) {
-      this.userRole = this.authService.getRole();
-      this.userName = this.authService.getUserName();
-      this.userRole = localStorage.getItem('role');
-      this.cartService
-        .getCartBooksByIds()
+      this.auth
+        .getUser()
         .pipe(take(1))
         .subscribe((res: any) => {
-          //Para que al actualizar la pantalla se mantenga el número de libros del carrito
-          this.booksList = res.books;
+          this.userName = res.name;
+          this.userRole = res.role;
+          this.userId = res.id;
+          console.log(res);
+          this.cartService
+            .getCartEventsByIds(this.userId)
+            .pipe(take(1))
+            .subscribe((res: any) => {
+              //Para que al actualizar la pantalla se mantenga el número de libros del carrito
+              this.eventsList = res.events;
+            });
         });
     }
   }

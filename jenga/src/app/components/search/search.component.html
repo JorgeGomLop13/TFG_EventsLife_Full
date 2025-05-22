@@ -1,6 +1,6 @@
-<app-header [booksList]="booksList"></app-header>
+<app-header [eventsList]="eventsList"></app-header>
 
-<form class="max-w-md mx-auto mt-6 mb-6" (submit)="searchBooks(); $event.preventDefault()">
+<form class="max-w-md mx-auto mt-6 mb-6" (submit)="searchEvents(); $event.preventDefault()">
     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"> Search </label>
     <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -48,38 +48,31 @@
 </form>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-    <div *ngFor="let book of books" class="bg-white rounded-2xl shadow-md overflow-hidden">
+    <div
+        *ngFor="let event of events"
+        class="bg-white rounded-2xl shadow-md overflow-hidden max-w-md mx-auto cursor-pointer"
+        [routerLink]="['/event', event.id]"
+    >
+        <!-- Imagen con aspecto fijo -->
         <div class="aspect-[3/2] overflow-hidden">
-            <img [src]="book.image" alt="Portada del libro" class="w-full h-full object-cover" />
+            <img [src]="event.image" alt="Imagen del evento" class="w-full h-full object-cover" />
         </div>
 
         <div class="p-4 space-y-2 text-sm text-gray-800">
             <div class="flex justify-between items-center font-semibold text-base">
-                <h3>{{ book.name }}</h3>
-                <span>{{ book.price }}€</span>
+                <h3 class="text-lg">{{ event.name }}</h3>
+                <span class="text-blue-600 font-bold" *ngIf="event.price !== 0">{{ event.price }}€</span>
+                <span class="text-blue-600 font-bold" *ngIf="event.price === 0">Free</span>
             </div>
-
-            <div class="text-sm text-gray-600">
-                <p class="text-gray-700 text-sm mt-2 line-clamp-3">
-                    <span class="font-medium">{{ "SEARCH.DESCRIPTION" | translate }}</span
-                    >{{ book.description }}
-                </p>
-                <p>
-                    <span class="font-medium">{{ "SEARCH.AUTHOR" | translate }}</span> {{ book.author }}
-                </p>
-                <p>
-                    <span class="font-medium">{{ "SEARCH.PAGES" | translate }}:</span> {{ book.pages }}
-                </p>
+            <br />
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
+                <p><span class="font-medium">Ubicación:</span> {{ event.location }}</p>
+                <p><span class="font-medium">Fecha:</span> {{ event.date }}</p>
+                <p><span class="font-medium">Inicio:</span> {{ event.start_date.slice(0, 5) }}h</p>
+                <p><span class="font-medium">Fin:</span> {{ event.end_date.slice(0, 5) }}h</p>
+                <p><span class="font-medium">Capacidad:</span> {{ event.capacity }}</p>
+                <p><span class="font-medium">Organizador:</span>{{ event.organizer }}</p>
             </div>
-        </div>
-        <div class="p-4 pt-0">
-            <button
-                (click)="addToCart(book.id)"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-xl transition duration-200"
-                *ngIf="role === 'reader' || !role"
-            >
-                {{ "SEARCH.CART" | translate }}
-            </button>
         </div>
     </div>
 </div>
@@ -87,7 +80,7 @@
 <!--Aqui utilizo paginación del back en vez de sacar todos los datos y hacer paginacion en front-->
 <div class="pagination flex items-center mt-4 justify-center">
     <button
-        (click)="getBooks(currentPage - 1)"
+        (click)="getEvents(currentPage - 1)"
         [disabled]="!hasPrevPage"
         class="flex items-center justify-center px-3 mr-5 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
     >
@@ -95,7 +88,7 @@
     </button>
     <span>{{ "SEARCH.PAGE" | translate }} {{ currentPage }} {{ "SEARCH.OF" | translate }} {{ totalPages }}</span>
     <button
-        (click)="getBooks(currentPage + 1)"
+        (click)="getEvents(currentPage + 1)"
         [disabled]="!hasNextPage"
         class="flex items-center justify-center px-3 ml-5 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
     >

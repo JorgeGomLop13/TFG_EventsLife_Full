@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { LocationService } from '@app/services/location.service';
 import { UseBackService } from '@app/services/use-back.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { take } from 'rxjs';
@@ -12,49 +11,24 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-register',
   imports: [FormsModule, CommonModule, RouterLink, TranslateModule],
-  providers: [LocationService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  public role_selected: string = 'reader';
+  public role_selected: string = 'standart';
   public name: string = '';
   public email: string = '';
   public password: string = '';
   public confirmation_password: string = '';
+  public phone: string = '';
+  public address: string = '';
   public terms_conditions: boolean = false;
-
-  public countries: any[] = [];
-  public comunities: any[] = [];
-  public provinces: any[] = [];
-
-  public select_country: string = '';
-  public select_comunity: string = '';
-  public select_province: string = '';
 
   public errorMessage: string = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private getData: UseBackService,
-    private location: LocationService
-  ) {
+  constructor(private authService: AuthService, private router: Router, private getData: UseBackService) {
     //Si el usuario ya tiene un token, lo eliminamos para que se registre de nuevo si es que pone la ruta de register
     this.deleteLocalStorage();
-
-    this.location
-      .getCountries()
-      .pipe(take(1))
-      .subscribe((res: any) => {
-        this.countries = res;
-      });
-    this.location
-      .getCommunities()
-      .pipe(take(1))
-      .subscribe((res: any) => {
-        this.comunities = res;
-      });
   }
 
   register() {
@@ -76,29 +50,23 @@ export class RegisterComponent {
       }, 5000);
       return;
     } else {
-      const user = {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        role: this.role_selected,
-        isoCode: this.select_country,
-        communityId: this.select_comunity,
-        provinceId: this.select_province,
-        id: ''
-      };
+      const formData = new FormData();
+
+      formData.append('name', this.name);
+      formData.append('email', this.email);
+      formData.append('password', this.password);
+      formData.append('role', this.role_selected);
+      formData.append('phone', this.phone);
+      formData.append('address', this.address);
 
       this.authService
-        .register(user)
+        .register(formData)
         .pipe(take(1))
         .subscribe({
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           next: (res: any) => {
             console.log('Usuario registrado:', res);
             localStorage.setItem('token', res.token);
-            localStorage.setItem('userId', res.user.id);
-            localStorage.setItem('userName', res.user.name);
-            localStorage.setItem('role', res.user.role);
-            localStorage.setItem('userEmail', res.user.email);
             this.router.navigate(['/home']);
           },
           error: (error) => {
@@ -122,30 +90,8 @@ export class RegisterComponent {
     return this.role_selected;
   }
 
-  resetCommunitiesProvinces(Event: Event) {
-    const country = (Event.target as HTMLSelectElement).value;
-    if (country != 'ES') {
-      this.select_comunity = '';
-      this.select_province = '';
-    }
-  }
-
-  setProvince(Event: Event) {
-    const provinceId = (Event.target as HTMLSelectElement).value;
-    this.location
-      .getProvinces(provinceId)
-      .pipe(take(1))
-      .subscribe((res: any) => {
-        this.provinces = res;
-      });
-  }
-
   deleteLocalStorage() {
     localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('role');
-    localStorage.removeItem('userEmail');
   }
   goHome() {
     this.router.navigate(['/home']).then(() => {
