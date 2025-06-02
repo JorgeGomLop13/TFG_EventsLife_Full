@@ -27,6 +27,7 @@ class EventSeeder extends Seeder
 			'price' => 10,
 			'capacity' => 100,
 			'image' => 'test.jpg',
+			'codes'=>[]
 		]);
     }
 }

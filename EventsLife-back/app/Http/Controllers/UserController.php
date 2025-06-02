@@ -123,6 +123,7 @@ class UserController extends Controller
 			$user->stripeAccountId = $stripeId;
 			$user->save();
 
+			
 			return response()->json([
 				'message' => 'Cuenta Stripe vinculada correctamente.',
 			]);
@@ -297,10 +298,18 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function update(Request $request, $id){
+		$user = User::findOrFail($id);
+
+		$validated = $request->validate([
+			'name' => 'sometimes|string|max:255',
+			'image' => 'sometimes|string' 
+		]);
+
+		$user->update($validated);
+		return response()->json($user);
+		
+	}
 
     /**
      * Remove the specified resource from storage.

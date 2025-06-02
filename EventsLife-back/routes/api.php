@@ -22,6 +22,7 @@ Route::post('/setEventToHistory ',[UserController::class, 'setEventToHistory']);
 Route::get('/history/{userId}',[UserController::class, 'getHistoryEventsByUser']);
 Route::get('/eventsFromIds/{eventId}',[UserController::class,'getCart']);
 Route::delete('/user/{userId}/events/{eventId}',[UserController::class,'deleteFromCart']);
+Route::put('/user/{id}/update',[UserController::class,'update']);
 
 
 Route::post('/register', [AuthController::class, 'register']);

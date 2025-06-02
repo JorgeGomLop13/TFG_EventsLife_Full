@@ -16,24 +16,26 @@ class UsersSeeder extends Seeder
     {
         //
 		User::factory()->create([
-            'name' => 'standart',
-            'email' => 'standart@standart.com',
-			'password'=> 'standart',
+            'name' => 'Pepe Barroso',
+            'email' => 'pepe@gmail.com',
+			'password'=> 'pepebarroso',
 			'role' => 'standart',
 			'phone' => '',
 			'address' => 'Calle Falsa 123',
 			'events_ids'=>[],
-			'history'=>[]
+			'history'=>[],
+			'image'=>''
         ]);
 		User::factory()->create([
-            'name' => 'organizer',
-            'email' => 'organizer@organizer.com',
-			'password'=> 'organizer',
+            'name' => 'Cafetería Molona',
+            'email' => 'cafeteriaMolona@gmail.com',
+			'password'=> 'molona',
 			'role' => 'organizer',
 			'phone' => '555667788',
-			'address' => 'Calle Falsa 456',
+			'address' => 'Calle Colombia 34',
 			'events_ids'=>[],
-			'history'=>[]
+			'history'=>[],
+			'image'=>''
         ]);
 		User::factory()->create([
             'name' => 'admin',
@@ -43,7 +45,8 @@ class UsersSeeder extends Seeder
 			'phone' => '',
 			'address' => 'Calle Falsa 789',
 			'events_ids'=>[],
-			'history'=>[]
+			'history'=>[],
+			'image'=>''
         ]);
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Event;
 use Illuminate\Http\JsonResponse;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\App;
+use Carbon\Carbon;
 
 
 class EventController extends Controller
@@ -31,11 +32,15 @@ class EventController extends Controller
 		$perPage = $request->query('limit', 6); 
 		$page = $request->query('page', 1);
 		$search = $request->query('search');
+		$category = $request->query('category');
 
 		$query = Event::query();
 
 		if ($search) {
 			$query->where('name', 'like', '%' . $search . '%');
+		}
+		if ($category) {
+			$query->where('category_id', $category);
 		}
 
 		$events = $query->paginate($perPage, ['*'], 'page', $page);
@@ -49,24 +54,45 @@ class EventController extends Controller
 	}
 	
 	public function store(Request $request){
-		$validated = $request->validate([
-			'name' => 'required|string|max:255',
-			'description' => 'required|string',
-			'location' => 'required|string',
-			'date' => 'required|date',
-			'start_date' => 'required|date_format:H:i',
-			'end_date' => 'required|date_format:H:i|after_or_equal:start_date',
-			'organizer_id' => 'required|exists:users,id',
-			'category_id' => 'required|exists:categories,id',
-			'price' => 'required|numeric',
-			'capacity' => 'required|integer',
-			'image' => 'nullable|string',
-		]);
-
-		// Creo el evento
-		$event = Event::create($validated);
-
-		return response()->json($event, 201);
+		try {
+			$validated = $request->validate([
+				'name' => 'required|string|max:255',
+				'description' => 'required|string',
+				'location' => 'required|string',
+				'date' => 'required|date',
+				'start_date' => 'required|date_format:H:i',
+				'end_date' => 'required|date_format:H:i|after_or_equal:start_date',
+				'organizer_id' => 'required|exists:users,id',
+				'category_id' => 'required|exists:categories,id',
+				'price' => 'required|numeric',
+				'capacity' => 'required|integer',
+				'image' => 'nullable|string',
+			]);
+			if (Carbon::parse($validated['date'])->isBefore(Carbon::today())) {
+				return response()->json([
+					'message' => 'FORM.DATEBEFORE',
+					'errorCode' => 'FORM.DATEBEFORE'
+				], 400);
+			}
+	
+			$event = Event::create($validated);
+			$event->codes = [];
+			$event->save();
+	
+			return response()->json($event, 201);
+	
+		} catch (\Illuminate\Validation\ValidationException $e) {
+			return response()->json([
+				'message' => 'Invalid input data',
+				'errorCode' => 'FORM.ERRORDATE',
+				'errors' => $e->errors() 
+			], 400);
+		} catch (\Exception $e) {
+			return response()->json([
+				'message' => 'An unexpected error occurred',
+				'errorCode' => 'FORM.DEFAULT_ERROR'
+			], 500);
+		}
 	}
 
 	public function destroy($id){

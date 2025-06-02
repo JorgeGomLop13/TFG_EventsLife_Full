@@ -9,6 +9,7 @@ class Category extends Model
     //
 	protected $fillable = [
 		'name',
+		'key'
 	];
 	public function events()
 	{

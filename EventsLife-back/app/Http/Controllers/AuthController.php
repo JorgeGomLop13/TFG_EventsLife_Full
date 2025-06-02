@@ -30,9 +30,22 @@ class AuthController extends Controller
 			'role' => 'string|max:255',
 		]);
 
-
+		
+		
 		if ($validator->fails()) {
-			return response()->json($validator->errors(), 400);
+			$errors = $validator->errors();
+
+			if ($errors->has('password')) {
+				return response()->json([
+					'errorCode' => 'PASSWORD_LENGTH',
+					'message' => $errors->first('password')
+				], 400);
+			}
+			
+			return response()->json([
+				'errorCode' => 'GENERICAL_ERROR',
+				'errors' => $errors
+			], 400);
 		}
 
 		$user = User::create([
@@ -45,7 +58,8 @@ class AuthController extends Controller
 			'remember_token' => Str::random(60),
 			'role' => $request->role,
 			'events_ids' => [],
-			'history'=>[]
+			'history'=>[],
+			'image'=>'',
 		]);
 
 

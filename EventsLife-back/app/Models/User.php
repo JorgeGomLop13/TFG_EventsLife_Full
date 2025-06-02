@@ -29,7 +29,8 @@ class User extends Authenticatable
 		'address',
 		'events_ids',
 		'stripeAccountId',
-		'history'
+		'history',
+		'image'
     ];
 	protected $casts = [
     	'events_ids' => 'array',

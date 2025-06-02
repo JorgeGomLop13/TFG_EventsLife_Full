@@ -25,6 +25,7 @@ return new class extends Migration
 			$table->json('history')->nullable();
 			$table->string('stripeAccountId')->nullable();
             $table->timestamps();
+			$table->mediumText ('image')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
