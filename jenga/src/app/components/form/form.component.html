@@ -1,139 +1,193 @@
-<div class="container-form">
-    <form [formGroup]="form" class="form">
-        <div class="field">
-            <label for="eventName">Nombre del evento</label>
-            <input
-                type="text"
-                id="eventName"
-                name="eventName"
-                formControlName="eventName"
-                required
-                placeholder="Titulo del evento..."
-                class="fill-info"
-            />
-        </div>
-        <div class="field">
-            <label>¿Cuándo lo quieres realizar?</label>
-            <div class="fecha">
-                <div class="time_global">
-                    <label for="eventDate">Fecha</label>
-                    <input type="date" id="eventDate" name="eventDate" formControlName="eventDate" required class="fill-info" />
-                </div>
-                <div class="time_start">
-                    <label for="eventTimeStart">Hora inicio</label>
-                    <input
-                        type="time"
-                        id="eventTimeStart"
-                        name="eventTimeStart"
-                        formControlName="eventTimeStart"
-                        required
-                        class="fill-info"
-                    />
-                </div>
-                <div class="time_end">
-                    <label for="eventTimeEnd">Hora fin</label>
-                    <input
-                        type="time"
-                        id="eventTimeEnd"
-                        name="eventTimeEnd"
-                        formControlName="eventTimeEnd"
-                        required
-                        class="fill-info"
-                    />
-                </div>
-            </div>
-        </div>
-        <div class="field">
-            <label for="eventLocation">¿Dónde se encuentra?</label>
-            <input
-                type="text"
-                id="eventLocation"
-                name="eventLocation"
-                formControlName="eventLocation"
-                required
-                placeholder="Ubicación del evento..."
-                class="fill-info"
-            />
-        </div>
-        <div class="field">
-            <label for="eventDescription">Descripción del evento</label>
-            <textarea
-                type="text"
-                id="eventDescription"
-                name="eventDescription"
-                formControlName="eventDescription"
-                required
-                class="fill-info-description"
-            ></textarea>
-        </div>
-        <div class="field">
-            <label for="eventPrice">¿Cuánto quieres cobrar por la entrada?</label>
-            <input
-                type="number"
-                id="eventPrice"
-                name="eventPrice"
-                formControlName="eventPrice"
-                required
-                class="fill-info"
-                [readonly]="freeEvent"
-            />
-            <div class="free-entry">
-                <input type="checkbox" id="eventPriceFree" name="eventPriceFree" (change)="onCheckboxChange()" />
-                <label for="eventPriceFree">La entrada es gratis</label>
-            </div>
-        </div>
-        <div class="field">
-            <label for="eventCapacity">¿Cuál es la capacidad máxima del evento?</label>
-            <input
-                type="number"
-                id="eventCapacity"
-                name="eventCapacity"
-                formControlName="eventCapacity"
-                required
-                class="fill-info"
-            />
-        </div>
-        <div class="field">
-            <label for="eventCategoryId">Selecciona una categoría</label>
-            <select id="eventCategoryId" name="eventCategoryId" formControlName="eventCategoryId" required class="fill-info">
-                <option value="" disabled selected>Selecciona una categoría</option>
-                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
-            </select>
-        </div>
-        <div class="field">
-            <label for="portrait">¡Sube una foto para la portada de tu evento!</label>
-            <input type="file" (change)="onFileSelected($event)" accept="image/*" id="eventImage" name="eventImage" />
-            <img *ngIf="eventImagePreview" [src]="eventImagePreview" alt="Vista previa" width="200" height="200" />
-        </div>
-        <!--Hasta que el formulario no sea valido el boton estara disabled-->
-        <button type="submit" (click)="selectFunction()" [disabled]="form.invalid" class="btn_action">Manda tus datos!</button>
-    </form>
-</div>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col">
+    <main class="flex-grow">
+        <section class="max-w-3xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-2xl">
+            @if (useFunction === 'createEvent') {
+            <h1 class="text-2xl font-bold text-blue-700 mb-6 text-center">
+                {{ "CREATEBOOK.TITLE" | translate }}
+            </h1>
+            } @else {
+            <h1 class="text-2xl font-bold text-blue-700 mb-6 text-center">
+                {{ "EDITBOOK.TITLE" | translate }}
+            </h1>
+            }
 
-<footer class="footer">
-    <div class="goBack" [routerLink]="['/home']">
-        <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-        >
-            <rect width="24" height="24" fill="url(#pattern0_44_8)" />
-            <defs>
-                <pattern id="pattern0_44_8" patternContentUnits="objectBoundingBox" width="1" height="1">
-                    <use xlink:href="#image0_44_8" transform="scale(0.0208333)" />
-                </pattern>
-                <image
-                    id="image0_44_8"
-                    width="48"
-                    height="48"
-                    preserveAspectRatio="none"
-                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAL/SURBVHgB7ZjNbhoxEIDH3iTqJVJSRVHbS1cNRFH+RJ4gcMzPgb4BOfXYRwg8Qp6geQQqRUlvkFtvpQqqUECqc2sjNdqqUqWy4OkYAgQK2LtdxErZ78La2N4Zjz0/CxARERER8ZixwAeJeDqxtPTqzYv5jZtvTsWBKTIDHlHCS9YoMGALzVk3SV0pmCLcy+CO8Ai4oNrI2r/TxFiBQeFJfNGoy9cwZYwU2FrZSw8K79ZlqiI+CJgyTDdg2M6HRXjFWAUSa2lbysansAqvGOuFpHRp5yG0witGWmBz7TDJJBa6HYinyEBAAHDGHcngc7lyVoT/ZLQFpNzt04+xjPbCGIKIwMi026sHgh6LljubK4m8AB94igNBQzrYtEeZ5pz7dXv1MAs+GH2EYnSE+MMjBHSEUEAg8AQDmaDX2/39mLfqv49Komicnow9FVvxgwKNSN4PFLw+m/Jr6qHrx/Z26UKc9iuC+avrc+MAOTaZe7q8cmmhlaHHJ6C8kSXTz+c33geVwN3e1W5uf1RPlhfjdMVYst3L1p4txn5+v6t9NFlDey/XKZBZFMjgPhZMwhKKzdj+MeMs22ogOHSxd0zeob3EX6r5Ev0ckehOe22w5ZxbSNhpGwKkXDvP0eLFVoMBZbp/3prMM/JCV9dn+SbOpCatBCLL9Vo8YzLH2I0qSwwqQfXAOwiQco0CW8fTkRWUJ9TN8RQH/lFiEvUAsmL3keNL3XDPgUwp4fLGDiV42UnUA7Su6DwzQFs33nNJqahUWgldDkLAVFOJYTCK0t0GojbehFAB7CpACV9JNz5UCqgUvpXgtUBxVbu41M0JlQJcYs8td4Kabg6EBJVO93YfwHWlkZMIhQJt4fG400aJWdPSNagiyxetshVJcGyn7G28pdOe4sBWfD9DdbE2Ouqgz5I2Y5iknbb7/8H8LypowAPGFlDCU9IeaO7zAAdRZsvVixPwiLEFmuDzU/Z4HDrwp66LJ34/13i6A+tkBR7AEeIgBUpm5OcjIiIiIiLG8ReIVF4tY0vSGgAAAABJRU5ErkJggg=="
-                />
-            </defs>
-        </svg>
-        <button>{{ "FORM.GO_BACK" | translate }}</button>
-    </div>
-</footer>
+            <form [formGroup]="form" class="space-y-6">
+                <div>
+                    <label for="eventName" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.EVENT_NAME" | translate }}
+                    </label>
+                    <input
+                        type="text"
+                        id="eventName"
+                        formControlName="eventName"
+                        [placeholder]="'FORM.PLACEHOLDER_EVENT_NAME' | translate"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.DATE_TITLE" | translate }}
+                    </label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+                        <div>
+                            <label for="eventDate" class="block text-sm text-gray-600">
+                                {{ "FORM.DATE" | translate }}
+                            </label>
+                            <input
+                                type="date"
+                                id="eventDate"
+                                formControlName="eventDate"
+                                required
+                                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div>
+                            <label for="eventTimeStart" class="block text-sm text-gray-600">
+                                {{ "FORM.START_TIME" | translate }}
+                            </label>
+                            <input
+                                type="time"
+                                id="eventTimeStart"
+                                formControlName="eventTimeStart"
+                                required
+                                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div>
+                            <label for="eventTimeEnd" class="block text-sm text-gray-600">
+                                {{ "FORM.END_TIME" | translate }}
+                            </label>
+                            <input
+                                type="time"
+                                id="eventTimeEnd"
+                                formControlName="eventTimeEnd"
+                                required
+                                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="eventLocation" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.LOCATION" | translate }}
+                    </label>
+                    <input
+                        type="text"
+                        id="eventLocation"
+                        formControlName="eventLocation"
+                        [placeholder]="'FORM.PLACEHOLDER_LOCATION' | translate"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label for="eventDescription" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.DESCRIPTION" | translate }}
+                    </label>
+                    <textarea
+                        id="eventDescription"
+                        formControlName="eventDescription"
+                        rows="4"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 resize-none"
+                    ></textarea>
+                </div>
+
+                <div>
+                    <label for="eventPrice" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.PRICE" | translate }}
+                    </label>
+                    <input
+                        type="number"
+                        id="eventPrice"
+                        formControlName="eventPrice"
+                        [readonly]="freeEvent"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                    <div class="flex items-center gap-2 mt-2">
+                        <input type="checkbox" id="eventPriceFree" (change)="onCheckboxChange()" class="h-4 w-4 text-blue-600" />
+                        <label for="eventPriceFree" class="text-sm text-gray-700">
+                            {{ "FORM.FREE_ENTRY" | translate }}
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="eventCapacity" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.CAPACITY" | translate }}
+                    </label>
+                    <input
+                        type="number"
+                        id="eventCapacity"
+                        formControlName="eventCapacity"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label for="eventCategoryId" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.CATEGORY" | translate }}
+                    </label>
+                    <select
+                        id="eventCategoryId"
+                        formControlName="eventCategoryId"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    >
+                        <option value="" disabled selected>{{ "FORM.PLACEHOLDER_CATEGORY" | translate }}</option>
+                        <option *ngFor="let category of categories" [value]="category.id">{{ category.key | translate }}</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="eventImage" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.IMAGE_UPLOAD" | translate }}
+                    </label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        (change)="onFileSelected($event)"
+                        id="eventImage"
+                        class="mt-2 block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200"
+                    />
+                    <img
+                        *ngIf="eventImagePreview"
+                        [src]="eventImagePreview"
+                        alt="Vista previa"
+                        class="mt-4 w-48 h-48 object-cover rounded-lg shadow"
+                    />
+                </div>
+                <div *ngIf="errorMessage" class="mt-2 p-2 bg-red-100 text-red-700 border border-red-400 rounded text-sm">
+                    {{ `${errorMessage}` | translate }}
+                </div>
+                <div>
+                    <button
+                        type="submit"
+                        (click)="selectFunction()"
+                        [disabled]="!form.valid && useFunction === 'createEvent'"
+                        class="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-semibold py-2 px-4 rounded-lg shadow disabled:opacity-50 transition duration-200"
+                    >
+                        {{ "FORM.SUBMIT" | translate }}
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="mt-10 py-6 bg-white shadow-inner">
+        <div class="flex justify-center">
+            <div class="flex items-center gap-2 text-blue-600 hover:underline cursor-pointer" [routerLink]="['/home']">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M15 19l-7-7 7-7" />
+                </svg>
+                <button class="text-sm font-medium">{{ "FORM.GO_BACK" | translate }}</button>
+            </div>
+        </div>
+    </footer>
+</body>

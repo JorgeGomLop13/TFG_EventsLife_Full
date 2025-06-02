@@ -7,11 +7,12 @@ import { StripeService } from '@app/services/stripe.service';
 import { UseBackService } from '@app/services/use-back.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { take } from 'rxjs';
+import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-cart',
-  imports: [HeaderComponent, CommonModule, TranslateModule],
+  imports: [HeaderComponent, CommonModule, TranslateModule, FooterComponent],
   providers: [StripeService],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
@@ -59,17 +60,21 @@ export class CartComponent implements OnInit {
     this.eventsInCart = this.eventsInCart.filter((event) => event.id !== id);
   }
 
-  payForProduct(eventId: number, eventPrice: number, eventTitle: string, authorId: number) {
+  payForProduct(eventId: number, eventPrice: number, eventTitle: string, authorId: number, actualPeople: [], maxPeople: number) {
     if (this.userId) {
-      this.useData
-        .getUserById(authorId)
-        .pipe(take(1))
-        .subscribe((res: any) => {
-          const authorStripeId = res.stripeAccountId;
-          this.stripe.payProduct(eventTitle, eventPrice, authorStripeId, eventId).subscribe((res: any) => {
-            window.location.href = res.url;
+      if (actualPeople.length < maxPeople) {
+        this.useData
+          .getUserById(authorId)
+          .pipe(take(1))
+          .subscribe((res: any) => {
+            const authorStripeId = res.stripeAccountId;
+            this.stripe.payProduct(eventTitle, eventPrice, authorStripeId, eventId).subscribe((res: any) => {
+              window.location.href = res.url;
+            });
           });
-        });
+      } else {
+        alert();
+      }
     }
   }
   /*

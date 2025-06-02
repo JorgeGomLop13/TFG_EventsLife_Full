@@ -1,0 +1,39 @@
+<div class="max-w-xl mx-auto bg-white p-6 rounded-2xl border border-gray-300 mb-[150px] mt-[150px]">
+    <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">Editar perfil</h2>
+
+    <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
+            <input
+                type="text"
+                id="name"
+                formControlName="name"
+                placeholder="Introduce tu nuevo nombre"
+                class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 cursor-text"
+            />
+        </div>
+
+        <div>
+            <label for="profileImage" class="block text-sm font-medium text-gray-700">Foto de perfil</label>
+            <input
+                type="file"
+                id="profileImage"
+                (change)="onFileSelected($event)"
+                accept="image/*"
+                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            />
+            @if (eventImagePreview) {
+            <div class="mt-4 flex justify-center">
+                <img [src]="eventImagePreview" alt="Vista previa" class="w-32 h-32 rounded-full object-cover shadow-md" />
+            </div>
+            }
+        </div>
+
+        <button
+            type="submit"
+            class="w-full bg-blue-600 text-white py-2 px-4 rounded-xl font-medium hover:bg-blue-700 transition duration-200"
+        >
+            Guardar cambios
+        </button>
+    </form>
+</div>

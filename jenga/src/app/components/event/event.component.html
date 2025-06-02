@@ -6,60 +6,86 @@
         <title>Document</title>
         <link rel="stylesheet" href="event.component.scss" />
     </head>
-    <body></body>
+    <body>
+        <app-header [eventsList]="eventsList"></app-header>
+        <a
+            [routerLink]="['/home']"
+            class="text-sm text-gray-500 hover:underline inline-flex items-center ml-auto mr-auto sm:ml-8 lg:ml-20 xl:ml-40 mt-8 px-4 md:px-6"
+        >
+            <span>&larr;</span> {{ "EVENT.BACK" | translate }}
+        </a>
+
+        <div class="max-w-[88rem] w-full mx-auto p-8" *ngIf="event">
+            <div class="grid grid-cols-[3fr_1.5fr] items-stretch">
+                <div class="flex items-stretch">
+                    <img
+                        [src]="event.image"
+                        alt="{{ 'EVENT.IMAGE_ALT' | translate }}"
+                        class="w-full max-w-[35rem] object-contain rounded-lg shadow-lg"
+                    />
+                </div>
+
+                <div class="flex flex-col justify-between">
+                    <div
+                        class="w-72 max-w-[90%] mx-auto bg-blue-400 bg-gradient-to-br from-blue-500 to-blue-300 text-white p-5 rounded-lg shadow-md flex flex-col items-center justify-between h-36 box-border"
+                    >
+                        <p class="text-xl">{{ "EVENT.UNIT_PRICE" | translate }}</p>
+                        <p class="text-xl">{{ event.price }}€</p>
+                        <button
+                            (click)="addToCart(event.id)"
+                            class="bg-blue-600 text-white rounded-md py-2 w-full max-w-[90vw] hover:bg-blue-700 transition duration-300"
+                        >
+                            {{ "EVENT.REGISTER" | translate }}
+                        </button>
+                    </div>
+
+                    <!-- Organizador -->
+                    <div
+                        class="w-72 max-w-[90%] mx-auto bg-blue-400 bg-gradient-to-br from-blue-500 to-blue-300 text-white p-5 rounded-lg shadow-md flex flex-col items-center justify-between h-36 box-border"
+                    >
+                        <p class="text-xl text-center">{{ "EVENT.ORGANIZED_BY" | translate }}</p>
+                        <p class="text-xl text-center truncate">{{ organizerName }}</p>
+                        <button
+                            (click)="showOrganizerData(event.organizer_id)"
+                            class="bg-blue-600 text-white rounded-md py-2 w-full max-w-[90vw] hover:bg-blue-700 transition duration-300"
+                        >
+                            {{ "EVENT.VIEW_ORGANIZER_PROFILE" | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-8"></div>
+
+        <div class="space-y-6 max-w-7xl mx-auto sm:ml-8 mt-8 px-4 md:px-6 lg:ml-16 xl:ml-24 2xl:ml-40" *ngIf="event">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-bold">{{ event.name }}</h2>
+                <div class="flex flex-wrap gap-6 text-gray-600 text-sm items-center">
+                    <span class="flex items-center gap-1">📅 {{ event.date }}</span>
+                    <span class="flex items-center gap-1"
+                        >🕕 {{ event.start_date.slice(0, 5) }} – {{ event.end_date.slice(0, 5) }}</span
+                    >
+                    <span class="flex items-center gap-1">📍{{ event.location }}</span>
+                    <span class="flex items-center gap-1">👥Capacidad: {{ event.capacity }}</span>
+                    <span class="flex items-center gap-1">🧑‍🤝‍🧑Inscritos: {{ event.codes.length }}</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold mb-2">{{ "EVENT.DESCRIPTION_TITLE" | translate }}</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    {{ event.description }}
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold mb-2">{{ "EVENT.IMPORTANT_INFO_TITLE" | translate }}</h3>
+                <p class="text-gray-700 leading-relaxed mb-16">
+                    {{ "EVENT.IMPORTANT_INFO_TEXT" | translate }}
+                </p>
+            </div>
+        </div>
+    </body>
+    <app-footer *ngIf="ready"></app-footer>
 </html>
-<app-header [eventsList]="eventsList"></app-header>
-<a
-    [routerLink]="['/home']"
-    class="text-sm text-gray-500 hover:underline inline-flex items-center ml-auto mr-auto sm:ml-8 lg:ml-20 xl:ml-40 mt-8 px-4 md:px-6"
->
-    <span>&larr;</span> Volver atrás
-</a>
-
-<div class="containerAll" *ngIf="event">
-    <div class="container" *ngIf="event">
-        <div class="image">
-            <img [src]="event.image" alt="Café y granos" />
-        </div>
-        <div class="info">
-            <div class="price">
-                <p>Precio unitario {{ event.price }}€</p>
-                <button (click)="addToCart(event.id)">Inscribirse</button>
-            </div>
-            <div class="organizer">
-                <p>Organizado por</p>
-                <p>{{ organizerName }}</p>
-                <button>Ver perfil del organizador</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="my-8"></div>
-
-<!-- Info del evento -->
-<div class="space-y-6 max-w-7xl mx-auto sm:ml-8 mt-8 px-4 md:px-6 lg:ml-16 xl:ml-24 2xl:ml-40" *ngIf="event">
-    <div class="space-y-2">
-        <h2 class="text-2xl font-bold">{{ event.name }}</h2>
-        <div class="flex flex-wrap gap-6 text-gray-600 text-sm items-center">
-            <span class="flex items-center gap-1">📅 {{ event.date }}</span>
-            <span class="flex items-center gap-1">🕕 {{ event.start_date }}–{{ event.end_date }}</span>
-            <span class="flex items-center gap-1">📍{{ event.location }}</span>
-            <span class="flex items-center gap-1">👥 {{ event.capacity }}</span>
-        </div>
-    </div>
-
-    <!-- Descripción -->
-    <div>
-        <h3 class="text-xl font-semibold mb-2">Descripción</h3>
-        <p class="text-gray-700 leading-relaxed">
-            {{ event.description }}
-        </p>
-    </div>
-    <div>
-        <h3 class="text-xl font-semibold mb-2">Información importante</h3>
-        <p class="text-gray-700 leading-relaxed mb-16">
-            Es recomendable llegar con 15 minutos de antelación. Recuerda traer tu identificación para la acreditación. El evento
-            comenzará puntualmente a la hora indicada.
-        </p>
-    </div>
-</div>

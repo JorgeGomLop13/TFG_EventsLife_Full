@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ChildrenOutletContexts, RouterOutlet } from '@angular/router';
+import { ChildrenOutletContexts, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { ConfirmDialogService } from '@common/confirm-dialog/confirm-dialog.service';
 import { GlobalMessageService } from '@common/global-message/global-message.service';
 import { ProgressSpinnerService } from '@common/progress-spinner/progress-spinner.service';
@@ -26,8 +26,14 @@ export class AppComponent {
   //TEST: theme-service
   protected themeService: ThemeService = inject(ThemeService);
 
-  constructor(private contexts: ChildrenOutletContexts) {
+  constructor(private contexts: ChildrenOutletContexts, private router: Router) {
     this.locale.setupAppLanguage();
+    //Con esto cada vez que se cambia de ruta se sube la barra de navegación al inicio de la página
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo({ top: 0 });
+      }
+    });
   }
 
   getRouteAnimationData() {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, signal } from '@angular/core';
 import { ENV } from '@app/core/constants/global.constants';
 import { Env } from '@app/core/types/env';
@@ -49,14 +49,18 @@ export class UseBackService {
     });
   }
 
-  getPaginatedEvents(page: number, totalEvents: number, search: string) {
-    return this.http.get(`${this.env.apiBaseUrl}/eventsSearch`, {
-      params: {
-        page: page,
-        limit: totalEvents,
-        search: search
-      }
-    });
+  getPaginatedEvents(page: number, totalEvents: number, search?: string, categoryId?: string) {
+    let params = new HttpParams().set('page', page.toString()).set('limit', totalEvents.toString());
+
+    if (search) {
+      params = params.set('search', search);
+    }
+
+    if (categoryId) {
+      params = params.set('category', categoryId);
+    }
+
+    return this.http.get(`${this.env.apiBaseUrl}/eventsSearch`, { params });
   }
 
   getEventByOrganizer(organizerId: number): Observable<any> {
@@ -83,5 +87,9 @@ export class UseBackService {
       },
       responseType: 'blob'
     });
+  }
+
+  updateUser(id: number, user: any) {
+    return this.http.put(`${this.env.apiBaseUrl}/user/${id}/update`, user);
   }
 }

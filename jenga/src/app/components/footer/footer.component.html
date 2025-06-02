@@ -14,7 +14,9 @@
                     </h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="#" class="hover:underline">{{ "FOOTER.RESOURCES.CATALOG" | translate }}</a>
+                            <a (click)="goToSearch()" class="hover:underline cursor-pointer">{{
+                                "FOOTER.RESOURCES.CATALOG" | translate
+                            }}</a>
                         </li>
                         <li>
                             <a href="#" class="hover:underline">{{ "FOOTER.RESOURCES.BLOG" | translate }}</a>
@@ -30,8 +32,8 @@
                         <li class="mb-4">
                             <a href="#" class="hover:underline">{{ "FOOTER.COMMUNITY.FORUM" | translate }}</a>
                         </li>
-                        <li>
-                            <a href="#" class="hover:underline">{{ "FOOTER.COMMUNITY.CONTACT" | translate }}</a>
+                        <li (click)="goToQuestions()">
+                            <a class="hover:underline cursor-pointer">{{ "FOOTER.COMMUNITY.QUESTIONS" | translate }}</a>
                         </li>
                     </ul>
                 </div>
@@ -45,7 +47,9 @@
                             <a href="#" class="hover:underline">{{ "FOOTER.LEGAL.PRIVACY" | translate }}</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:underline">{{ "FOOTER.LEGAL.TERMS" | translate }}</a>
+                            <a (click)="goToTerms()" class="hover:underline cursor-pointer">{{
+                                "FOOTER.LEGAL.TERMS" | translate
+                            }}</a>
                         </li>
                     </ul>
                 </div>

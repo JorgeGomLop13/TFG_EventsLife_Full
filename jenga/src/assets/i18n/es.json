@@ -1,19 +1,23 @@
 {
     "HOME": {
-        "AUTHOR": "Autor",
         "PAGES": "Páginas",
         "CART": "Añadir al carro",
         "PREVIUS": "Anterior",
         "FORWARD": "Siguiente",
         "IMAGETEXT": "Bienvenido a EventsLife ",
-        "IMAGESUBTEXT": "Descubre, explora y sumérgete en miles de libros 📚",
+        "IMAGESUBTEXT1": "Descubre, explora y sumérgete en miles de eventos ",
+        "IMAGESUBTEXT2": "Organiza tus propios eventos ",
         "DESCRIPTION": "Descripción: ",
         "DELETE": "Borrar evento",
-        "DELETEUSER": "Borrar evento y usuario"
+        "DELETEUSER": "Borrar evento y usuario",
+        "LOCATION": "Ubicación",
+        "DATE": "Fecha",
+        "START": "Inicio",
+        "END": "Fin",
+        "CAPACITY": "Capacidad",
+        "ORGANIZER": "Organizador"
     },
     "SEARCH": {
-        "AUTHOR": "Autor:",
-        "PAGES": "Páginas:",
         "CART": "Añadir al carro",
         "PREVIUS": "Anterior",
         "FORWARD": "Siguiente",
@@ -22,12 +26,22 @@
         "RESETBUTTON": "Restablecer",
         "PAGE": "Página",
         "OF": "de",
-        "DESCRIPTION": "Descripción: "
+        "DESCRIPTION": "Descripción: ",
+        "CATEGORY_LABEL": "Buscar por categorías",
+        "ALL_CATEGORIES": "Todas las categorías",
+        "NOTFOUND_TITLE": "No se encontraron resultados",
+        "NOTFOUND_BODY": "Parece que no tenemos ningún evento que coincida con tu búsqueda.",
+        "LOCATION": "Ubicación",
+        "DATE": "Fecha",
+        "START": "Inicio",
+        "END": "Fin",
+        "CAPACITY": "Capacidad",
+        "ORGANIZER": "Organizador"
     },
     "HEADER": {
         "SEARCH": "Búsqueda",
         "LANGUAGE": "Seleccionar idioma",
-        "PUBLISH": "Publica tu evento",
+        "PUBLISH": "Crea tu evento",
         "REGISTER": "Registrarse",
         "LOGIN": "Iniciar sesión"
     },
@@ -44,7 +58,8 @@
         "CREATED_EVENTS": "Mis eventos:",
         "NODELETE": "No puedes eliminar este evento porque ya ha sido comprado por al menos un usuario",
         "CODES": "Descargar códigos de asistentes",
-        "pdf_title": "codigos_evento_"
+        "pdf_title": "codigos_evento_",
+        "EDITPROFILE": "Editar perfil"
     },
     "CREATEBOOK": {
         "TITLE": "¡Introduce los datos de tu evento!"
@@ -52,15 +67,7 @@
     "EDITBOOK": {
         "TITLE": "¡Edita los datos de tu evento!"
     },
-    "FORM": {
-        "BOOK_NAME": "Nombre del evento",
-        "BOOK_PAGES": "Número de páginas",
-        "BOOK_DESCRIPTION": "Descripción del evento",
-        "BOOK_PRICE": "Precio del evento",
-        "IMAGE_PREVIEW": "Vista previa",
-        "SUBMIT": "Mandar los datos",
-        "GO_BACK": "Volver atrás"
-    },
+
     "REGISTER": {
         "TITLE": "Crear Cuenta",
         "SUBTITLE": "Completa el formulario para registrarte en EventsLife",
@@ -68,13 +75,17 @@
         "USERNAME_PLACEHOLDER": "Tu usuario",
         "EMAIL": "Email",
         "EMAIL_PLACEHOLDER": "Email",
+        "ADDRESS": "Dirección",
+        "ADDRESS_PLACEHOLDER": "Dirección",
+        "PHONE": "Teléfono",
+        "PHONE_PLACEHOLDER": "Teléfono",
         "PASSWORD": "Contraseña",
-        "CONFIRM_PASSWORD": "Confirmación contraseña",
+        "PASSWORD_CONFIRMATION": "Confirmación contraseña",
         "USER_TYPE": "Tipo de usuario",
-        "READER_LABEL": "Asistente (para asistir a eventos)",
-        "WRITER_LABEL": "Organizador (para crear y gestionar eventos)",
+        "ROLE_ATTENDEE": "Asistente (para asistir a eventos)",
+        "ROLE_ORGANIZER": "Organizador (para crear y gestionar eventos)",
         "ACCEPT": "Acepto los",
-        "TERMS": "Términos y condiciones",
+        "TERMS": "Términos y Condiciones",
         "BUTTON": "Registrarse",
         "BACK": "Volver atrás",
         "HAVE_ACCOUNT": "¿Ya tienes una cuenta?",
@@ -82,7 +93,9 @@
     },
     "ERROR-CODES": {
         "USEREXIST": "El correo ya está asignado a otra cuenta",
-        "PASSWORD": "Las contraseñas no coinciden",
+        "PASSWORD_REPEATED": "Las contraseñas no coinciden",
+        "PASSWORD_LENGTH": "La contraseña debe tener al menos 6 caracteres",
+        "EMAIL_INVALID": "Formato de email inválido",
         "LOGIN": "Email o contraseña incorrectos",
         "DEFAULT": "Fallo al crear tu usuario"
     },
@@ -101,7 +114,7 @@
     "CART": {
         "TITLE": "Mi carrito:",
         "EMPTY": "Tu carrito está vacío por ahora.",
-        "ADD_HINT": "Añade libros para poder verlos aquí 📚",
+        "ADD_HINT": "Añade eventos para poder verlos aquí ",
         "PAGES": "páginas",
         "DELETE": "Borrar",
         "PAY": "Pagar"
@@ -109,12 +122,12 @@
     "SUCCESS": {
         "BACK_TO_SHOP": "Volver a la tienda",
         "TITLE": "¡Compra realizada con éxito!",
-        "MESSAGE_1": "Gracias por tu compra.",
-        "MESSAGE_2": "El libro ha sido añadido a tu biblioteca.",
+        "MESSAGE_1": "Se te ha enviado un correo con tu entrada!.",
+        "MESSAGE_2": "El evento ha sido añadido a tu biblioteca.",
         "SUBSCRIPTION_TITLE": "¡Cuenta de Stripe vinculada!",
         "SUBSCRIPTION_MSG_1": "Gracias por vincular tu cuenta.",
         "SUBJECT": "Pedido realizado correctamente",
-        "HTML": "Gracias por realizar tu pedido con nosotros, el código de seguimiento de tu libro es: "
+        "HTML": "Gracias por realizar tu pedido con nosotros.<br></br>Puedes encontrar los datos completos del evento en tu historial.<br></br>El código de seguimiento de tu evento es:"
     },
     "FOOTER": {
         "RESOURCES": {
@@ -125,7 +138,7 @@
         "COMMUNITY": {
             "TITLE": "Comunidad",
             "FORUM": "Foro",
-            "CONTACT": "Contacto"
+            "QUESTIONS": "Preguntas frecuentes"
         },
         "LEGAL": {
             "TITLE": "Legal",
@@ -133,6 +146,107 @@
             "TERMS": "Términos y Condiciones"
         },
         "RIGHTS": "Todos los derechos reservados."
+    },
+    "TERMS": {
+        "HEADER": "Términos y Condiciones",
+        "LAST_UPDATED": "Última actualización: 25 de mayo de 2025",
+        "BACK_BUTTON": "Volver",
+        "SECTIONS": {
+            "SERVICE": {
+                "TITLE": "1. Descripción del servicio",
+                "DESCRIPTION": "Nuestra plataforma permite a organizadores crear eventos personalizados, y a asistentes descubrir y registrarse en dichos eventos, realizando pagos si corresponde."
+            },
+            "ORGANIZER": {
+                "TITLE": "2. Responsabilidad del organizador",
+                "DESCRIPTION": "El organizador es responsable del contenido, condiciones y cumplimiento del evento publicado. Una vez que al menos un asistente se haya registrado, no podrá eliminar el evento bajo ninguna circunstancia."
+            },
+            "ATTENDEE": {
+                "TITLE": "3. Responsabilidad del asistente",
+                "DESCRIPTION": "Los asistentes pueden registrarse a eventos disponibles. En caso de que el evento sea de pago, una vez realizado el pago, no podrán cancelar su participación ni solicitar reembolsos a través de la plataforma."
+            },
+            "PAYMENTS": {
+                "TITLE": "4. Pagos y comisiones",
+                "DESCRIPTION": "Los pagos se procesan mediante nuestro proveedor seguro. La plataforma puede cobrar una comisión por transacción, visible antes de confirmar el pago."
+            },
+            "MODIFICATIONS": {
+                "TITLE": "5. Cambios en eventos",
+                "DESCRIPTION": "El organizador puede modificar ciertos detalles del evento (como fecha o descripción), siempre que no afecten las condiciones esenciales pactadas con asistentes ya registrados."
+            },
+            "ACCEPTANCE": {
+                "TITLE": "6. Aceptación",
+                "DESCRIPTION": "Al usar esta plataforma, tanto organizadores como asistentes aceptan estos términos. Se recomienda leerlos detenidamente antes de crear o participar en un evento."
+            }
+        }
+    },
+    "EVENT": {
+        "BACK": "Volver atrás",
+        "UNIT_PRICE": "Precio unitario",
+        "REGISTER": "Inscribirse",
+        "ORGANIZED_BY": "Organizado por",
+        "VIEW_ORGANIZER_PROFILE": "Ver perfil del organizador",
+        "IMAGE_ALT": "Foto del evento",
+        "DESCRIPTION_TITLE": "Descripción",
+        "IMPORTANT_INFO_TITLE": "Información importante",
+        "IMPORTANT_INFO_TEXT": "Es recomendable llegar con 15 minutos de antelación. Recuerda traer tu identificación para la acreditación. El evento comenzará puntualmente a la hora indicada.",
+        "MAXCAPACITY": "El evento ya está al máximo de capacidad"
+    },
+    "DIALOG": {
+        "TITLE": "Eliminar evento",
+        "MESSAGE": "¿Estás seguro de que deseas eliminar este evento? Esta acción no se puede deshacer.",
+        "DELETE": "Eliminar",
+        "CANCEL": "Cancelar",
+        "PROFILE": "Perfil del organizador del evento",
+        "CLOSE": "Cerrar",
+        "NAME": "Nombre",
+        "EMAIL": "Correo electrónico",
+        "PHONE": "Teléfono",
+        "ADDRESS": "Dirección"
+    },
+    "FORM": {
+        "EVENT_NAME": "Nombre del evento",
+        "PLACEHOLDER_EVENT_NAME": "Título del evento...",
+        "DATE_TITLE": "¿Cuándo lo quieres realizar?",
+        "DATE": "Fecha",
+        "START_TIME": "Hora inicio",
+        "END_TIME": "Hora fin",
+        "LOCATION": "¿Dónde se encuentra?",
+        "PLACEHOLDER_LOCATION": "Ubicación del evento...",
+        "DESCRIPTION": "Descripción del evento",
+        "PRICE": "¿Cuánto quieres cobrar por la entrada?",
+        "FREE_ENTRY": "La entrada es gratis",
+        "CAPACITY": "¿Cuál es la capacidad máxima del evento?",
+        "CATEGORY": "Selecciona una categoría",
+        "PLACEHOLDER_CATEGORY": "Selecciona una categoría",
+        "IMAGE_UPLOAD": "¡Sube una foto para la portada!",
+        "SUBMIT": "¡Manda tus datos!",
+        "GO_BACK": "Volver",
+        "DATEBEFORE": "La fecha establecida ya ha pasado",
+        "ERRORDATE": "La hora de finalización es anterior a la hora de comienzo"
+    },
+    "CATEGORY": {
+        "TASTING": "Cata",
+        "MUSIC": "Música",
+        "FOOD_DRINK": "Comida y bebida",
+        "WORKSHOP": "Taller",
+        "NETWORKING": "Networking",
+        "SPORTS": "Deporte y bienestar",
+        "EDUCATION": "Educación",
+        "ART_CULTURE": "Arte y cultura",
+        "FAMILY": "Familia e infancia",
+        "GAMES": "Juegos y competencias"
+    },
+    "QUESTIONS": {
+        "FAQ_TITLE": "Preguntas Frecuentes",
+        "FAQ_QUESTION_1": "¿Cómo puedo inscribirme en un evento?",
+        "FAQ_ANSWER_1": "Para inscribirte, solo haz clic en el evento deseado y pulsa el botón 'Inscribirse'. Necesitarás haber iniciado sesión como usuario asistente.",
+        "FAQ_QUESTION_2": "¿Los eventos tienen algún coste?",
+        "FAQ_ANSWER_2": "La mayoría de los eventos son gratuitos, pero algunos pueden tener un coste. El precio se mostrará claramente en la página del evento.",
+        "FAQ_QUESTION_3": "¿Puedo organizar mi propio evento?",
+        "FAQ_ANSWER_3": "¡Sí! Una vez que hayas iniciado sesión como usuario organizador, en la cabecera aparecerá la opción de crear tu propio evento, además, accede a tu perfil donde encontrarás la opción de gestionar tus eventos.",
+        "FAQ_QUESTION_4": "¿Dónde puedo ver los eventos a los que me he inscrito?",
+        "FAQ_ANSWER_4": "Puedes verlos en tu perfil, en la sección 'Mis Eventos'.",
+        "CONTACT_ISSUE_TITLE": "¿Tienes un problema?",
+        "CONTACT_ISSUE_BODY": "Si tienes algún problema o duda, no dudes en contactarnos al correo soporte@eventos.com o llamando al +34 912 345 678."
     },
     "common": {
         "accessDenied": "Acceso denegado",

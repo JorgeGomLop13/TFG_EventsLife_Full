@@ -20,10 +20,13 @@ export class HeaderComponent implements OnInit {
   public userName: string | null = '';
   public userRole: string | null = '';
   public userId: number = 0;
+  public profile: string = '';
 
   public userEventsInCart: [] = [];
 
   public currentLang: string = '';
+
+  public user: any;
 
   @Input() eventsList = [];
 
@@ -38,9 +41,10 @@ export class HeaderComponent implements OnInit {
         .getUser()
         .pipe(take(1))
         .subscribe((res: any) => {
-          this.userName = res.name;
           this.userRole = res.role;
           this.userId = res.id;
+          this.userName = res.name;
+          this.profile = res.image;
           console.log(res);
           this.cartService
             .getCartEventsByIds(this.userId)

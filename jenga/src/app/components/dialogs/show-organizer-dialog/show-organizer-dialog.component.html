@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="text-3xl font-marhey mb-12 text-center text-blue-800 border-b-4 border-blue-500 pb-3">
+    {{ "DIALOG.PROFILE" | translate }}
+</h2>
+
+<mat-dialog-content class="mt-6 mb-10 px-8 space-y-6 text-gray-600 text-lg bg-blue-50 rounded-md p-6">
+    <br />
+    <p>
+        <span class="font-semibold text-gray-800">{{ "DIALOG.NAME" | translate }}:</span> {{ nombreOrganizador }}
+    </p>
+    <p>
+        <span class="font-semibold text-gray-800">{{ "DIALOG.EMAIL" | translate }}:</span> {{ emailOrganizador }}
+    </p>
+    <p>
+        <span class="font-semibold text-gray-800">{{ "DIALOG.PHONE" | translate }}:</span> {{ telefonoOrganizador }}
+    </p>
+    <p>
+        <span class="font-semibold text-gray-800">{{ "DIALOG.ADDRESS" | translate }}:</span> {{ calleOrganizador }}
+    </p>
+    <br /><br />
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="flex justify-end px-6 py-4 bg-white border-t border-gray-200">
+    <button
+        mat-stroked-button
+        color="primary"
+        (click)="dialogRef.close(true)"
+        class="px-5 py-2 rounded border border-blue-600 text-blue-600 hover:bg-blue-100 transition"
+    >
+        {{ "DIALOG.CLOSE" | translate }}
+    </button>
+</mat-dialog-actions>

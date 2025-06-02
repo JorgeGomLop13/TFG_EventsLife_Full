@@ -8,11 +8,12 @@ import { CartService } from '@app/services/cart.service';
 import { UseBackService } from '@app/services/use-back.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { take } from 'rxjs';
+import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-search',
-  imports: [HeaderComponent, FormsModule, CommonModule, TranslateModule, RouterLink],
+  imports: [HeaderComponent, FormsModule, CommonModule, TranslateModule, RouterLink, FooterComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
@@ -40,6 +41,9 @@ export class SearchComponent implements OnInit {
   public actualUser: string = '';
   public userRole: string = '';
   public userId: number = 0;
+  public selectedCategory: string = '';
+  public categories: any[] = [];
+  public ready = false;
 
   ngOnInit(): void {
     if (this.token) {
@@ -54,6 +58,13 @@ export class SearchComponent implements OnInit {
     } else {
       this.getEvents(this.currentPage);
     }
+    this.useData
+      .getCategories()
+      .pipe(take(1))
+      .subscribe((res: any) => {
+        this.categories = res;
+        console.log(this.categories);
+      });
   }
 
   getEvents(page: number) {
@@ -74,15 +85,17 @@ export class SearchComponent implements OnInit {
             .pipe(take(1))
             .subscribe((res: any) => {
               event.organizer = res.name;
+              this.ready = true;
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             })
         );
       });
   }
 
   searchEvents() {
-    if (this.searchTerm) {
+    if (this.searchTerm || this.selectedCategory) {
       this.useData
-        .getPaginatedEvents(this.currentPage, this.limit, this.searchTerm)
+        .getPaginatedEvents(this.currentPage, this.limit, this.searchTerm, this.selectedCategory)
         .pipe(take(1))
         .subscribe((res: any) => {
           this.events = res.data;

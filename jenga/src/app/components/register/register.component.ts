@@ -34,7 +34,7 @@ export class RegisterComponent {
   register() {
     const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
     if (!emailValido) {
-      this.errorMessage = 'Introduce un correo válido.';
+      this.errorMessage = 'EMAIL_INVALID';
       this.email = '';
       setTimeout(() => {
         this.errorMessage = '';
@@ -42,7 +42,7 @@ export class RegisterComponent {
       return;
     }
     if (this.password !== this.confirmation_password) {
-      this.errorMessage = 'PASSWORD';
+      this.errorMessage = 'PASSWORD_REPEATED';
       this.password = '';
       this.confirmation_password = '';
       setTimeout(() => {

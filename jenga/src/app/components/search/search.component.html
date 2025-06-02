@@ -1,45 +1,71 @@
 <app-header [eventsList]="eventsList"></app-header>
 
-<form class="max-w-md mx-auto mt-6 mb-6" (submit)="searchEvents(); $event.preventDefault()">
-    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"> Search </label>
-    <div class="relative">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-                class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-            >
-                <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-            </svg>
+<form
+    class="w-full max-w-4xl mx-auto p-6 md:flex md:items-end md:gap-6 space-y-4 md:space-y-0 mb-6"
+    (submit)="searchEvents(); $event.preventDefault()"
+>
+    <!-- Search input -->
+    <div class="w-full md:flex-1">
+        <label for="default-search" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            {{ "SEARCH.SEARCHPLACEHOLDER" | translate }}
+        </label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 20 20">
+                    <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                </svg>
+            </div>
+            <input
+                type="search"
+                id="default-search"
+                name="searchTerm"
+                [(ngModel)]="searchTerm"
+                class="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:placeholder-gray-400"
+            />
         </div>
-        <input
-            type="search"
-            id="default-search"
-            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            [placeholder]="'SEARCH.SEARCHPLACEHOLDER' | translate"
-            name="searchTerm"
-            [(ngModel)]="searchTerm"
-        />
     </div>
 
-    <div class="flex justify-end gap-2 mt-2">
+    <!-- Category select -->
+    <div class="w-full md:w-64">
+        <label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-500 mb-1">
+            {{ "SEARCH.CATEGORY_LABEL" | translate }}
+        </label>
+        <select
+            id="category"
+            name="category"
+            [(ngModel)]="selectedCategory"
+            class="w-full px-4 py-2.5 text-sm rounded-xl border border-gray-300 bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+        >
+            <option [value]="''" class="bg-white dark:bg-gray-800 dark:text-white">
+                {{ "SEARCH.ALL_CATEGORIES" | translate }}
+            </option>
+            <option
+                *ngFor="let category of categories"
+                [value]="category.id"
+                class="bg-white hover:bg-blue-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
+            >
+                {{ category.key | translate }}
+            </option>
+        </select>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex gap-2 w-full md:w-auto">
         <button
             type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="flex-1 md:flex-none px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
         >
             {{ "SEARCH.SEARCHBUTTON" | translate }}
         </button>
         <button
             type="button"
-            class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-gray-400 dark:hover:bg-gray-500 dark:focus:ring-gray-600"
+            class="flex-1 md:flex-none px-5 py-2.5 bg-gray-400 hover:bg-gray-500 text-white text-sm font-medium rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
             (click)="reset()"
         >
             {{ "SEARCH.RESETBUTTON" | translate }}
@@ -66,18 +92,46 @@
             </div>
             <br />
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
-                <p><span class="font-medium">Ubicación:</span> {{ event.location }}</p>
-                <p><span class="font-medium">Fecha:</span> {{ event.date }}</p>
-                <p><span class="font-medium">Inicio:</span> {{ event.start_date.slice(0, 5) }}h</p>
-                <p><span class="font-medium">Fin:</span> {{ event.end_date.slice(0, 5) }}h</p>
-                <p><span class="font-medium">Capacidad:</span> {{ event.capacity }}</p>
-                <p><span class="font-medium">Organizador:</span>{{ event.organizer }}</p>
+                <p>
+                    <span class="font-medium">{{ "SEARCH.LOCATION" | translate }}:</span> {{ event.location }}
+                </p>
+                <p>
+                    <span class="font-medium">{{ "SEARCH.DATE" | translate }}:</span> {{ event.date }}
+                </p>
+                <p>
+                    <span class="font-medium">{{ "SEARCH.START" | translate }}:</span> {{ event.start_date.slice(0, 5) }}h
+                </p>
+                <p>
+                    <span class="font-medium">{{ "SEARCH.END" | translate }}:</span> {{ event.end_date.slice(0, 5) }}h
+                </p>
+                <p>
+                    <span class="font-medium">{{ "SEARCH.CAPACITY" | translate }}:</span> {{ event.capacity }}
+                </p>
+                <p>
+                    <span class="font-medium">{{ "SEARCH.ORGANIZER" | translate }}:</span> {{ event.organizer }}
+                </p>
             </div>
         </div>
     </div>
 </div>
-
+@if (events.length <= 0 && ready) {
+<div class="min-h-[calc(70vh-00px)] flex flex-col">
+    <div class="flex flex-col items-center justify-center text-center py-16 text-gray-600">
+        <svg class="w-10 h-10 mb-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M19.53 17.47a.75.75 0 0 0-1.06 1.06l1.06-1.06zM22.47 22.53a.75.75 0 0 0 1.06-1.06l-1.06 1.06zM18.47 18.53l4 4 1.06-1.06-4-4-1.06 1.06zM11 18.25c-4.56 0-8.25-3.69-8.25-8.25H1.25C1.25 15.38 5.62 19.75 11 19.75v-1.5zm8.25-8.25c0 4.56-3.69 8.25-8.25 8.25v1.5c5.38 0 9.75-4.37 9.75-9.75h-1.5zM11 1.75c4.56 0 8.25 3.69 8.25 8.25h1.5C20.75 4.62 16.38.25 11 .25v1.5zm0-1.5C5.62.25 1.25 4.62 1.25 10h1.5C2.75 5.44 6.44 1.75 11 1.75V.25z"
+            />
+        </svg>
+        <h2 class="text-xl font-semibold">{{ "SEARCH.NOTFOUND_TITLE" | translate }}</h2>
+        <p class="text-base mt-1">{{ "SEARCH.NOTFOUND_BODY" | translate }}</p>
+    </div>
+</div>
+}
 <!--Aqui utilizo paginación del back en vez de sacar todos los datos y hacer paginacion en front-->
+@if (events.length>0 ) {
 <div class="pagination flex items-center mt-4 justify-center">
     <button
         (click)="getEvents(currentPage - 1)"
@@ -95,3 +149,6 @@
         {{ "SEARCH.FORWARD" | translate }}
     </button>
 </div>
+}
+<br />
+<app-footer *ngIf="ready"></app-footer>

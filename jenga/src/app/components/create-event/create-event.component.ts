@@ -8,11 +8,10 @@ import { UseBackService } from '@app/services/use-back.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { take } from 'rxjs';
 import { FormComponent } from '../form/form.component';
-import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-create-event',
-  imports: [HeaderComponent, CommonModule, FormsModule, FormComponent, TranslateModule],
+  imports: [CommonModule, FormsModule, FormComponent, TranslateModule],
   templateUrl: './create-event.component.html',
   styleUrl: './create-event.component.scss'
 })

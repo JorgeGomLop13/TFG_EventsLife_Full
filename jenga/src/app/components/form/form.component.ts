@@ -31,6 +31,8 @@ export class FormComponent implements OnInit {
 
   public eventImagePreview: string | ArrayBuffer | null = null;
 
+  public errorMessage: string = '';
+
   @Input() useFunction: string = '';
 
   protected readonly form = inject(FormBuilder).group({
@@ -55,6 +57,13 @@ export class FormComponent implements OnInit {
     this.useBack.getCategories().subscribe((data: any) => {
       this.categories = data;
     });
+
+    if (this.useFunction === 'editEvent') {
+      Object.keys(this.form.controls).forEach((key) => {
+        this.form.get(key)?.setValidators(null);
+      });
+      this.form.updateValueAndValidity();
+    }
   }
 
   onFileSelected(event: Event) {
@@ -108,13 +117,23 @@ export class FormComponent implements OnInit {
     this.useBack
       .createEvent(event)
       .pipe(take(1))
-      .subscribe(() => {
-        this.router.navigate(['/home']);
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/home']);
+        },
+        error: (error) => {
+          this.errorMessage = error?.error?.errorCode;
+          setTimeout(() => {
+            this.errorMessage = '';
+          }, 8000);
+        }
       });
   }
 
   updateEvent() {
-    const event = {
+    //Si es actualizar se quita la validación de que todos los campos son requeridos
+
+    const rawEvent = {
       name: this.form.value.eventName,
       organizer_id: this.eventOrganizerId,
       category_id: this.form.value.eventCategoryId,
@@ -127,6 +146,14 @@ export class FormComponent implements OnInit {
       price: this.form.value.eventPrice,
       capacity: this.form.value.eventCapacity
     };
+
+    //Para mandar solo lo que se haya modificado
+    const event: any = {};
+    Object.entries(rawEvent).forEach(([key, value]) => {
+      if (value !== null && value !== '') {
+        event[key] = value;
+      }
+    });
 
     const eventID = Number(this.route.snapshot.paramMap.get('id'));
 

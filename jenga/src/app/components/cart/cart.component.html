@@ -13,14 +13,14 @@
         {{ "CART.TITLE" | translate }}
     </h1>
     <!--Si no hay libros se muestra este mensaje-->
-    <div *ngIf="eventsInCart.length === 0" class="text-center text-gray-400 mt-10">
+    <div *ngIf="eventsInCart.length === 0" class="text-center text-gray-400 mt-10 mb-[450px]">
         <p class="text-lg">{{ "CART.EMPTY" | translate }}</p>
         <p class="text-sm mt-1">{{ "CART.ADD_HINT" | translate }}</p>
     </div>
 
     <div
         *ngFor="let event of eventsInCart"
-        class="bg-gray-900 text-white rounded-2xl shadow-lg overflow-hidden mb-6 border border-gray-700 transition hover:shadow-2xl"
+        class="bg-gray-900 text-white rounded-2xl shadow-lg overflow-hidden mb-6 border border-gray-700 transition hover:shadow-2xl mb-[250px]"
     >
         <div class="px-6 py-3 border-b border-gray-700 flex justify-between items-center">
             <h2 class="text-lg font-semibold truncate">{{ event.name }}</h2>
@@ -72,9 +72,14 @@
                         </div>
                         <div class="flex items-center">
                             <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
                             </svg>
-                            {{ event.start_date }} - {{ event.end_date }}
+                            {{ event.start_date.slice(0, 5) }} – {{ event.end_date.slice(0, 5) }}
                         </div>
                     </div>
                 </div>
@@ -88,7 +93,9 @@
                     </button>
                     <button
                         class="px-4 py-1.5 bg-green-600 hover:bg-green-500 text-sm font-medium rounded-md transition"
-                        (click)="payForProduct(event.id, event.price, event.name, event.organizer_id)"
+                        (click)="
+                            payForProduct(event.id, event.price, event.name, event.organizer_id, event.capacity, event.codes)
+                        "
                     >
                         {{ "CART.PAY" | translate }}
                     </button>
@@ -97,3 +104,4 @@
         </div>
     </div>
 </div>
+<app-footer></app-footer>

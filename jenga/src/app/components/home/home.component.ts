@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@app/services/auth.service';
 import { CartService } from '@app/services/cart.service';
@@ -20,6 +20,8 @@ import { HeaderComponent } from '../header/header.component';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @ViewChild('eventSection') eventSection!: ElementRef;
+
   public events: any[] = [];
   public page: number = 1;
   public currentPage = 1;
@@ -33,9 +35,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   public role: string = '';
   public userId: number = 0;
   public eventsList: [] = [];
+  public isTextVisible = true;
 
-  /*images = ['assets/libroCarrusel1.jpeg', 'assets/eventOpen.jpg', 'assets/librery.jpeg', 'assets/eventTogether.jpeg'];*/
-  images = [];
+  images = ['assets/eventCarrusel_1.webp', 'assets/cafeteria.jpg', 'assets/pintar.jpg', 'assets/vino.jpg'];
+  textImage = ['IMAGESUBTEXT1', 'IMAGESUBTEXT2', 'IMAGESUBTEXT1', 'IMAGESUBTEXT2'];
   currentIndex = 0;
   intervalId: any;
 
@@ -64,7 +67,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.startAutoSlide();
   }
 
-  getEvents(page: number) {
+  getEvents(page: number, button?: boolean) {
     this.useData
       .getEvents(page, this.limit)
       .pipe(take(1))
@@ -84,6 +87,9 @@ export class HomeComponent implements OnInit, OnDestroy {
             .pipe(take(1))
             .subscribe((res: any) => {
               event.organizer = res.name;
+              if (button) {
+                this.scrollToEvents();
+              }
             })
         );
       });
@@ -131,7 +137,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.next();
       this.cdr.detectChanges();
-    }, 4000);
+    }, 5000);
   }
 
   next() {
@@ -140,6 +146,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   prev() {
     this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+  }
+
+  scrollToEvents() {
+    this.eventSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 
   ngOnDestroy() {

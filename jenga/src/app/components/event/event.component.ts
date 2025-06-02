@@ -1,16 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '@app/services/auth.service';
 import { CartService } from '@app/services/cart.service';
 import { UseBackService } from '@app/services/use-back.service';
+import { TranslateModule } from '@ngx-translate/core';
 import { take } from 'rxjs';
+import { ShowOrganizerDialogComponent } from '../dialogs/show-organizer-dialog/show-organizer-dialog.component';
+import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-event',
-  imports: [HeaderComponent, CommonModule, RouterLink],
+  imports: [HeaderComponent, CommonModule, RouterLink, TranslateModule, FooterComponent],
   templateUrl: './event.component.html',
   styleUrl: './event.component.scss'
 })
@@ -24,13 +28,15 @@ export class EventComponent implements OnInit {
   public role: string = '';
   public actualUser: string | null = localStorage.getItem('token');
   public eventsList: [] = [];
+  public ready = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private useBack: UseBackService,
     private auth: AuthService,
-    private cartService: CartService
+    private cartService: CartService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -52,7 +58,7 @@ export class EventComponent implements OnInit {
           next: (res) => {
             this.event = res;
             this.event = this.event[0];
-            console.log(this.event.name);
+            console.log(this.event);
           },
           complete: () => {
             this.useBack
@@ -60,6 +66,7 @@ export class EventComponent implements OnInit {
               .pipe(take(1))
               .subscribe((res: any) => {
                 this.organizerName = res.name;
+                this.ready = true;
               });
           }
         });
@@ -77,17 +84,30 @@ export class EventComponent implements OnInit {
   }
 
   addToCart(eventId: number) {
+    const actualPeople = this.event.codes;
+    const maxPeople = this.event.capacity;
     if (this.actualUser && this.role === 'standart') {
-      this.cartService.setEventToCart(eventId, this.userId).subscribe((res: any) => {
-        console.log(res);
-        alert('Añadido correctamente al carrito');
-        this.eventsList = res.cart;
-        console.log(this.eventsList);
-      });
+      if (actualPeople.length < maxPeople) {
+        this.cartService.setEventToCart(eventId, this.userId).subscribe((res: any) => {
+          console.log(res);
+          alert('Añadido correctamente al carrito');
+          this.eventsList = res.cart;
+          console.log(this.eventsList);
+        });
+      } else {
+        alert('El evento ya está al máximo de capacidad');
+      }
     } else {
       this.router.navigate(['/register']).then(() => {
         window.scrollTo(0, 0);
       });
     }
+  }
+  showOrganizerData(organizerId: number) {
+    console.log(organizerId);
+    this.dialog.open(ShowOrganizerDialogComponent, {
+      data: { organizerId: organizerId },
+      width: '500px'
+    });
   }
 }

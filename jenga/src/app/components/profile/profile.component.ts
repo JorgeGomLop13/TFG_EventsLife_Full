@@ -1,18 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@app/services/auth.service';
 import { CartService } from '@app/services/cart.service';
 import { StripeService } from '@app/services/stripe.service';
 import { UseBackService } from '@app/services/use-back.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { take } from 'rxjs';
+import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
+import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [HeaderComponent, CommonModule, RouterLink, TranslateModule],
+  imports: [CommonModule, RouterLink, TranslateModule, HeaderComponent, FooterComponent],
   providers: [StripeService],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -24,18 +27,23 @@ export class ProfileComponent implements OnInit {
   public userRole: string = '';
   public userHistory: number[] = [];
   public userStripeId: string = '';
+  public image: string = '';
 
   public userEvents: any[] = [];
 
   public eventsInCart: any[] = [];
   public eventsInHistory: any[] = [];
 
+  public ready = false;
+
   constructor(
     private useData: UseBackService,
     private auth: AuthService,
     private stripe: StripeService,
     private cartService: CartService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -48,14 +56,14 @@ export class ProfileComponent implements OnInit {
         this.userId = res.id;
         this.userEmail = res.email;
         this.userStripeId = res.stripeAccountId;
+        this.image = res.image;
+        console.log(res);
         if (this.userRole === 'organizer') {
-          console.log(this.userId);
           this.useData
             .getEventByOrganizer(this.userId)
             .pipe(take(1))
             .subscribe((res: any) => {
               this.userEvents = res;
-              console.log(res);
             });
         }
         if (this.userId && this.userRole === 'standart') {
@@ -74,6 +82,15 @@ export class ProfileComponent implements OnInit {
             });
         }
       });
+  }
+  deleteEventWithDialog(eventId: number, codes: any) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteEvent(eventId, codes);
+      }
+    });
   }
 
   deleteEvent(id: number, codes: [string]) {
@@ -107,10 +124,16 @@ export class ProfileComponent implements OnInit {
       error: (err) => {
         const reader = new FileReader();
         reader.onload = () => {
-          console.error('Error (contenido):', reader.result); // Aquí verás el mensaje real
+          console.error('Error (contenido):', reader.result);
         };
-        reader.readAsText(err.error); // Lee el contenido del blob
+        reader.readAsText(err.error);
       }
+    });
+  }
+
+  goToEditProfile() {
+    this.router.navigate([`/editUser/${this.userId}`]).then(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 

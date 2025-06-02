@@ -1,0 +1,41 @@
+<section class="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow-md text-gray-800">
+    <h1 class="text-3xl font-bold mb-4 text-center">{{ "TERMS.HEADER" | translate }}</h1>
+
+    <div class="space-y-6 text-justify">
+        <div>
+            <h2 class="text-xl font-semibold mb-2">{{ "TERMS.SECTIONS.SERVICE.TITLE" | translate }}</h2>
+            <p>{{ "TERMS.SECTIONS.SERVICE.DESCRIPTION" | translate }}</p>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold mb-2">{{ "TERMS.SECTIONS.ORGANIZER.TITLE" | translate }}</h2>
+            <p>{{ "TERMS.SECTIONS.ORGANIZER.DESCRIPTION" | translate }}</p>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold mb-2">{{ "TERMS.SECTIONS.ATTENDEE.TITLE" | translate }}</h2>
+            <p>{{ "TERMS.SECTIONS.ATTENDEE.DESCRIPTION" | translate }}</p>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold mb-2">{{ "TERMS.SECTIONS.PAYMENTS.TITLE" | translate }}</h2>
+            <p>{{ "TERMS.SECTIONS.PAYMENTS.DESCRIPTION" | translate }}</p>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold mb-2">{{ "TERMS.SECTIONS.MODIFICATIONS.TITLE" | translate }}</h2>
+            <p>{{ "TERMS.SECTIONS.MODIFICATIONS.DESCRIPTION" | translate }}</p>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold mb-2">{{ "TERMS.SECTIONS.ACCEPTANCE.TITLE" | translate }}</h2>
+            <p>{{ "TERMS.SECTIONS.ACCEPTANCE.DESCRIPTION" | translate }}</p>
+        </div>
+    </div>
+    <div class="mt-10 text-center">
+        <button (click)="goBack()" class="px-6 py-2 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition">
+            {{ "TERMS.BACK_BUTTON" | translate }}
+        </button>
+    </div>
+    <p class="mt-4 text-sm text-gray-500 text-center">{{ "TERMS.LAST_UPDATED" | translate }}</p>
+</section>
