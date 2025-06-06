@@ -54,8 +54,8 @@ class UserController extends Controller
 
 			$accountLink = AccountLink::create([
 				'account' => $accountId,
-				'return_url' => "http://localhost:64308/#/success/account/{$accountId}",
-				'refresh_url' => "http://localhost:64308/#/profile",
+				'return_url' => "http://localhost:4200/#/success/account/{$accountId}",
+				'refresh_url' => "http://localhost:4200/#/profile",
 				'type' => 'account_onboarding',
 			]);
 
@@ -100,8 +100,8 @@ class UserController extends Controller
                     ],
                 ],
                 'mode' => 'payment',
-                'success_url' => "http://localhost:64308/#/success/product/{$productId}",
-                'cancel_url' => "http://localhost:64308/#/home",
+                'success_url' => "http://localhost:4200/#/success/product/{$productId}",
+                'cancel_url' => "http://localhost:4200/#/home",
             ]);
 
             return response()->json(['url' => $session->url]);
