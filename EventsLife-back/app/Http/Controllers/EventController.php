@@ -17,7 +17,11 @@ class EventController extends Controller
 		$perPage = $request->query('limit', 6); 
     	$page = $request->query('page', 1);
 
-    	$events = Event::paginate($perPage, ['*'], 'page', $page);
+		$today = now()->toDateString();
+		//Para que solo se muestren en la pagina los eventos que aún no hayan ocurrido
+		$events = Event::whereDate('date', '>=', $today)
+			->orderBy('date', 'asc')
+			->paginate($perPage, ['*'], 'page', $page);
 
 		return response()->json($events);
 	}

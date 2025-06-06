@@ -27,7 +27,7 @@ return new class extends Migration
 			$table->json('codes')->nullable();
             $table->timestamps(); 
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.
