@@ -1,0 +1,260 @@
+{
+    "HOME": {
+        "AUTHOR": "Author",
+        "PAGES": "Pages",
+        "CART": "Add to the cart",
+        "PREVIUS": "Previus",
+        "FORWARD": "Next",
+        "IMAGETEXT": "Welcome to EventsLife ",
+        "IMAGESUBTEXT1": "Discover, explore, and dive into thousands of events ",
+        "IMAGESUBTEXT2": "Organize your own events ",
+        "DESCRIPTION": "Description: ",
+        "DELETE": "Delete event",
+        "DELETEUSER": "Delete event and user",
+        "LOCATION": "Location",
+        "DATE": "Date",
+        "START": "Start",
+        "END": "End",
+        "CAPACITY": "Capacity",
+        "ORGANIZER": "Organizer"
+    },
+    "SEARCH": {
+        "AUTHOR": "Author:",
+        "PAGES": "Pages:",
+        "CART": "Add to the cart",
+        "PREVIUS": "Previus",
+        "FORWARD": "Next",
+        "SEARCHPLACEHOLDER": "Search events...",
+        "SEARCHBUTTON": "Search",
+        "RESETBUTTON": "Reset",
+        "PAGE": "Page",
+        "OF": "of",
+        "DESCRIPTION": "Description: ",
+        "CATEGORY_LABEL": "Search by categories",
+        "ALL_CATEGORIES": "All categories",
+        "NOTFOUND_TITLE": "No results found",
+        "NOTFOUND_BODY": "It looks like we don't have any events that match your search.",
+        "LOCATION": "Location",
+        "DATE": "Date",
+        "START": "Start",
+        "END": "End",
+        "CAPACITY": "Capacity",
+        "ORGANIZER": "Organizer"
+    },
+    "HEADER": {
+        "SEARCH": "Search",
+        "LANGUAGE": "Select language",
+        "PUBLISH": "Create your event",
+        "REGISTER": "Register",
+        "LOGIN": "Login"
+    },
+    "PROFILE": {
+        "STRIPE": "Link Stripe",
+        "SESSION": "Log out",
+        "PAGES": "Pages",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "ACCOUNT": "Account type",
+        "ID": "User ID",
+        "HISTORY": "My recent purchases:",
+        "STRIPEID": "Stripe ID",
+        "CREATED_EVENTS": "My events:",
+        "NODELETE": "You can not delete this event, because it has been booked by at least one user",
+        "CODES": "Download asistants codes",
+        "pdf_title": "event_codes_",
+        "EDITPROFILE": "Edit profile"
+    },
+    "CREATEBOOK": {
+        "TITLE": "Enter your event details!"
+    },
+    "EDITBOOK": {
+        "TITLE": "Edit your event details!"
+    },
+
+    "REGISTER": {
+        "TITLE": "Create Account",
+        "SUBTITLE": "Complete the form to register in EventsLife",
+        "USERNAME": "Username",
+        "USERNAME_PLACEHOLDER": "Your username",
+        "EMAIL": "Email",
+        "EMAIL_PLACEHOLDER": "Email",
+        "ADDRESS": "Direction",
+        "ADDRESS_PLACEHOLDER": "Direction",
+        "PHONE": "Phone",
+        "PHONE_PLACEHOLDER": "Phone",
+        "PASSWORD": "Password",
+        "PASSWORD_CONFIRMATION": "Confirm password",
+        "USER_TYPE": "User type",
+        "ROLE_ATTENDEE": "Asistant (to asist published events)",
+        "ROLE_ORGANIZER": "Organizer (to be able to publish and organize events)",
+        "ACCEPT": "I accept the",
+        "TERMS": "Terms and Conditions",
+        "BUTTON": "Register",
+        "BACK": "Go back",
+        "HAVE_ACCOUNT": "Already have an account?",
+        "LOGIN_LINK": "Log in"
+    },
+    "ERROR-CODES": {
+        "USEREXIST": "The email is already asigned to another account",
+        "PASSWORD_REPEATED": "Passwords do not match",
+        "PASSWORD_LENGTH": "Password must be at least 6 characters long",
+        "EMAIL_INVALID": "Invalid email format",
+        "LOGIN": "Email or password incorrect",
+        "DEFAULT": "Failed to create your user"
+    },
+    "LOGIN": {
+        "WELCOME": "Welcome to EventsLife",
+        "SUBTITLE": "Log in to access your account",
+        "EMAIL": "Email",
+        "EMAIL_PLACEHOLDER": "Email",
+        "PASSWORD": "Password",
+        "PASSWORD_PLACEHOLDER": "Password",
+        "BUTTON": "Log in",
+        "BACK": "Go back",
+        "NO_ACCOUNT": "Don't have an account?",
+        "REGISTER_LINK": "Register here"
+    },
+    "CART": {
+        "TITLE": "My cart:",
+        "EMPTY": "Your cart is empty for now.",
+        "ADD_HINT": "Add events to see them here ",
+        "PAGES": "pages",
+        "DELETE": "Delete",
+        "PAY": "Pay"
+    },
+    "SUCCESS": {
+        "BACK_TO_SHOP": "Back to the shop",
+        "TITLE": "Purchase completed successfully!",
+        "MESSAGE_1": "An email with your ticket has been sent to you!",
+        "MESSAGE_2": "The event has been added to your library.",
+        "SUBSCRIPTION_TITLE": "Stripe account linked!",
+        "SUBSCRIPTION_MSG_1": "Thank you for linking your account.",
+        "SUBJECT": "Order successfully placed",
+        "HTML": "Thank you for placing your order with us.<br></br> You can find the complete data of the event in your history. <br></br> The tracking code for your event is: "
+    },
+    "FOOTER": {
+        "RESOURCES": {
+            "TITLE": "Resources",
+            "CATALOG": "Catalog",
+            "BLOG": "Blog"
+        },
+        "COMMUNITY": {
+            "TITLE": "Community",
+            "FORUM": "Forum",
+            "QUESTIONS": "Frequent questions"
+        },
+        "LEGAL": {
+            "TITLE": "Legal",
+            "PRIVACY": "Privacy Policy",
+            "TERMS": "Terms and Conditions"
+        },
+        "RIGHTS": "All rights reserved."
+    },
+    "TERMS": {
+        "HEADER": "Terms and Conditions",
+        "LAST_UPDATED": "Last updated: May 25, 2025",
+        "BACK_BUTTON": "Go back",
+        "SECTIONS": {
+            "SERVICE": {
+                "TITLE": "1. Service Description",
+                "DESCRIPTION": "Our platform allows organizers to create custom events, and attendees to discover and register for those events, making payments if required."
+            },
+            "ORGANIZER": {
+                "TITLE": "2. Organizer Responsibility",
+                "DESCRIPTION": "The organizer is responsible for the event’s content, terms, and fulfillment. Once at least one attendee has registered, the event cannot be deleted under any circumstance."
+            },
+            "ATTENDEE": {
+                "TITLE": "3. Attendee Responsibility",
+                "DESCRIPTION": "Attendees may register for available events. For paid events, once payment is completed, cancellation and refunds are not allowed through the platform."
+            },
+            "PAYMENTS": {
+                "TITLE": "4. Payments and Fees",
+                "DESCRIPTION": "Payments are processed through our secure provider. The platform may charge a transaction fee, shown before confirming the payment."
+            },
+            "MODIFICATIONS": {
+                "TITLE": "5. Event Changes",
+                "DESCRIPTION": "Organizers can modify certain event details (such as date or description), as long as they do not affect essential conditions agreed upon by already registered attendees."
+            },
+            "ACCEPTANCE": {
+                "TITLE": "6. Acceptance",
+                "DESCRIPTION": "By using this platform, both organizers and attendees agree to these terms. It is recommended to read them carefully before creating or joining an event."
+            }
+        }
+    },
+    "EVENT": {
+        "BACK": "Go back",
+        "UNIT_PRICE": "Unit price",
+        "REGISTER": "Sign up",
+        "ORGANIZED_BY": "Organized by",
+        "VIEW_ORGANIZER_PROFILE": "View organizer profile",
+        "IMAGE_ALT": "Events image",
+        "DESCRIPTION_TITLE": "Description",
+        "IMPORTANT_INFO_TITLE": "Important information",
+        "IMPORTANT_INFO_TEXT": "It is recommended to arrive 15 minutes early. Remember to bring your ID for accreditation. The event will start promptly at the indicated time.",
+        "MAXCAPACITY": "The event is already full ",
+        "WRONG_USER": "You have to be an asistant user to sign up"
+    },
+    "DIALOG": {
+        "TITLE": "Delete event",
+        "MESSAGE": "Are you sure you want to delete this event? This action cannot be undone.",
+        "DELETE": "Delete",
+        "CANCEL": "Cancel",
+        "CLOSE": "Close",
+        "PROFILE": "Event organizer profile",
+        "NAME": "Name",
+        "EMAIL": "Email",
+        "PHONE": "Phone",
+        "ADDRESS": "Address"
+    },
+    "FORM": {
+        "EVENT_NAME": "Event name",
+        "PLACEHOLDER_EVENT_NAME": "Event title...",
+        "DATE_TITLE": "When will it take place?",
+        "DATE": "Date",
+        "START_TIME": "Start time",
+        "END_TIME": "End time",
+        "LOCATION": "Where is it located?",
+        "PLACEHOLDER_LOCATION": "Event location...",
+        "DESCRIPTION": "Event description",
+        "PRICE": "How much will the entry cost?",
+        "FREE_ENTRY": "The entry is free",
+        "CAPACITY": "What is the maximum capacity?",
+        "CATEGORY": "Select a category",
+        "PLACEHOLDER_CATEGORY": "Choose a category",
+        "IMAGE_UPLOAD": "Upload a cover photo!",
+        "SUBMIT": "Submit your data!",
+        "GO_BACK": "Go back",
+        "DATEBEFORE": "The selected date has already passed",
+        "ERRORDATE": "The end time is earlier than the start time"
+    },
+    "CATEGORY": {
+        "TASTING": "Tasting",
+        "MUSIC": "Music",
+        "FOOD_DRINK": "Food & Drink",
+        "WORKSHOP": "Workshop",
+        "NETWORKING": "Networking",
+        "SPORTS": "Sports & Wellness",
+        "EDUCATION": "Education",
+        "ART_CULTURE": "Art & Culture",
+        "FAMILY": "Family & Kids",
+        "GAMES": "Games & Competitions"
+    },
+    "QUESTIONS": {
+        "FAQ_TITLE": "Frequently Asked Questions",
+        "FAQ_QUESTION_1": "How can I register for an event?",
+        "FAQ_ANSWER_1": "To register, just click on the desired event and use the 'Register' button. You will need to be logged in as an assistant user.",
+        "FAQ_QUESTION_2": "Is there a cost to attend events?",
+        "FAQ_ANSWER_2": "Most events are free, but some may have a cost. You will see the price clearly displayed on the event page.",
+        "FAQ_QUESTION_3": "Can I organize my own event?",
+        "FAQ_ANSWER_3": "Yes! After logging in, go to your profile and you will find the option to create and manage your events.",
+        "FAQ_QUESTION_4": "Where can I see events I've registered for?",
+        "FAQ_ANSWER_4": "You can find them in your profile, under the section 'My Events'.",
+        "CONTACT_ISSUE_TITLE": "Having an issue?",
+        "CONTACT_ISSUE_BODY": "If you're experiencing any issues or have questions, feel free to contact us at soporte@eventos.com or call us at +34 912 345 678."
+    },
+    "NOT_FOUND": {
+        "TITLE": "Page not found",
+        "DESCRIPTION": "Sorry, the page you're looking for doesn't exist or has been moved.",
+        "BUTTON": "Back to home"
+    }
+}

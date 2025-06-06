@@ -1,0 +1,225 @@
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-2xl shadow-md">
+        <h1 class="text-2xl font-bold mb-2 text-blue-600 text-center font-marhey">
+            {{ "REGISTER.TITLE" | translate }}
+        </h1>
+        <h2 class="text-md text-gray-600 text-center mb-6 font-marhey">
+            {{ "REGISTER.SUBTITLE" | translate }}
+        </h2>
+
+        <form #registerForm="ngForm" (ngSubmit)="register()" class="space-y-5">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">
+                    {{ "REGISTER.USERNAME" | translate }}
+                </label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    [(ngModel)]="name"
+                    required
+                    [placeholder]="'REGISTER.USERNAME_PLACEHOLDER' | translate"
+                    class="mt-1 block w-full rounded-xl border border-gray-300 px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">
+                    {{ "REGISTER.EMAIL" | translate }}
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    [(ngModel)]="email"
+                    required
+                    [placeholder]="'REGISTER.EMAIL_PLACEHOLDER' | translate"
+                    class="mt-1 block w-full rounded-xl border border-gray-300 px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+            </div>
+
+            <div *ngIf="role_selected === 'organizer'">
+                <label for="address" class="block text-sm font-medium text-gray-700">
+                    {{ "REGISTER.ADDRESS" | translate }}
+                </label>
+                <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    [(ngModel)]="address"
+                    required
+                    [placeholder]="'REGISTER.ADDRESS_PLACEHOLDER' | translate"
+                    class="mt-1 block w-full rounded-xl border border-gray-300 px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+            </div>
+
+            <div *ngIf="role_selected === 'organizer'">
+                <label for="phone" class="block text-sm font-medium text-gray-700">
+                    {{ "REGISTER.PHONE" | translate }}
+                </label>
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    [(ngModel)]="phone"
+                    required
+                    [placeholder]="'REGISTER.PHONE_PLACEHOLDER' | translate"
+                    class="mt-1 block w-full rounded-xl border border-gray-300 px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">
+                    {{ "REGISTER.PASSWORD" | translate }}
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    [(ngModel)]="password"
+                    required
+                    class="mt-1 block w-full rounded-xl border border-gray-300 px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+            </div>
+
+            <div>
+                <label for="confirmation_password" class="block text-sm font-medium text-gray-700">
+                    {{ "REGISTER.PASSWORD_CONFIRMATION" | translate }}
+                </label>
+                <input
+                    type="password"
+                    id="confirmation_password"
+                    name="confirmation_password"
+                    [(ngModel)]="confirmation_password"
+                    required
+                    class="mt-1 block w-full rounded-xl border border-gray-300 px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <label for="role_selected" class="text-sm font-medium mb-1">
+                    {{ "REGISTER.USER_TYPE" | translate }}
+                </label>
+
+                <div class="user_type flex items-center gap-3">
+                    <input
+                        type="radio"
+                        id="standart"
+                        name="role_selected"
+                        (click)="changeRoleSelected('standart')"
+                        class="w-4 h-4 cursor-pointer accent-blue-600"
+                        checked
+                    />
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 36 35"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="flex-shrink-0"
+                    >
+                        <rect x="0.825684" y="0.208008" width="34.7036" height="34.7036" fill="url(#pattern0_31_370)" />
+                        <defs>
+                            <pattern id="pattern0_31_370" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_31_370" transform="scale(0.0208333)" />
+                            </pattern>
+                            <image
+                                id="image0_31_370"
+                                width="48"
+                                height="48"
+                                preserveAspectRatio="none"
+                                xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMKSURBVHgB7ZhdbtNAEMdnnPqJl9ygRihSQCr4CO4baoXUGzQ9Adyg6Q16g5Yb8NIKiYf6COWjUFEh3BtU4gEptnfYzYdjhVLvzBgaofxesray9vx3d3bHf4AV9wvCX6Df34lCGCVkYH3yEnpfEmafr07PoWVaFbDR2xpAgLtAkMDtL8vsz/DD15PX0BKtCIjtiJeUH/0p8N8gSDt5uHeevclAiVqAC96Y/IwAotrtGwJMAcx0yQSxXUaJbXRrL86CUbipFbEGSsYjXw/emMMfxc+DLEtv6v/r959Ha0WwiwEO3bUTXIbjvpugQDUD4zWPeDS7NiUMLr7dvb4X+9gABpqcCEABIu7P2mRo2BS84+PV6bEd/sOqH8EAFIgFxL2duFr3BDdFYbxH0SbwgZU/WWIIyeOHW+sgRCygxCKqLpDSy+xt5tvXJq4LPq2CCDEBIWIBBObZvA3sA4qqHWp80EUgRJUDy4BYAAZwXbVtSgATtGfDrG0QxCWGWEAHTFpdECZxlHR9+7rDz/4k1Q2TX4MQsYDzS5u0NE1EhG4ZPtj37WtMMbCqp4LJFnnv/v0MOEqg+daJ8Orpo+3dpj4bvRcDAqrEGpiczFLUtdBGb/vM7eXzB+JBMFo7Xqxx4mina8JiSEgvZ/fsIZZ+ujq5v1LC4Wqc0ARn9lHR/KFoizmTzrZXl+Q2aROqlo2DsnxkNjnnx220Uk6PRZSdo/pM3IUb+SIv97TBO1r9oHliC7UOwn59Nuq4wAnh+GLZPmgWsULiTgDrNuDxXh+AyfI8SL98PxVvlyuWFdUSWnQf+C/XuxUiAU3ugyCIDIRuBUsA233gInArvAX4uQ9c9G6Ftyvh6z5w0boVXjMgcR+4SN0Kr2pU4j5wkboVjQI07gMXiVvRKEDjPnCRuBWNArTuAxeuW/H/uxJa94EL161oFKBxH7hI3IpGARr3gYvErfDKAYn7wEXqVnjXQr7uAxetW+EtwMd94NKGW8Eqp7nuAxeJWyH6oGlyH7ho3ArVJ+Wi+8Bl5VasWKHnF2xVybQED+mPAAAAAElFTkSuQmCC"
+                            />
+                        </defs>
+                    </svg>
+                    <label for="standart" class="text-sm cursor-pointer">
+                        {{ "REGISTER.ROLE_ATTENDEE" | translate }}
+                    </label>
+                </div>
+                <div class="user_type flex items-center gap-3">
+                    <input
+                        type="radio"
+                        id="organizer"
+                        name="role_selected"
+                        (click)="changeRoleSelected('organizer')"
+                        class="w-4 h-4 cursor-pointer accent-blue-600"
+                    />
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 36 36"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="flex-shrink-0"
+                    >
+                        <rect x="0.825684" y="0.393066" width="34.7036" height="34.7036" fill="url(#pattern0_31_379)" />
+                        <defs>
+                            <pattern id="pattern0_31_379" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_31_379" transform="scale(0.0208333)" />
+                            </pattern>
+                            <image
+                                id="image0_31_379"
+                                width="48"
+                                height="48"
+                                preserveAspectRatio="none"
+                                xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMrSURBVHgB7ZdLctpAEIZ7BHjNDQILKOIqU+IGYZfCXpgTGJ/AvkF8BHKC4BOYRSCpygLnBFaFhLjAVSgnCJts9Or0QKQQ0GNaSuJKRd8GiWlEt6Zn5v8BcnJycnL+ZwRk5KjW6YEmzgQKHQHL9EBTs761DPN2FR8nVijQEAiDD/PRNaQkdQF647TiufYNCtD3Bj3v2fThzfvEuJ9JUNGltmEOTWCSqoB1Up49QYDK7hgi3H5cjNpJcSGJpCpCgxTsJLVCD68cGyvT+Uj4ySfF2ZpblfeU+rrVZJxXsm6ACXsG1r0sxCs/KRexPVuMjbRxh7VTvSCcCZVQ/pFQj7Mm+DNAC9G/pDfYD0uKEzdbDA0Erx/EIvSAkw5woV3Ev3Qc7zpzHFHUfhnXgUGKNbCZasm9+dbMHgdg3G+NCygDgxQFiGB/f1rtPMket9mtghuEFTBI0UIY9HKhFNOvqnEgdysnGKfdyAAG7AJcwKBf6VS9PKx19CxxOu1C9HHh39OBNwAGqQ6yZv34Dv3FRlMuhHipWcXB7iEUF9egtjnYvPkLDNYLmtP5uAoMUhXQaDyvlDyN9m5R2RskbTNdjM4T4/Z/aNqW105a8Luk1kJxyblotWaLd0ZSnA/SenFsr8tNXpJZjVJv9zQglbkRa+WoN7kfR9ICwZA9/ymDGv3nUZ6BXT1PXw1IlJ3DI5NYQJyel8ry83L8BR6RYtxgoOdFuO4PSz5kplhwnVrsDNA+vtzR833XhUFY4irOi4uKyYksQFXPSzjOi0tSEdEtJPU8bi7Xev5hHKlRQpxX5EwlIc+NoqOdCU27lIp2y6m1wuKjZ6B+8tWXxLblVqMOGc5McVB1ajFiTlHPqzo0JqpOLaYART3PcF5cVJxadAHKel7deXFRcWqRBajqeY7z4qLi1CILoF4eCN8dUfUFEJNm/eRKr2w9dP1gdefFRcWpxToyS3O7Ul2ub6gIOllfuAf28qh+jM1a505+rT5TPFSdWqIWitPzvhZSdWgqcJ2ashrd1/NiOJ2/7m7+lOO8uMQ7tcyGxudPFKHi1H5bAT4hzotL7tRycnJy/h7fAYYeVZKGBJIZAAAAAElFTkSuQmCC"
+                            />
+                        </defs>
+                    </svg>
+
+                    <label for="organizer" class="text-sm cursor-pointer">
+                        {{ "REGISTER.ROLE_ORGANIZER" | translate }}
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-2">
+                <input
+                    type="checkbox"
+                    id="terms_conditions"
+                    name="terms_conditions"
+                    [(ngModel)]="terms_conditions"
+                    required
+                    class="mt-1 text-blue-600 focus:ring-blue-500"
+                />
+                <label for="terms_conditions" class="text-sm text-gray-700">
+                    {{ "REGISTER.ACCEPT" | translate }}
+                    <a [routerLink]="['/terms-and-conditions']" class="text-blue-600 hover:underline">
+                        {{ "REGISTER.TERMS" | translate }}
+                    </a>
+                </label>
+            </div>
+
+            <div *ngIf="errorMessage" class="bg-red-100 text-red-700 border border-red-400 rounded p-3 text-sm">
+                {{ `ERROR-CODES.${errorMessage}` | translate }}
+            </div>
+
+            <button
+                type="submit"
+                [disabled]="!registerForm.valid"
+                class="w-full py-2 px-4 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:bg-blue-600"
+            >
+                {{ "REGISTER.BUTTON" | translate }}
+            </button>
+        </form>
+
+        <div class="mt-6 flex justify-between items-center text-sm text-gray-600 font-marhey">
+            <div class="flex items-center gap-2 cursor-pointer hover:underline" [routerLink]="['/home']">
+                <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        fill-rule="evenodd"
+                        d="M12.707 15.707a1 1 0 01-1.414 0L6.586 11l4.707-4.707a1 1 0 011.414 1.414L9.414 11l3.293 3.293a1 1 0 010 1.414z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+                <span>{{ "REGISTER.BACK" | translate }}</span>
+            </div>
+            <div>
+                {{ "REGISTER.HAVE_ACCOUNT" | translate }}
+                <a [routerLink]="['/login']" class="text-blue-600 hover:underline ml-1">{{
+                    "REGISTER.LOGIN_LINK" | translate
+                }}</a>
+            </div>
+        </div>
+    </div>
+</body>

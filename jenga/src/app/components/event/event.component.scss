@@ -1,0 +1,132 @@
+.containerAll {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 3fr 1.5fr;
+  gap: 5rem;
+  padding: 2rem;
+  max-width: 88rem;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: stretch;
+}
+
+.image {
+  align-self: stretch;
+  display: flex;
+}
+
+.image img {
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  justify-content: space-between;
+}
+
+.price,
+.organizer {
+  width: 15rem; /* O ajusta el tamaño según sea necesario */
+  max-width: 90%; /* Mantén el 90% del ancho de su contenedor */
+  margin: 0 auto;
+  background-color: #85b2e9;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  height: 9rem; /* La altura es fija para ambos contenedores */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* Asegura que el contenido esté bien distribuido */
+  box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
+}
+
+button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.3125rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  width: 100%;
+  max-width: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.price p,
+.organizer p {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+
+  .image {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .image img {
+    width: 100%;
+    max-width: 28rem;
+    height: auto;
+  }
+
+  .info {
+    gap: 2rem;
+  }
+
+  .price,
+  .organizer {
+    padding: 1rem;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .image img {
+    max-width: 26rem;
+    width: 100%;
+  }
+
+  .price,
+  .organizer {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}

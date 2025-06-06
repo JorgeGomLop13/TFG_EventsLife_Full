@@ -1,0 +1,196 @@
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col">
+    <main class="flex-grow">
+        <section class="max-w-3xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-2xl">
+            @if (useFunction === 'createEvent') {
+            <h1 class="text-2xl font-bold text-blue-700 mb-6 text-center">
+                {{ "CREATEBOOK.TITLE" | translate }}
+            </h1>
+            } @else {
+            <h1 class="text-2xl font-bold text-blue-700 mb-6 text-center">
+                {{ "EDITBOOK.TITLE" | translate }}
+            </h1>
+            }
+
+            <form [formGroup]="form" class="space-y-6">
+                <div>
+                    <label for="eventName" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.EVENT_NAME" | translate }}*
+                    </label>
+                    <input
+                        type="text"
+                        id="eventName"
+                        formControlName="eventName"
+                        [placeholder]="'FORM.PLACEHOLDER_EVENT_NAME' | translate"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-blue-700"> {{ "FORM.DATE_TITLE" | translate }}* </label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+                        <div>
+                            <label for="eventDate" class="block text-sm text-gray-600"> {{ "FORM.DATE" | translate }}* </label>
+                            <input
+                                type="date"
+                                id="eventDate"
+                                formControlName="eventDate"
+                                required
+                                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div>
+                            <label for="eventTimeStart" class="block text-sm text-gray-600">
+                                {{ "FORM.START_TIME" | translate }}*
+                            </label>
+                            <input
+                                type="time"
+                                id="eventTimeStart"
+                                formControlName="eventTimeStart"
+                                required
+                                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div>
+                            <label for="eventTimeEnd" class="block text-sm text-gray-600">
+                                {{ "FORM.END_TIME" | translate }}*
+                            </label>
+                            <input
+                                type="time"
+                                id="eventTimeEnd"
+                                formControlName="eventTimeEnd"
+                                required
+                                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="eventLocation" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.LOCATION" | translate }}*
+                    </label>
+                    <input
+                        type="text"
+                        id="eventLocation"
+                        formControlName="eventLocation"
+                        [placeholder]="'FORM.PLACEHOLDER_LOCATION' | translate"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label for="eventDescription" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.DESCRIPTION" | translate }}*
+                    </label>
+                    <textarea
+                        id="eventDescription"
+                        formControlName="eventDescription"
+                        rows="4"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 resize-none"
+                    ></textarea>
+                </div>
+
+                <div>
+                    <label for="eventPrice" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.PRICE" | translate }}*
+                    </label>
+                    <input
+                        type="number"
+                        id="eventPrice"
+                        formControlName="eventPrice"
+                        [readonly]="freeEvent"
+                        [ngClass]="{ 'cursor-not-allowed bg-gray-100': freeEvent }"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+
+                    <div class="flex items-center gap-2 mt-2">
+                        <input
+                            type="checkbox"
+                            id="eventPriceFree"
+                            (change)="onCheckboxChange()"
+                            class="h-4 w-4 text-blue-600 cursor-pointer"
+                        />
+                        <label for="eventPriceFree" class="text-sm text-gray-700 cursor-pointer">
+                            {{ "FORM.FREE_ENTRY" | translate }}
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="eventCapacity" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.CAPACITY" | translate }}*
+                    </label>
+                    <input
+                        type="number"
+                        id="eventCapacity"
+                        formControlName="eventCapacity"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label for="eventCategoryId" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.CATEGORY" | translate }}*
+                    </label>
+                    <select
+                        id="eventCategoryId"
+                        formControlName="eventCategoryId"
+                        required
+                        class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    >
+                        <option value="" disabled selected>{{ "FORM.PLACEHOLDER_CATEGORY" | translate }}</option>
+                        <option *ngFor="let category of categories" [value]="category.id">{{ category.key | translate }}</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="eventImage" class="block text-sm font-semibold text-blue-700">
+                        {{ "FORM.IMAGE_UPLOAD" | translate }}*
+                    </label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        (change)="onFileSelected($event)"
+                        id="eventImage"
+                        class="mt-2 block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200"
+                    />
+                    <img
+                        *ngIf="eventImagePreview"
+                        [src]="eventImagePreview"
+                        alt="Vista previa"
+                        class="mt-4 w-48 h-48 object-cover rounded-lg shadow"
+                    />
+                </div>
+                <div *ngIf="errorMessage" class="mt-2 p-2 bg-red-100 text-red-700 border border-red-400 rounded text-sm">
+                    {{ `${errorMessage}` | translate }}
+                </div>
+                <div>
+                    <button
+                        type="submit"
+                        (click)="selectFunction()"
+                        [disabled]="!form.valid || eventImage.length < 1"
+                        class="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-semibold py-2 px-4 rounded-lg shadow disabled:opacity-50 transition duration-200"
+                    >
+                        {{ "FORM.SUBMIT" | translate }}
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="mt-10 py-6 bg-white shadow-inner">
+        <div class="flex justify-center">
+            <div class="flex items-center gap-2 text-blue-600 hover:underline cursor-pointer" [routerLink]="['/home']">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M15 19l-7-7 7-7" />
+                </svg>
+                <button class="text-sm font-medium">{{ "FORM.GO_BACK" | translate }}</button>
+            </div>
+        </div>
+    </footer>
+</body>

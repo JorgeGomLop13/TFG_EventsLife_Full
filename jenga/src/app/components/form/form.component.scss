@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+@import '../../styles/forms.scss';
+
+.container-form {
+  margin: auto;
+  width: 55%;
+  text-align: center;
+  background-color: $background-color_orange;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+}
