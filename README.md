@@ -106,8 +106,8 @@ cp .env.example .env
 
 Este proyecto contiene dos carpetas principales:
 
-- `EventsLife_back`: Backend (Node.js, Express, etc.)
-- `jenga`: Frontend (React o similar)
+- `EventsLife_back`: Backend (Laravel)
+- `jenga`: Frontend (Angular)
 
 ### ⚙️ Instalación
 
