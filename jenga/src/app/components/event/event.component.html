@@ -16,18 +16,18 @@
         </a>
 
         <div class="max-w-[88rem] w-full mx-auto p-8" *ngIf="event">
-            <div class="grid grid-cols-[3fr_1.5fr] items-stretch">
+            <div class="grid grid-cols-[1.5fr_1.5fr] gap-x-4 items-stretch">
                 <div class="flex items-stretch">
                     <img
                         [src]="event.image"
                         alt="{{ 'EVENT.IMAGE_ALT' | translate }}"
-                        class="w-full max-w-[35rem] object-contain rounded-lg shadow-lg"
+                        class="w-[35rem] h-[26.25rem] max-w-[35rem] max-h-[26.25rem] object-cover rounded-lg shadow-lg"
                     />
                 </div>
 
                 <div class="flex flex-col justify-between">
                     <div
-                        class="w-72 max-w-[90%] mx-auto bg-blue-400 bg-gradient-to-br from-blue-500 to-blue-300 text-white p-5 rounded-lg shadow-md flex flex-col items-center justify-between h-36 box-border"
+                        class="w-72 max-w-[85%] mx-auto bg-blue-400 bg-gradient-to-br from-blue-500 to-blue-300 text-white p-5 rounded-lg shadow-md flex flex-col items-center justify-between h-36 box-border"
                     >
                         <p class="text-xl">{{ "EVENT.UNIT_PRICE" | translate }}</p>
                         <p class="text-xl">{{ event.price }}€</p>
@@ -41,7 +41,7 @@
 
                     <!-- Organizador -->
                     <div
-                        class="w-72 max-w-[90%] mx-auto bg-blue-400 bg-gradient-to-br from-blue-500 to-blue-300 text-white p-5 rounded-lg shadow-md flex flex-col items-center justify-between h-36 box-border"
+                        class="w-72 max-w-[85%] mx-auto bg-blue-400 bg-gradient-to-br from-blue-500 to-blue-300 text-white p-5 rounded-lg shadow-md flex flex-col items-center justify-between h-36 box-border"
                     >
                         <p class="text-xl text-center">{{ "EVENT.ORGANIZED_BY" | translate }}</p>
                         <p class="text-xl text-center truncate">{{ organizerName }}</p>

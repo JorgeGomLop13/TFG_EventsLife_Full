@@ -14,7 +14,7 @@
             <form [formGroup]="form" class="space-y-6">
                 <div>
                     <label for="eventName" class="block text-sm font-semibold text-blue-700">
-                        {{ "FORM.EVENT_NAME" | translate }}
+                        {{ "FORM.EVENT_NAME" | translate }}*
                     </label>
                     <input
                         type="text"
@@ -27,14 +27,10 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-semibold text-blue-700">
-                        {{ "FORM.DATE_TITLE" | translate }}
-                    </label>
+                    <label class="block text-sm font-semibold text-blue-700"> {{ "FORM.DATE_TITLE" | translate }}* </label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
                         <div>
-                            <label for="eventDate" class="block text-sm text-gray-600">
-                                {{ "FORM.DATE" | translate }}
-                            </label>
+                            <label for="eventDate" class="block text-sm text-gray-600"> {{ "FORM.DATE" | translate }}* </label>
                             <input
                                 type="date"
                                 id="eventDate"
@@ -45,7 +41,7 @@
                         </div>
                         <div>
                             <label for="eventTimeStart" class="block text-sm text-gray-600">
-                                {{ "FORM.START_TIME" | translate }}
+                                {{ "FORM.START_TIME" | translate }}*
                             </label>
                             <input
                                 type="time"
@@ -57,7 +53,7 @@
                         </div>
                         <div>
                             <label for="eventTimeEnd" class="block text-sm text-gray-600">
-                                {{ "FORM.END_TIME" | translate }}
+                                {{ "FORM.END_TIME" | translate }}*
                             </label>
                             <input
                                 type="time"
@@ -72,7 +68,7 @@
 
                 <div>
                     <label for="eventLocation" class="block text-sm font-semibold text-blue-700">
-                        {{ "FORM.LOCATION" | translate }}
+                        {{ "FORM.LOCATION" | translate }}*
                     </label>
                     <input
                         type="text"
@@ -86,7 +82,7 @@
 
                 <div>
                     <label for="eventDescription" class="block text-sm font-semibold text-blue-700">
-                        {{ "FORM.DESCRIPTION" | translate }}
+                        {{ "FORM.DESCRIPTION" | translate }}*
                     </label>
                     <textarea
                         id="eventDescription"
@@ -99,19 +95,26 @@
 
                 <div>
                     <label for="eventPrice" class="block text-sm font-semibold text-blue-700">
-                        {{ "FORM.PRICE" | translate }}
+                        {{ "FORM.PRICE" | translate }}*
                     </label>
                     <input
                         type="number"
                         id="eventPrice"
                         formControlName="eventPrice"
                         [readonly]="freeEvent"
+                        [ngClass]="{ 'cursor-not-allowed bg-gray-100': freeEvent }"
                         required
                         class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                     />
+
                     <div class="flex items-center gap-2 mt-2">
-                        <input type="checkbox" id="eventPriceFree" (change)="onCheckboxChange()" class="h-4 w-4 text-blue-600" />
-                        <label for="eventPriceFree" class="text-sm text-gray-700">
+                        <input
+                            type="checkbox"
+                            id="eventPriceFree"
+                            (change)="onCheckboxChange()"
+                            class="h-4 w-4 text-blue-600 cursor-pointer"
+                        />
+                        <label for="eventPriceFree" class="text-sm text-gray-700 cursor-pointer">
                             {{ "FORM.FREE_ENTRY" | translate }}
                         </label>
                     </div>
@@ -119,7 +122,7 @@
 
                 <div>
                     <label for="eventCapacity" class="block text-sm font-semibold text-blue-700">
-                        {{ "FORM.CAPACITY" | translate }}
+                        {{ "FORM.CAPACITY" | translate }}*
                     </label>
                     <input
                         type="number"
@@ -132,7 +135,7 @@
 
                 <div>
                     <label for="eventCategoryId" class="block text-sm font-semibold text-blue-700">
-                        {{ "FORM.CATEGORY" | translate }}
+                        {{ "FORM.CATEGORY" | translate }}*
                     </label>
                     <select
                         id="eventCategoryId"
@@ -147,7 +150,7 @@
 
                 <div>
                     <label for="eventImage" class="block text-sm font-semibold text-blue-700">
-                        {{ "FORM.IMAGE_UPLOAD" | translate }}
+                        {{ "FORM.IMAGE_UPLOAD" | translate }}*
                     </label>
                     <input
                         type="file"
@@ -170,7 +173,7 @@
                     <button
                         type="submit"
                         (click)="selectFunction()"
-                        [disabled]="!form.valid && useFunction === 'createEvent'"
+                        [disabled]="!form.valid || eventImage.length < 1"
                         class="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-semibold py-2 px-4 rounded-lg shadow disabled:opacity-50 transition duration-200"
                     >
                         {{ "FORM.SUBMIT" | translate }}

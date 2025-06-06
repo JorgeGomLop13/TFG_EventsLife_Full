@@ -191,7 +191,8 @@
         "DESCRIPTION_TITLE": "Description",
         "IMPORTANT_INFO_TITLE": "Important information",
         "IMPORTANT_INFO_TEXT": "It is recommended to arrive 15 minutes early. Remember to bring your ID for accreditation. The event will start promptly at the indicated time.",
-        "MAXCAPACITY": "The event is already full "
+        "MAXCAPACITY": "The event is already full ",
+        "WRONG_USER": "You have to be an asistant user to sign up"
     },
     "DIALOG": {
         "TITLE": "Delete event",
@@ -251,16 +252,9 @@
         "CONTACT_ISSUE_TITLE": "Having an issue?",
         "CONTACT_ISSUE_BODY": "If you're experiencing any issues or have questions, feel free to contact us at soporte@eventos.com or call us at +34 912 345 678."
     },
-    "common": {
-        "accessDenied": "Acces denied",
-        "close": "Close"
-    },
-    "confirmdialog": {
-        "no": "No",
-        "yes": "Yes"
-    },
-    "errors": {
-        "unknown": "Unknown error"
-    },
-    "hello": "Wellcome to Jenga 🙌"
+    "NOT_FOUND": {
+        "TITLE": "Page not found",
+        "DESCRIPTION": "Sorry, the page you're looking for doesn't exist or has been moved.",
+        "BUTTON": "Back to home"
+    }
 }

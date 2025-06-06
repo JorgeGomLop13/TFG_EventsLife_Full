@@ -29,6 +29,8 @@ export class FormComponent implements OnInit {
   public eventCapacity: number = 0;
   public freeEvent: boolean = false;
 
+  eventID = Number(this.route.snapshot.paramMap.get('id'));
+
   public eventImagePreview: string | ArrayBuffer | null = null;
 
   public errorMessage: string = '';
@@ -38,13 +40,13 @@ export class FormComponent implements OnInit {
   protected readonly form = inject(FormBuilder).group({
     eventName: ['', Validators.required],
     eventCategoryId: ['', Validators.required],
-    eventCapacity: ['', Validators.required],
+    eventCapacity: [1, [Validators.required, Validators.min(1)]],
     eventDescription: ['', Validators.required],
     eventDate: ['', Validators.required],
     eventTimeEnd: ['', Validators.required],
     eventTimeStart: ['', Validators.required],
     eventLocation: ['', Validators.required],
-    eventPrice: [0, Validators.required]
+    eventPrice: [0, [Validators.required, Validators.min(0)]]
   });
 
   constructor(private useBack: UseBackService, private router: Router, private route: ActivatedRoute, private auth: AuthService) {
@@ -59,11 +61,28 @@ export class FormComponent implements OnInit {
     });
 
     if (this.useFunction === 'editEvent') {
-      Object.keys(this.form.controls).forEach((key) => {
-        this.form.get(key)?.setValidators(null);
-      });
-      this.form.updateValueAndValidity();
+      console.log(this.eventID);
+      this.useBack
+        .getEventById(this.eventID)
+        .pipe(take(1))
+        .subscribe((res: any) => {
+          const event = res[0];
+          this.form.patchValue({
+            eventName: event.name,
+            eventCategoryId: event.category_id,
+            eventCapacity: event.capacity,
+            eventDescription: event.description,
+            eventDate: event.date,
+            eventTimeStart: event.start_date?.slice(0, 5),
+            eventTimeEnd: event.end_date?.slice(0, 5),
+            eventLocation: event.location,
+            eventPrice: event.price
+          });
+          this.eventImagePreview = event.image;
+          this.eventImage = event.image;
+        });
     }
+    console.log(this.eventImage.length);
   }
 
   onFileSelected(event: Event) {

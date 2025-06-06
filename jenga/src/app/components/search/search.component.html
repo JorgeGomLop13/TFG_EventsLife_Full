@@ -111,6 +111,22 @@
                     <span class="font-medium">{{ "SEARCH.ORGANIZER" | translate }}:</span> {{ event.organizer }}
                 </p>
             </div>
+            @if (this.userRole === "admin") {
+            <div class="p-4 pt-0">
+                <button
+                    (click)="deleteEvent(event.id); $event.stopPropagation()"
+                    class="w-full mt-2 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-xl transition duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
+                >
+                    {{ "HOME.DELETE" | translate }}
+                </button>
+                <button
+                    (click)="deleteEventAndUser(event.id, event.author_id); $event.stopPropagation()"
+                    class="w-full mt-2 bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-xl transition duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
+                >
+                    {{ "HOME.DELETEUSER" | translate }}
+                </button>
+            </div>
+            }
         </div>
     </div>
 </div>

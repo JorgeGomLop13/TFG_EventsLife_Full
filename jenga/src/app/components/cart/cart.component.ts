@@ -60,7 +60,7 @@ export class CartComponent implements OnInit {
     this.eventsInCart = this.eventsInCart.filter((event) => event.id !== id);
   }
 
-  payForProduct(eventId: number, eventPrice: number, eventTitle: string, authorId: number, actualPeople: [], maxPeople: number) {
+  payForProduct(eventId: number, eventPrice: number, eventTitle: string, authorId: number, maxPeople: number, actualPeople: []) {
     if (this.userId) {
       if (actualPeople.length < maxPeople) {
         this.useData
@@ -73,6 +73,8 @@ export class CartComponent implements OnInit {
             });
           });
       } else {
+        console.log(actualPeople.length);
+        console.log(maxPeople);
         alert();
       }
     }

@@ -9,8 +9,7 @@ describe('TermsAndConditionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TermsAndConditionsComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TermsAndConditionsComponent);
     component = fixture.componentInstance;

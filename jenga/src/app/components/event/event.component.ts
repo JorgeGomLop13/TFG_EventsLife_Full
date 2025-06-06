@@ -6,7 +6,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '@app/services/auth.service';
 import { CartService } from '@app/services/cart.service';
 import { UseBackService } from '@app/services/use-back.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { take } from 'rxjs';
 import { ShowOrganizerDialogComponent } from '../dialogs/show-organizer-dialog/show-organizer-dialog.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -36,7 +36,8 @@ export class EventComponent implements OnInit {
     private useBack: UseBackService,
     private auth: AuthService,
     private cartService: CartService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -95,9 +96,12 @@ export class EventComponent implements OnInit {
           console.log(this.eventsList);
         });
       } else {
-        alert('El evento ya está al máximo de capacidad');
+        alert(this.translate.instant('EVENT.MAXCAPACITY'));
       }
+    } else if (this.role === 'organizer') {
+      alert(this.translate.instant('EVENT.WRONG_USER'));
     } else {
+      alert(this.translate.instant('EVENT.WRONG_USER'));
       this.router.navigate(['/register']).then(() => {
         window.scrollTo(0, 0);
       });

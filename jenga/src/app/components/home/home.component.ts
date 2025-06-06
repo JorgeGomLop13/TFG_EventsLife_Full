@@ -37,6 +37,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   public eventsList: [] = [];
   public isTextVisible = true;
 
+  today = new Date();
+
   images = ['assets/eventCarrusel_1.webp', 'assets/cafeteria.jpg', 'assets/pintar.jpg', 'assets/vino.jpg'];
   textImage = ['IMAGESUBTEXT1', 'IMAGESUBTEXT2', 'IMAGESUBTEXT1', 'IMAGESUBTEXT2'];
   currentIndex = 0;

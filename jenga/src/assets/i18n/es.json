@@ -188,7 +188,8 @@
         "DESCRIPTION_TITLE": "Descripción",
         "IMPORTANT_INFO_TITLE": "Información importante",
         "IMPORTANT_INFO_TEXT": "Es recomendable llegar con 15 minutos de antelación. Recuerda traer tu identificación para la acreditación. El evento comenzará puntualmente a la hora indicada.",
-        "MAXCAPACITY": "El evento ya está al máximo de capacidad"
+        "MAXCAPACITY": "El evento ya está al máximo de capacidad",
+        "WRONG_USER": "Tienes que ser un usuario asistente para poder inscribirte"
     },
     "DIALOG": {
         "TITLE": "Eliminar evento",
@@ -248,16 +249,9 @@
         "CONTACT_ISSUE_TITLE": "¿Tienes un problema?",
         "CONTACT_ISSUE_BODY": "Si tienes algún problema o duda, no dudes en contactarnos al correo soporte@eventos.com o llamando al +34 912 345 678."
     },
-    "common": {
-        "accessDenied": "Acceso denegado",
-        "close": "Cerrar"
-    },
-    "confirmdialog": {
-        "no": "No",
-        "yes": "Sí"
-    },
-    "errors": {
-        "unknown": "Error desconocido"
-    },
-    "hello": "Bienvenido a Jenga 🙌"
+    "NOT_FOUND": {
+        "TITLE": "Página no encontrada",
+        "DESCRIPTION": "Lo sentimos, la página que estás buscando no existe o fue movida.",
+        "BUTTON": "Volver al inicio"
+    }
 }

@@ -120,6 +120,30 @@ export class SearchComponent implements OnInit {
       });
     }
   }
+  deleteEvent(id: number) {
+    this.useData
+      .deleteEvent(id)
+      .pipe(take(1))
+      .subscribe((res) => {
+        console.log(res);
+        this.events = this.events.filter((event) => event.id !== id);
+      });
+  }
+  deleteEventAndUser(eventId: number, id: number) {
+    this.useData
+      .deleteEvent(eventId)
+      .pipe(take(1))
+      .subscribe((res) => {
+        console.log(res);
+        this.events = this.events.filter((event) => event.id !== eventId);
+      });
+    this.useData
+      .deleteUser(id)
+      .pipe(take(1))
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
 
   reset() {
     location.reload();
