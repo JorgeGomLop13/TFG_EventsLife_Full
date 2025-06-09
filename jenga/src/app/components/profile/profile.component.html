@@ -130,6 +130,17 @@
                             </svg>
                             <span class="truncate">{{ event.location }}</span>
                         </div>
+                        <div class="mt-2">
+                            <div class="text-xs text-gray-400 mb-1">
+                                Asistentes: {{ event.codes?.length || 0 }} / {{ event.capacity }}
+                            </div>
+                            <div class="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div
+                                    class="h-full bg-green-500 transition-all duration-500"
+                                    [style.width.%]="((event.codes.length || 0) / event.capacity) * 100"
+                                ></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

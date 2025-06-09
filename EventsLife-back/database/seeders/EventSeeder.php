@@ -19,7 +19,7 @@ class EventSeeder extends Seeder
 			'name' => 'Test Event',
 			'description' => 'This is a test event',
 			'location' => 'Test Location',
-			'date' => '2025-01-01',
+			'date' => '2025-10-10',
 			'start_date' => '10:00:00',
 			'end_date' => '12:00:00',
 			'organizer_id' => 2,

@@ -36,7 +36,8 @@
         "START": "Inicio",
         "END": "Fin",
         "CAPACITY": "Capacidad",
-        "ORGANIZER": "Organizador"
+        "ORGANIZER": "Organizador",
+        "FREE": "Gratis"
     },
     "HEADER": {
         "SEARCH": "Búsqueda",
@@ -96,6 +97,7 @@
         "PASSWORD_REPEATED": "Las contraseñas no coinciden",
         "PASSWORD_LENGTH": "La contraseña debe tener al menos 6 caracteres",
         "EMAIL_INVALID": "Formato de email inválido",
+        "PHONE": "Introduce un número de teléfono válido",
         "LOGIN": "Email o contraseña incorrectos",
         "DEFAULT": "Fallo al crear tu usuario"
     },

@@ -34,7 +34,7 @@
             <div class="flex justify-between items-center font-semibold text-base">
                 <h3 class="text-lg">{{ event.name }}</h3>
                 <span class="text-blue-600 font-bold" *ngIf="event.price !== 0">{{ event.price }}€</span>
-                <span class="text-blue-600 font-bold" *ngIf="event.price === 0">Free</span>
+                <span class="text-blue-600 font-bold" *ngIf="event.price === 0">{{ "SEARCH.FREE" | translate }}</span>
             </div>
             <br />
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">

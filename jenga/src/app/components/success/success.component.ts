@@ -19,7 +19,7 @@ export class SuccessComponent implements OnInit {
   public textShow2: string = '';
   public textShow3: string = '';
 
-  public bookFollowCode: string = '';
+  public eventFollowCode: string = '';
 
   public userId: number = 0;
 
@@ -52,24 +52,26 @@ export class SuccessComponent implements OnInit {
               .pipe(take(1))
               .subscribe((res: any) => {
                 console.log(res);
-                this.bookFollowCode = res.followCode;
-                console.log(this, this.bookFollowCode);
-                if (this.bookFollowCode) {
-                  this.cartService
-                    .sendEmail(
-                      this.translate.instant('SUCCESS.SUBJECT'),
-                      this.translate.instant('SUCCESS.HTML') + this.bookFollowCode,
-                      'jgomezlop13@gmail.com'
-                    )
+                this.eventFollowCode = res.followCode;
+                console.log(this, this.eventFollowCode);
+                if (this.eventFollowCode) {
+                  this.auth
+                    .getUser()
                     .pipe(take(1))
                     .subscribe((res) => {
-                      console.log(res);
-                    });
-                  this.cartService
-                    .setCodeToEvent(eventId, this.bookFollowCode)
-                    .pipe(take(1))
-                    .subscribe((res) => {
-                      console.log(res);
+                      const username = res.name;
+                      const userEmail = res.email;
+
+                      this.cartService
+                        .sendEmail(
+                          this.translate.instant('SUCCESS.SUBJECT'),
+                          this.translate.instant('SUCCESS.HTML') + this.eventFollowCode,
+                          userEmail
+                        )
+                        .pipe(take(1))
+                        .subscribe();
+
+                      this.cartService.setCodeToEvent(eventId, this.eventFollowCode, username).pipe(take(1)).subscribe();
                     });
                 }
               });
@@ -77,10 +79,7 @@ export class SuccessComponent implements OnInit {
             this.textShow2 = this.translate.instant('SUCCESS.MESSAGE_1');
             this.textShow3 = this.translate.instant('SUCCESS.MESSAGE_2');
           } else if (stripeId) {
-            console.log('Llega');
-            this.stripe.setStripeId(this.userId, stripeId).subscribe((res) => {
-              console.log(res);
-            });
+            this.stripe.setStripeId(this.userId, stripeId).subscribe();
             this.textShow1 = this.translate.instant('SUCCESS.SUBSCRIPTION_TITLE');
             this.textShow2 = this.translate.instant('SUCCESS.SUBSCRIPTION_MSG_1');
           }

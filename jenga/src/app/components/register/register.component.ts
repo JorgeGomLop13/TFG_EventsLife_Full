@@ -36,51 +36,51 @@ export class RegisterComponent {
     if (!emailValido) {
       this.errorMessage = 'EMAIL_INVALID';
       this.email = '';
-      setTimeout(() => {
-        this.errorMessage = '';
-      }, 5000);
+      this.deleteError();
       return;
     }
     if (this.password !== this.confirmation_password) {
       this.errorMessage = 'PASSWORD_REPEATED';
       this.password = '';
       this.confirmation_password = '';
-      setTimeout(() => {
-        this.errorMessage = '';
-      }, 5000);
+      this.deleteError();
       return;
-    } else {
-      const formData = new FormData();
-
-      formData.append('name', this.name);
-      formData.append('email', this.email);
-      formData.append('password', this.password);
-      formData.append('role', this.role_selected);
-      formData.append('phone', this.phone);
-      formData.append('address', this.address);
-
-      this.authService
-        .register(formData)
-        .pipe(take(1))
-        .subscribe({
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          next: (res: any) => {
-            console.log('Usuario registrado:', res);
-            localStorage.setItem('token', res.token);
-            this.router.navigate(['/home']);
-          },
-          error: (error) => {
-            console.error('Error al registrar:', error);
-            this.errorMessage = error?.error?.errorCode;
-            setTimeout(() => {
-              this.errorMessage = '';
-            }, 5000);
-          },
-          complete: () => {
-            console.log('Petición completada.');
-          }
-        });
     }
+    if (!this.validatePhone(this.phone)) {
+      this.errorMessage = 'PHONE';
+      this.phone = '';
+      this.deleteError();
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append('name', this.name);
+    formData.append('email', this.email);
+    formData.append('password', this.password);
+    formData.append('role', this.role_selected);
+    formData.append('phone', this.phone);
+    formData.append('address', this.address);
+
+    this.authService
+      .register(formData)
+      .pipe(take(1))
+      .subscribe({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        next: (res: any) => {
+          console.log('Usuario registrado:', res);
+          localStorage.setItem('token', res.token);
+          this.router.navigate(['/home']);
+        },
+        error: (error) => {
+          console.error('Error al registrar:', error);
+          this.errorMessage = error?.error?.errorCode;
+          this.deleteError();
+        },
+        complete: () => {
+          console.log('Petición completada.');
+        }
+      });
   }
 
   changeRoleSelected(role: string) {
@@ -102,5 +102,14 @@ export class RegisterComponent {
     this.router.navigate(['/login']).then(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  }
+  validatePhone(phone: string): boolean {
+    const phoneRegex = /^\+?\d{7,15}$/;
+    return phoneRegex.test(phone);
+  }
+  deleteError() {
+    setTimeout(() => {
+      this.errorMessage = '';
+    }, 5000);
   }
 }

@@ -22,6 +22,14 @@ export const routes: Routes = [
     data: { animation: 'ProfilePage' }
   },
   {
+    path: 'success/account/:accountId',
+    loadComponent: () => import('./components/success/success.component').then((m) => m.SuccessComponent)
+  },
+  {
+    path: 'success/product/:productId',
+    loadComponent: () => import('./components/success/success.component').then((m) => m.SuccessComponent)
+  },
+  {
     path: '',
     loadComponent: () => import('./layouts/layout/layout.component').then((m) => m.LayoutComponent),
     children: [
@@ -35,14 +43,7 @@ export const routes: Routes = [
         loadComponent: () => import('./components/edit-event/edit-event.component').then((m) => m.EditEventComponent),
         canActivate: [authGuard]
       },
-      {
-        path: 'success/account/:accountId',
-        loadComponent: () => import('./components/success/success.component').then((m) => m.SuccessComponent)
-      },
-      {
-        path: 'success/product/:productId',
-        loadComponent: () => import('./components/success/success.component').then((m) => m.SuccessComponent)
-      },
+
       {
         path: 'editUser/:id',
         loadComponent: () => import('./components/edit-profile/edit-profile.component').then((m) => m.EditProfileComponent)

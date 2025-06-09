@@ -22,7 +22,7 @@ return new class extends Migration
 			$table->foreignId('organizer_id')->constrained('users');
 			$table->foreignId('category_id')->constrained('categories');
 			$table->smallInteger('price');
-			$table->smallInteger('capacity');
+			$table->mediumInteger('capacity');
 			$table->mediumText ('image')->nullable();
 			$table->json('codes')->nullable();
             $table->timestamps(); 

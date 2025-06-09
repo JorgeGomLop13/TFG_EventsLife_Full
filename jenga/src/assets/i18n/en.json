@@ -39,7 +39,8 @@
         "START": "Start",
         "END": "End",
         "CAPACITY": "Capacity",
-        "ORGANIZER": "Organizer"
+        "ORGANIZER": "Organizer",
+        "FREE": "FREE"
     },
     "HEADER": {
         "SEARCH": "Search",
@@ -99,6 +100,7 @@
         "PASSWORD_REPEATED": "Passwords do not match",
         "PASSWORD_LENGTH": "Password must be at least 6 characters long",
         "EMAIL_INVALID": "Invalid email format",
+        "PHONE": "Enter a valid phone number",
         "LOGIN": "Email or password incorrect",
         "DEFAULT": "Failed to create your user"
     },

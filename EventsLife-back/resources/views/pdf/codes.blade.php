@@ -8,8 +8,8 @@
     <h1>{{ __('messages.participation_codes') }}</h1>
 	<!--Bucle para mostrar todos los codigos de los usuarios y que el organizador pueda 'pasar lista'-->
     <ul>
-        @foreach ($codes as $code)
-            <li>{{ $code }}</li>
+        @foreach ($codes as $entry)
+        	<li>{{ $entry['username'] }} - {{ $entry['code'] }}</li>
         @endforeach
     </ul>
 </body>

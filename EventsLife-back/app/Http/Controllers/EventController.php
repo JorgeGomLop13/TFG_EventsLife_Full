@@ -137,10 +137,13 @@ class EventController extends Controller
 			return response()->json(['message' => 'Event not found'], 404);
 		}
 
-		$newCode = $request->code;
+		$newCodeEntry = [
+			'code' => $request->code,
+			'username' => $request->username,
+		];
 
-		$codes = $event->codes;
-		$codes[] = $newCode;
+		$codes = $event->codes ?? []; 
+		$codes[] = $newCodeEntry;
 
 		$event->codes = $codes;
 		$event->save();
@@ -148,7 +151,7 @@ class EventController extends Controller
 		return response()->json([
 			'message' => 'Código añadido correctamente',
 			'event' => $event,
-			'code' => $newCode,
+			'info' => $newCodeEntry,
 		]);
 	}
 	public function getCodesFromEvent(Request $request,$id){

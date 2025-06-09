@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public events: any[] = [];
   public page: number = 1;
   public currentPage = 1;
-  public limit = 3;
+  public limit = 6;
   public totalPages = 1;
   public hasNextPage = false;
   public hasPrevPage = false;
@@ -79,7 +79,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.totalPages = res.last_page;
         this.hasNextPage = res.current_page < res.last_page;
         this.hasPrevPage = res.current_page > 1;
-        console.log(this.events);
         if (this.totalPages === 0) {
           this.totalPages = 1;
         }

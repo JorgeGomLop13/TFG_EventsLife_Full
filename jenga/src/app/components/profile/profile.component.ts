@@ -57,7 +57,6 @@ export class ProfileComponent implements OnInit {
         this.userEmail = res.email;
         this.userStripeId = res.stripeAccountId;
         this.image = res.image;
-        console.log(res);
         if (this.userRole === 'organizer') {
           this.useData
             .getEventByOrganizer(this.userId)

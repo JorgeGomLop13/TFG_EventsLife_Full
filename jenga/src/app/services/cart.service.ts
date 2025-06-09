@@ -38,10 +38,11 @@ export class CartService {
       email: email
     });
   }
-  setCodeToEvent(eventId: number, code: string) {
+  setCodeToEvent(eventId: number, code: string, username: string) {
     return this.http.post(`${this.env.apiBaseUrl}/setCodeToEvent`, {
       eventId: eventId,
-      code: code
+      code: code,
+      username: username
     });
   }
 }

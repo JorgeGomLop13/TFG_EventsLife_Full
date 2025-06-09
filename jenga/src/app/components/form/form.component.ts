@@ -138,7 +138,7 @@ export class FormComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/profile']);
         },
         error: (error) => {
           this.errorMessage = error?.error?.errorCode;
@@ -184,7 +184,7 @@ export class FormComponent implements OnInit {
       .updateEvent(eventID, event)
       .pipe(take(1))
       .subscribe(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/profile']);
       });
   }
 }
